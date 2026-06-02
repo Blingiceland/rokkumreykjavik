@@ -79,7 +79,7 @@ export function ArtistCard({
           {artist.name}
         </h3>
         <p className="font-mono text-[11px] uppercase tracking-wide text-bone-faint">
-          {artist.genre} · {artist.displayDate}
+          {artist.displayDate}
         </p>
       </div>
     </button>

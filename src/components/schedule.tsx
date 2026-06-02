@@ -4,6 +4,7 @@ import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Ticket, ArrowRight, MapPin, Play } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { ArtistCover } from "@/components/artist-card";
 import { events, getEventArtists } from "@/data/events";
 import { venue } from "@/data/site";
 import { cn } from "@/lib/utils/cn";
@@ -172,16 +173,15 @@ export function Schedule() {
                 >
                   <a
                     href={`#listamenn`}
-                    className="group flex h-full items-center justify-between gap-3 rounded-xl border border-base-line bg-base-card px-5 py-4 transition-colors hover:border-neon"
+                    className="group flex h-full items-center gap-3 rounded-xl border border-base-line bg-base-card p-3 transition-colors hover:border-neon"
                   >
-                    <div>
-                      <p className="font-display text-lg leading-tight text-bone transition-colors group-hover:text-neon">
-                        {artist.name}
-                      </p>
-                      <p className="font-mono text-[11px] uppercase tracking-wide text-bone-faint">
-                        {artist.genre}
-                      </p>
-                    </div>
+                    <ArtistCover
+                      artist={artist}
+                      className="h-14 w-14 shrink-0 rounded-lg"
+                    />
+                    <p className="min-w-0 flex-1 font-display text-lg leading-tight text-bone transition-colors group-hover:text-neon">
+                      {artist.name}
+                    </p>
                     <ArrowRight
                       size={16}
                       className="shrink-0 text-bone-faint transition-all group-hover:translate-x-0.5 group-hover:text-neon"

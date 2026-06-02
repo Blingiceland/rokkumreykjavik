@@ -43,6 +43,26 @@ export interface Artist {
   ticketUrl: string;
 }
 
+/**
+ * Slugs that have a real cover image on disk at
+ * `public/images/artists/<slug>.jpg`. Acts not listed here fall back to the
+ * placeholder. Keep in sync with the files in that folder.
+ */
+const SLUGS_WITH_IMAGE = new Set<string>([
+  "spacestation",
+  "endless-dark",
+  "juno-paul",
+  "mukka",
+  "vintage-caravan",
+  "volcanova",
+  "ultra-magnus",
+  "hoffman",
+  "superserious",
+  "gedbrigdi",
+  "brain-police",
+  "krummi-og-bjarni",
+]);
+
 /** Build a URL-safe slug from an artist name (handles Icelandic glyphs). */
 function slugify(name: string): string {
   return name
@@ -78,7 +98,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
     displayDate: "4. júlí",
     acts: [
       { name: "Spacestation", genre: "Rock", videoId: "E8n6pXizcHE" },
-      { name: "Endless Dark", genre: "Post-Hardcore" },
+      { name: "Endless Dark", genre: "Post-Hardcore", videoId: "OqJ5hS0lnB0" },
       { name: "Juno Paul", genre: "Indie" },
       { name: "Mukka", genre: "Alternative" },
     ],
@@ -88,8 +108,8 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
     displayDate: "11. júlí",
     acts: [
       { name: "Vintage Caravan", genre: "Hard Rock", videoId: "odL0bhBluPE" },
-      { name: "Volcanova", genre: "Stoner Rock" },
-      { name: "Krummi & Bjarni", genre: "Rock" },
+      { name: "Volcanova", genre: "Stoner Rock", videoId: "c4VfzuomC8E" },
+      { name: "Krummi & Bjarni", genre: "Rock", videoId: "xAnmhNy_BdQ" },
       { name: "Ultra Magnus", genre: "Heavy Rock" },
     ],
   },
@@ -98,8 +118,8 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
     displayDate: "18. júlí",
     acts: [
       { name: "hOFFMAN", genre: "Alternative" },
-      { name: "Superserious", genre: "Indie Rock" },
-      { name: "Geðbrigði", genre: "Post-Punk", videoId: "-ElTTJnbOgY" },
+      { name: "Superserious", genre: "Indie Rock", videoId: "h8mKULHRmvg" },
+      { name: "Geðbrigði", genre: "Post-Punk" },
       { name: "Harma", genre: "Alternative" },
     ],
   },
@@ -126,7 +146,9 @@ export const artists: Artist[] = lineup.flatMap(({ date, displayDate, acts }) =>
       displayDate,
       genre: act.genre,
       shortBio: PLACEHOLDER_BIO,
-      image: PLACEHOLDER_IMAGE,
+      image: SLUGS_WITH_IMAGE.has(slug)
+        ? `/images/artists/${slug}.jpg`
+        : PLACEHOLDER_IMAGE,
       spotifyUrl: PLACEHOLDER_SPOTIFY,
       youtubeUrl: PLACEHOLDER_YOUTUBE,
       soundcloudUrl: PLACEHOLDER_SOUNDCLOUD,

@@ -132,7 +132,7 @@ export function ArtistGrid() {
             <div className="space-y-6 p-6 sm:p-8">
               <div>
                 <p className="font-mono text-xs uppercase tracking-widest text-neon-cyan">
-                  {active.displayDate} · {active.genre}
+                  {active.displayDate}
                 </p>
                 <h3 id="artist-modal-title" className="mt-2 font-display text-4xl text-bone sm:text-5xl">
                   {active.name}
