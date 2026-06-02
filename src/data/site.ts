@@ -12,6 +12,13 @@ export interface SiteConfig {
   description: string;
   contactEmail: string;
   defaultTicketUrl: string;
+  /**
+   * Spotify playlist ID for the "listen before the party" embed.
+   * Paste the ID from a playlist share link
+   * (open.spotify.com/playlist/<THIS_PART>). Empty -> renders a "væntanlegt"
+   * placeholder instead of the player.
+   */
+  spotifyPlaylistId: string;
 }
 
 export const site: SiteConfig = {
@@ -21,6 +28,7 @@ export const site: SiteConfig = {
   description: "Fjórir laugardagar. Sextán bönd. Rokkum Reykjavík.",
   contactEmail: "info@rokkumreykjavik.is",
   defaultTicketUrl: "/tickets",
+  spotifyPlaylistId: "",
 };
 
 export interface VenueConfig {

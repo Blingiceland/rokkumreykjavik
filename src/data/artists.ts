@@ -89,6 +89,11 @@ interface ArtistSeed {
   genre: string;
   /** Optional YouTube video ID for in-page video embed. */
   videoId?: string;
+  /** Real media links. Omit to fall back to the disabled placeholder chip. */
+  spotifyUrl?: string;
+  youtubeUrl?: string;
+  soundcloudUrl?: string;
+  instagramUrl?: string;
 }
 
 /** Lineup grouped by night. Order within a night is set order. */
@@ -97,28 +102,76 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
     date: `${EVENT_YEAR}-07-04`,
     displayDate: "4. júlí",
     acts: [
-      { name: "Spacestation", genre: "Rock", videoId: "E8n6pXizcHE" },
-      { name: "Endless Dark", genre: "Post-Hardcore", videoId: "OqJ5hS0lnB0" },
-      { name: "Juno Paul", genre: "Indie" },
-      { name: "Mukka", genre: "Alternative" },
+      {
+        name: "Spacestation",
+        genre: "Rock",
+        videoId: "E8n6pXizcHE",
+        spotifyUrl: "https://open.spotify.com/artist/0tC0VODFMyQLqetgajNbbh",
+      },
+      {
+        name: "Endless Dark",
+        genre: "Post-Hardcore",
+        videoId: "OqJ5hS0lnB0",
+        spotifyUrl: "https://open.spotify.com/artist/5AwyVJxKIm2D9dm8unLlqi",
+        youtubeUrl: "https://www.youtube.com/@EndlessDarkOfficial",
+      },
+      {
+        name: "Juno Paul",
+        genre: "Indie",
+        spotifyUrl: "https://open.spotify.com/artist/3H4roNkMDnWHhrcVGHSRGs",
+      },
+      {
+        name: "Mukka",
+        genre: "Alternative",
+        spotifyUrl: "https://open.spotify.com/artist/0ZyPf367VBQPjzOiUISIZW",
+      },
     ],
   },
   {
     date: `${EVENT_YEAR}-07-11`,
     displayDate: "11. júlí",
     acts: [
-      { name: "Vintage Caravan", genre: "Hard Rock", videoId: "odL0bhBluPE" },
-      { name: "Volcanova", genre: "Stoner Rock", videoId: "c4VfzuomC8E" },
-      { name: "Krummi & Bjarni", genre: "Rock", videoId: "xAnmhNy_BdQ" },
-      { name: "Ultra Magnus", genre: "Heavy Rock" },
+      {
+        name: "Vintage Caravan",
+        genre: "Hard Rock",
+        videoId: "odL0bhBluPE",
+        spotifyUrl: "https://open.spotify.com/artist/61MH29rMIyOfuK7KXQznzX",
+      },
+      {
+        name: "Volcanova",
+        genre: "Stoner Rock",
+        videoId: "c4VfzuomC8E",
+        spotifyUrl: "https://open.spotify.com/artist/5PxsSQ4uYOq6svb417ravK",
+      },
+      {
+        name: "Krummi & Bjarni",
+        genre: "Rock",
+        videoId: "xAnmhNy_BdQ",
+        spotifyUrl: "https://open.spotify.com/artist/20R75zrEiZGUgJPIdILRdr",
+      },
+      {
+        name: "Ultra Magnus",
+        genre: "Heavy Rock",
+        spotifyUrl: "https://open.spotify.com/artist/12BwwwOSI4XPUsO3OnJr0R",
+      },
     ],
   },
   {
     date: `${EVENT_YEAR}-07-18`,
     displayDate: "18. júlí",
     acts: [
-      { name: "hOFFMAN", genre: "Alternative" },
-      { name: "Superserious", genre: "Indie Rock", videoId: "h8mKULHRmvg" },
+      {
+        name: "hOFFMAN",
+        genre: "Alternative",
+        youtubeUrl: "https://www.youtube.com/@hoffmanband238",
+      },
+      {
+        name: "Superserious",
+        genre: "Indie Rock",
+        videoId: "h8mKULHRmvg",
+        spotifyUrl: "https://open.spotify.com/artist/34T4k3cBCZQWauiohowYjS",
+        youtubeUrl: "https://www.youtube.com/@superserious_band",
+      },
       { name: "Geðbrigði", genre: "Post-Punk" },
       { name: "Harma", genre: "Alternative" },
     ],
@@ -127,7 +180,12 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
     date: `${EVENT_YEAR}-07-25`,
     displayDate: "25. júlí",
     acts: [
-      { name: "Brain Police", genre: "Stoner Rock", videoId: "FToInB6v4ac" },
+      {
+        name: "Brain Police",
+        genre: "Stoner Rock",
+        videoId: "FToInB6v4ac",
+        spotifyUrl: "https://open.spotify.com/artist/3u8Bmkzs6rer0AirAa87iR",
+      },
       { name: "Sót", genre: "Rock" },
       { name: "Duft", genre: "Punk Rock" },
       { name: "Drunga", genre: "Heavy Rock" },
@@ -149,10 +207,10 @@ export const artists: Artist[] = lineup.flatMap(({ date, displayDate, acts }) =>
       image: SLUGS_WITH_IMAGE.has(slug)
         ? `/images/artists/${slug}.jpg`
         : PLACEHOLDER_IMAGE,
-      spotifyUrl: PLACEHOLDER_SPOTIFY,
-      youtubeUrl: PLACEHOLDER_YOUTUBE,
-      soundcloudUrl: PLACEHOLDER_SOUNDCLOUD,
-      instagramUrl: PLACEHOLDER_INSTAGRAM,
+      spotifyUrl: act.spotifyUrl ?? PLACEHOLDER_SPOTIFY,
+      youtubeUrl: act.youtubeUrl ?? PLACEHOLDER_YOUTUBE,
+      soundcloudUrl: act.soundcloudUrl ?? PLACEHOLDER_SOUNDCLOUD,
+      instagramUrl: act.instagramUrl ?? PLACEHOLDER_INSTAGRAM,
       videoId: act.videoId ?? "",
       ticketUrl: site.defaultTicketUrl,
     };

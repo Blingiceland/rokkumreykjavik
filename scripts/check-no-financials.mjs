@@ -11,8 +11,11 @@
  */
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, extname } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const ROOT = new URL("../src", import.meta.url).pathname;
+// fileURLToPath (not .pathname) so the path is valid on Windows too —
+// .pathname yields "/C:/..." which Node resolves to "C:\C:\...".
+const ROOT = fileURLToPath(new URL("../src", import.meta.url));
 
 // Word-boundary patterns for fields that would expose artist money data.
 // Tuned to avoid false positives (e.g. allows "ticketUrl", "Offer", schema "price"

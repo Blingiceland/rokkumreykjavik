@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils/cn";
 const navLinks = [
   { href: "#dagskra", label: "Dagskrá" },
   { href: "#listamenn", label: "Listamenn" },
+  { href: "#hlusta", label: "Hlusta" },
   { href: "#midar", label: "Miðar" },
 ];
 

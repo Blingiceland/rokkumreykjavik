@@ -3,6 +3,7 @@ import { Hero } from "@/components/hero";
 import { Countdown } from "@/components/countdown";
 import { Schedule } from "@/components/schedule";
 import { ArtistGrid } from "@/components/artist-grid";
+import { PlaylistSection } from "@/components/playlist-section";
 import { TicketsSection } from "@/components/tickets-section";
 import { SignupSection } from "@/components/signup-section";
 import { SponsorSection } from "@/components/sponsor-section";
@@ -17,6 +18,7 @@ export default function Home() {
         <Countdown />
         <Schedule />
         <ArtistGrid />
+        <PlaylistSection />
         <TicketsSection />
         <SignupSection />
         <SponsorSection />
