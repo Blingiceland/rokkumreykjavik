@@ -9,7 +9,8 @@
     --font-body: "Sora", ui-sans-serif, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-    /* Default = BLEIKT: hot pink + highlighter yellow + teal on dirty paper. */
+    /* BLEIKT — photocopied zine: hot pink + highlighter yellow + teal on
+       dirty paper. Black ink, harsh rules. */
     --c-base: 232 228 218;
     --c-base-deep: 222 217 205;
     --c-base-card: 238 234 224;
@@ -26,46 +27,6 @@
     --c-amber-bright: 244 226 36;
     --c-amber-deep: 198 178 0;
     --on-amber: 18 16 15;
-  }
-
-  /* RAUTT: blood red + goldenrod + slate-blue on warm cream. */
-  [data-look="rautt"] {
-    --c-base: 236 230 216;
-    --c-base-deep: 226 219 203;
-    --c-base-card: 242 237 224;
-    --c-base-raised: 232 226 211;
-    --c-base-line: 26 20 16;
-    --c-base-linebright: 60 50 44;
-    --c-bone: 22 16 12;
-    --c-bone-dim: 64 54 46;
-    --c-bone-faint: 110 98 86;
-    --c-neon: 207 43 34;
-    --c-neon-cyan: 44 74 92;
-    --c-neon-deep: 168 30 24;
-    --c-amber: 217 158 36;
-    --c-amber-bright: 232 176 56;
-    --c-amber-deep: 184 128 20;
-    --on-amber: 22 16 12;
-  }
-
-  /* SÝRA: magenta + acid green + ink on cool grey-cream. */
-  [data-look="acid"] {
-    --c-base: 230 230 222;
-    --c-base-deep: 220 220 210;
-    --c-base-card: 238 238 230;
-    --c-base-raised: 228 228 218;
-    --c-base-line: 20 20 18;
-    --c-base-linebright: 54 54 50;
-    --c-bone: 16 16 14;
-    --c-bone-dim: 58 58 54;
-    --c-bone-faint: 100 100 94;
-    --c-neon: 214 42 138;
-    --c-neon-cyan: 30 28 26;
-    --c-neon-deep: 176 28 110;
-    --c-amber: 140 196 28;
-    --c-amber-bright: 158 214 46;
-    --c-amber-deep: 110 156 20;
-    --on-amber: 16 16 14;
   }
 
   html { scroll-behavior: smooth; }
