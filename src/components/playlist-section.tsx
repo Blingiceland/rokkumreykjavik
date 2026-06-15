@@ -37,10 +37,7 @@ export function PlaylistSection() {
         >
           <span
             aria-hidden="true"
-            className="absolute inset-0 opacity-[0.05]"
-            style={{
-              backgroundImage: "repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 14px)",
-            }}
+            className="hatch absolute inset-0 opacity-[0.05]"
           />
           <span className="relative grid h-14 w-14 place-items-center rounded-full border border-neon/50 text-neon">
             <Music2 size={24} />

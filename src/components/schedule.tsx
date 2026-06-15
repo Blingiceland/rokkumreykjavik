@@ -265,13 +265,27 @@ export function SectionLabel({
   title: string;
   accent: string;
 }) {
+  // Standard + typo variants; CSS shows the one matching the active look.
   return (
-    <div className="mb-10">
-      <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-neon">{kicker}</p>
-      <h2 className="font-display text-5xl text-bone sm:text-7xl">
-        {title}
-        <span className="text-neon">{accent}</span>
-      </h2>
-    </div>
+    <>
+      <div className="only-standard mb-10">
+        <p className="mb-3 font-mono text-xs uppercase tracking-[0.3em] text-neon">{kicker}</p>
+        <h2 className="font-display text-5xl text-bone sm:text-7xl">
+          {title}
+          <span className="text-neon">{accent}</span>
+        </h2>
+      </div>
+      <div className="only-typo mb-10">
+        <p className="flex items-center justify-between border-y-2 border-bone py-2 font-mono text-[10px] uppercase tracking-[0.3em] text-bone sm:text-xs sm:tracking-[0.4em]">
+          <span>{kicker}</span>
+        </p>
+        <h2 className="mt-4 font-display text-6xl uppercase leading-[0.82] tracking-[-0.02em] text-bone sm:text-8xl">
+          {title}
+          <span className="text-neon" style={{ textShadow: "0.04em 0.045em 0 rgba(255,157,60,0.5)" }}>
+            {accent}
+          </span>
+        </h2>
+      </div>
+    </>
   );
 }

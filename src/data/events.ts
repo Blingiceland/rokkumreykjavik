@@ -63,6 +63,11 @@ export function getSetTime(event: RokkEvent, artistId: string): string | null {
   return event.setTimes?.[artistId] ?? null;
 }
 
+/** Day-of-month for each night, e.g. [4, 11, 18, 25]. */
+export function getEventDays(): number[] {
+  return events.map((e) => Number(e.date.slice(-2)));
+}
+
 export function getEventById(id: string): RokkEvent | undefined {
   return events.find((e) => e.id === id);
 }
@@ -76,4 +81,9 @@ export function getEventArtists(event: RokkEvent): Artist[] {
   return event.artistIds
     .map((id) => artists.find((a) => a.id === id))
     .filter((a): a is Artist => a !== undefined);
+}
+
+/** The night's headliner — the first act in set order. */
+export function getHeadliner(event: RokkEvent): Artist | undefined {
+  return getEventArtists(event)[0];
 }

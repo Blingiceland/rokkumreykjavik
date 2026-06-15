@@ -10,8 +10,9 @@ const buttonVariants = cva(
     variants: {
       variant: {
         // Warm amber CTA.
+        // Dark ink text so it reads on amber in both the dark and paper looks.
         primary:
-          "bg-amber text-base hover:bg-amber-bright hover:-translate-y-0.5 shadow-[0_8px_30px_-10px_rgba(255,157,60,0.7)] hover:shadow-[0_12px_40px_-8px_rgba(255,157,60,0.85)]",
+          "bg-amber text-[#1f1710] hover:bg-amber-bright hover:-translate-y-0.5 shadow-[0_8px_30px_-10px_rgba(176,80,20,0.55)] hover:shadow-[0_12px_40px_-8px_rgba(176,80,20,0.7)]",
         // Neon outline secondary.
         neon:
           "border border-neon/50 text-neon bg-neon/5 hover:bg-neon/10 hover:border-neon hover:-translate-y-0.5",

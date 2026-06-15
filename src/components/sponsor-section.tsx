@@ -64,7 +64,7 @@ export function SponsorSection() {
                           src={s.logo}
                           alt={`${s.name} logo`}
                           className={cn(
-                            "max-h-14 max-w-full object-contain opacity-90 transition-opacity group-hover:opacity-100",
+                            "sponsor-logo max-h-14 max-w-full object-contain opacity-90 transition-opacity group-hover:opacity-100",
                             s.treatment && treatmentClass[s.treatment]
                           )}
                         />

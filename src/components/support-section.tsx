@@ -22,10 +22,7 @@ export function SupportSection() {
         {/* Faint diagonal print texture */}
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.05]"
-          style={{
-            backgroundImage: "repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 14px)",
-          }}
+          className="hatch pointer-events-none absolute inset-0 opacity-[0.05]"
         />
 
         <p className="relative font-mono text-xs uppercase tracking-[0.3em] text-neon">

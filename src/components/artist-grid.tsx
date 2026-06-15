@@ -82,10 +82,7 @@ function VideoBlock({ artist }: { artist: Artist }) {
       role="img"
       aria-label="Myndband væntanlegt"
     >
-      <span
-        className="absolute inset-0 opacity-[0.05]"
-        style={{ backgroundImage: "repeating-linear-gradient(45deg,#fff 0 1px,transparent 1px 14px)" }}
-      />
+      <span className="hatch absolute inset-0 opacity-[0.05]" />
       <div className="relative flex flex-col items-center gap-2">
         <span className="grid h-12 w-12 place-items-center rounded-full border border-base-line text-bone-faint">
           <Play size={18} />

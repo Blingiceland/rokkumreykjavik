@@ -8,6 +8,45 @@
     --font-display: "Archivo Black", ui-sans-serif, sans-serif;
     --font-body: "Sora", ui-sans-serif, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+    /* Default (dark) palette — shared by the "base" and "typo" looks.
+       Channel triplets so Tailwind can apply opacity modifiers. */
+    --c-base: 12 8 20;
+    --c-base-deep: 8 5 15;
+    --c-base-card: 22 15 36;
+    --c-base-raised: 31 22 51;
+    --c-base-line: 44 35 66;
+    --c-base-linebright: 58 47 85;
+    --c-bone: 243 238 247;
+    --c-bone-dim: 169 159 192;
+    --c-bone-faint: 111 102 136;
+    --c-neon: 77 255 195;
+    --c-neon-cyan: 58 212 255;
+    --c-neon-deep: 15 174 138;
+    --c-amber: 255 157 60;
+    --c-amber-bright: 255 179 94;
+    --c-amber-deep: 224 122 23;
+  }
+
+  /* "paper" look — light cream silkscreen theme. Token ROLES are preserved
+     (base = surface, bone = ink, neon = vermilion accent), values flipped. */
+  [data-look="paper"] {
+    color-scheme: light;
+    --c-base: 236 226 205;
+    --c-base-deep: 227 215 189;
+    --c-base-card: 246 239 221;
+    --c-base-raised: 239 230 208;
+    --c-base-line: 211 192 154;
+    --c-base-linebright: 192 170 126;
+    --c-bone: 34 27 19;
+    --c-bone-dim: 90 79 62;
+    --c-bone-faint: 138 124 100;
+    --c-neon: 195 58 34;
+    --c-neon-cyan: 47 111 120;
+    --c-neon-deep: 156 44 23;
+    --c-amber: 217 116 26;
+    --c-amber-bright: 239 143 51;
+    --c-amber-deep: 179 94 16;
   }
 
   html {
@@ -21,6 +60,13 @@
       radial-gradient(50rem 40rem at -8% 12%, rgba(77, 255, 195, 0.07), transparent 55%),
       radial-gradient(60rem 50rem at 50% 110%, rgba(255, 157, 60, 0.06), transparent 60%);
     background-attachment: fixed;
+  }
+  /* Paper look: faint warm/ink vignette instead of jewel-tone glows. */
+  [data-look="paper"] body {
+    background-image:
+      radial-gradient(55rem 38rem at 75% -8%, rgba(195, 58, 34, 0.06), transparent 60%),
+      radial-gradient(50rem 40rem at -8% 12%, rgba(47, 111, 120, 0.05), transparent 55%),
+      radial-gradient(60rem 50rem at 50% 110%, rgba(34, 27, 19, 0.05), transparent 60%);
   }
 
   ::-webkit-scrollbar {
@@ -36,6 +82,15 @@
   }
   ::-webkit-scrollbar-thumb:hover {
     background: #4dffc3;
+  }
+  [data-look="paper"] ::-webkit-scrollbar-track {
+    background: #e3d7bd;
+  }
+  [data-look="paper"] ::-webkit-scrollbar-thumb {
+    background: #c0aa7e;
+  }
+  [data-look="paper"] ::-webkit-scrollbar-thumb:hover {
+    background: #c33a22;
   }
 
   h1, h2, h3, h4 {
@@ -56,6 +111,11 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     animation: grain-shift 8s steps(10) infinite;
   }
+  /* On paper, multiply so the noise reads as ink tooth on the cream. */
+  [data-look="paper"] .grain::before {
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+  }
 
   .text-stroke {
     -webkit-text-stroke: 1.5px #f3eef7;
@@ -65,14 +125,66 @@
     -webkit-text-stroke: 1.5px #4dffc3;
     color: transparent;
   }
+  [data-look="paper"] .text-stroke {
+    -webkit-text-stroke-color: #221b13;
+  }
+  [data-look="paper"] .text-stroke-neon {
+    -webkit-text-stroke-color: #c33a22;
+  }
 
   .glow-neon {
     text-shadow: 0 0 24px rgba(77, 255, 195, 0.45);
+  }
+  /* Paper has no glows — repurpose as subtle ink misregistration. */
+  [data-look="paper"] .glow-neon {
+    text-shadow: 0.035em 0.04em 0 rgba(47, 111, 120, 0.5);
   }
 
   /* Poster-style hairline frame. */
   .poster-frame {
     box-shadow: inset 0 0 0 1px rgba(58, 47, 85, 0.6);
+  }
+  [data-look="paper"] .poster-frame {
+    box-shadow: inset 0 0 0 1px rgba(34, 27, 19, 0.16);
+  }
+
+  /* Diagonal print hatch for "væntanlegt" placeholders — ink colour per look. */
+  .hatch {
+    background-image: repeating-linear-gradient(45deg, #fff 0 1px, transparent 1px 14px);
+  }
+  [data-look="paper"] .hatch {
+    background-image: repeating-linear-gradient(45deg, #000 0 1px, transparent 1px 14px);
+  }
+
+  /* Hero scanline texture — ink colour per look. */
+  .hero-scan {
+    background-image: repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 5px);
+  }
+  [data-look="paper"] .hero-scan {
+    background-image: repeating-linear-gradient(0deg, #000 0 1px, transparent 1px 5px);
+  }
+
+  /* Brand/sponsor logos: dark theme uses invert/lighten (set in markup); on
+     paper print them dark via multiply. */
+  [data-look="paper"] .brand-logo {
+    filter: none;
+    mix-blend-mode: multiply;
+  }
+  [data-look="paper"] .sponsor-logo {
+    filter: invert(1);
+    mix-blend-mode: multiply;
+  }
+
+  /* Look variants: components render both the standard and typo markup; CSS
+     shows only the one matching the active look. Default = standard. */
+  .only-typo {
+    display: none;
+  }
+  [data-look="typo"] .only-standard {
+    display: none;
+  }
+  [data-look="typo"] .only-typo {
+    display: block;
   }
 }
 

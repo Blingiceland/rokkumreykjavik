@@ -5,29 +5,32 @@ const config: Config = {
   content: ["./src/**/*.{ts,tsx}"],
   theme: {
     extend: {
+      // Colours are driven by CSS variables (channel triplets) so the look
+      // switcher can re-theme at runtime by toggling [data-look] on <html>
+      // without a Tailwind rebuild. Values live in globals.css.
       colors: {
         base: {
-          DEFAULT: "#0c0814",
-          deep: "#08050f",
-          card: "#160f24",
-          raised: "#1f1633",
-          line: "#2c2342",
-          linebright: "#3a2f55",
+          DEFAULT: "rgb(var(--c-base) / <alpha-value>)",
+          deep: "rgb(var(--c-base-deep) / <alpha-value>)",
+          card: "rgb(var(--c-base-card) / <alpha-value>)",
+          raised: "rgb(var(--c-base-raised) / <alpha-value>)",
+          line: "rgb(var(--c-base-line) / <alpha-value>)",
+          linebright: "rgb(var(--c-base-linebright) / <alpha-value>)",
         },
         bone: {
-          DEFAULT: "#f3eef7",
-          dim: "#a99fc0",
-          faint: "#6f6688",
+          DEFAULT: "rgb(var(--c-bone) / <alpha-value>)",
+          dim: "rgb(var(--c-bone-dim) / <alpha-value>)",
+          faint: "rgb(var(--c-bone-faint) / <alpha-value>)",
         },
         neon: {
-          DEFAULT: "#4dffc3",
-          cyan: "#3ad4ff",
-          deep: "#0fae8a",
+          DEFAULT: "rgb(var(--c-neon) / <alpha-value>)",
+          cyan: "rgb(var(--c-neon-cyan) / <alpha-value>)",
+          deep: "rgb(var(--c-neon-deep) / <alpha-value>)",
         },
         amber: {
-          DEFAULT: "#ff9d3c",
-          bright: "#ffb35e",
-          deep: "#e07a17",
+          DEFAULT: "rgb(var(--c-amber) / <alpha-value>)",
+          bright: "rgb(var(--c-amber-bright) / <alpha-value>)",
+          deep: "rgb(var(--c-amber-deep) / <alpha-value>)",
         },
       },
       fontFamily: {
