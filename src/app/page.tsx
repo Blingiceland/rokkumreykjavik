@@ -1,7 +1,6 @@
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { Schedule } from "@/components/schedule";
-import { ArtistGrid } from "@/components/artist-grid";
 import { PlaylistSection } from "@/components/playlist-section";
 import { SupportSection } from "@/components/support-section";
 import { SignupSection } from "@/components/signup-section";
@@ -15,7 +14,6 @@ export default function Home() {
       <main>
         <Hero />
         <Schedule />
-        <ArtistGrid />
         <PlaylistSection />
         <SupportSection />
         <SignupSection />

@@ -112,10 +112,9 @@ export function Schedule() {
 
             {/* Support — counting down 19:00, 18:00, … */}
             {support.map((band) => (
-              <a
+              <div
                 key={band.id}
-                href="#listamenn"
-                className="group flex items-stretch border-2 border-bone bg-base-card transition-colors hover:bg-amber"
+                className="flex items-stretch border-2 border-bone bg-base-card"
               >
                 <span className="flex w-[4.25rem] shrink-0 items-center justify-center bg-bone font-display text-xl tabular-nums leading-none text-[color:rgb(var(--c-base))] sm:w-24 sm:text-3xl">
                   {getScheduleTime(event, band.id)}
@@ -127,7 +126,7 @@ export function Schedule() {
                 <span className="flex flex-1 items-center px-4 font-display text-xl uppercase leading-none text-bone sm:text-3xl">
                   {band.name}
                 </span>
-              </a>
+              </div>
             ))}
           </div>
         </motion.div>
