@@ -4,75 +4,30 @@
 
 @layer base {
   :root {
-    color-scheme: dark;
+    color-scheme: light;
     --font-display: "Archivo Black", ui-sans-serif, sans-serif;
     --font-body: "Sora", ui-sans-serif, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-    /* Default = ROKK. Channel triplets so Tailwind opacity modifiers work. */
-    --c-base: 13 12 14;
-    --c-base-deep: 8 7 9;
-    --c-base-card: 24 21 25;
-    --c-base-raised: 33 29 34;
-    --c-base-line: 48 43 50;
-    --c-base-linebright: 70 62 72;
-    --c-bone: 245 240 235;
-    --c-bone-dim: 168 160 152;
-    --c-bone-faint: 110 104 99;
-    --c-neon: 230 48 34;          /* rock red */
-    --c-neon-cyan: 240 176 64;    /* dirty gold */
-    --c-neon-deep: 176 30 20;
-    --c-amber: 240 176 64;        /* gold */
-    --c-amber-bright: 255 196 92;
-    --c-amber-deep: 200 140 40;
-    --on-amber: 31 23 16;         /* text colour on the primary button */
-  }
-
-  /* ROKK — loud dark rock poster (same as :root, named for clarity). */
-  [data-look="rokk"] {
-    color-scheme: dark;
-  }
-
-  /* PÖNK — photocopied zine: dirty paper, harsh black, hot pink + highlighter. */
-  [data-look="ponk"] {
-    color-scheme: light;
-    --c-base: 233 230 222;
-    --c-base-deep: 224 220 210;
-    --c-base-card: 240 238 231;
-    --c-base-raised: 230 227 218;
-    --c-base-line: 26 24 23;        /* harsh black rules */
+    /* PÖNK — photocopied zine on cheap paper. Channel triplets so Tailwind
+       opacity modifiers work. Roles: base = paper, bone = black ink,
+       neon = hot pink spot, neon-cyan = teal plate, amber = highlighter. */
+    --c-base: 232 228 218;        /* dirty newsprint */
+    --c-base-deep: 222 217 205;
+    --c-base-card: 238 234 224;
+    --c-base-raised: 228 223 211;
+    --c-base-line: 24 22 21;       /* harsh black rules */
     --c-base-linebright: 58 54 52;
-    --c-bone: 17 16 15;            /* black ink */
-    --c-bone-dim: 64 60 58;
-    --c-bone-faint: 108 102 98;
-    --c-neon: 255 39 110;          /* hot pink spot */
-    --c-neon-cyan: 26 24 23;       /* black secondary */
-    --c-neon-deep: 214 24 88;
-    --c-amber: 232 212 0;          /* highlighter yellow */
-    --c-amber-bright: 245 228 40;
-    --c-amber-deep: 200 182 0;
-    --on-amber: 20 19 18;
-  }
-
-  /* VENJULEGT — clean modern light theme. */
-  [data-look="venjulegt"] {
-    color-scheme: light;
-    --c-base: 250 250 252;
-    --c-base-deep: 244 244 247;
-    --c-base-card: 255 255 255;
-    --c-base-raised: 247 247 250;
-    --c-base-line: 226 226 232;
-    --c-base-linebright: 206 206 216;
-    --c-bone: 28 28 34;            /* slate ink */
-    --c-bone-dim: 90 92 104;
-    --c-bone-faint: 142 144 156;
-    --c-neon: 37 99 235;          /* calm blue */
-    --c-neon-cyan: 13 148 136;    /* teal */
-    --c-neon-deep: 29 78 216;
-    --c-amber: 37 99 235;         /* blue primary */
-    --c-amber-bright: 59 117 245;
-    --c-amber-deep: 29 78 216;
-    --on-amber: 255 255 255;       /* white text on blue */
+    --c-bone: 18 16 15;           /* black ink */
+    --c-bone-dim: 60 56 54;
+    --c-bone-faint: 104 98 94;
+    --c-neon: 232 41 110;         /* hot pink spot */
+    --c-neon-cyan: 32 110 112;    /* teal plate */
+    --c-neon-deep: 200 28 92;
+    --c-amber: 230 208 0;         /* highlighter yellow */
+    --c-amber-bright: 244 226 36;
+    --c-amber-deep: 198 178 0;
+    --on-amber: 18 16 15;         /* ink text on the highlighter button */
   }
 
   html {
@@ -83,32 +38,20 @@
     @apply bg-base text-bone font-body antialiased selection:bg-neon selection:text-base;
     background-attachment: fixed;
   }
-  /* ROKK: smoky red/gold glows. */
-  [data-look="rokk"] body,
-  :root body {
-    background-image:
-      radial-gradient(55rem 38rem at 75% -8%, rgba(230, 48, 34, 0.10), transparent 60%),
-      radial-gradient(60rem 50rem at 50% 110%, rgba(240, 176, 64, 0.06), transparent 60%);
-  }
-  /* PÖNK + VENJULEGT: flat (no glows). */
-  [data-look="ponk"] body,
-  [data-look="venjulegt"] body {
-    background-image: none;
-  }
 
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: rgb(var(--c-base-deep));
+    background: #ddd9cd;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgb(var(--c-base-linebright));
-    border-radius: 999px;
+    background: #18100f;
+    border-radius: 0;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgb(var(--c-neon));
+    background: #e8296e;
   }
 
   h1, h2, h3, h4 {
@@ -118,26 +61,30 @@
 }
 
 @layer utilities {
-  /* Grain / ink tooth — intensity + blend per look. */
+  /* Heavy xerox tooth — multiply darkens the dirty paper like a photocopy. */
   .grain::before {
     content: "";
     position: fixed;
     inset: -50%;
     z-index: 1;
     pointer-events: none;
-    opacity: 0.07;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    animation: grain-shift 8s steps(10) infinite;
-  }
-  /* PÖNK: heavy xerox tooth (multiply on the dirty paper). */
-  [data-look="ponk"] .grain::before {
     opacity: 0.55;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grain-shift 8s steps(10) infinite;
   }
-  /* VENJULEGT: clean — no grain. */
-  [data-look="venjulegt"] .grain::before {
-    display: none;
+
+  /* Halftone dot field — laid over surfaces with multiply for a printed tone. */
+  .halftone {
+    background-image: radial-gradient(rgba(18, 16, 15, 0.6) 1px, transparent 1.4px);
+    background-size: 5px 5px;
+    mix-blend-mode: multiply;
+  }
+
+  /* Diagonal ink hatch for "væntanlegt" placeholders. */
+  .hatch {
+    background-image: repeating-linear-gradient(45deg, rgb(var(--c-bone)) 0 1px, transparent 1px 14px);
+    mix-blend-mode: multiply;
   }
 
   .text-stroke {
@@ -149,66 +96,20 @@
     color: transparent;
   }
 
-  /* "glow" — a soft halo on dark, an ink misregistration on light, nothing clean. */
+  /* Misregistration "glow" — a pink plate nudged off behind the ink. */
   .glow-neon {
-    text-shadow: 0 0 26px rgb(var(--c-neon) / 0.4);
-  }
-  [data-look="ponk"] .glow-neon {
-    text-shadow: 0.04em 0.045em 0 rgb(var(--c-amber) / 0.9);
-  }
-  [data-look="venjulegt"] .glow-neon {
-    text-shadow: none;
+    text-shadow: 0.04em 0.045em 0 rgb(var(--c-neon) / 0.9);
   }
 
-  /* Poster hairline frame. */
+  /* Poster frame — heavy black rule. */
   .poster-frame {
-    box-shadow: inset 0 0 0 1px rgb(var(--c-base-line) / 0.7);
-  }
-  [data-look="ponk"] .poster-frame {
     box-shadow: inset 0 0 0 2px rgb(var(--c-bone));
   }
-  [data-look="venjulegt"] .poster-frame {
-    box-shadow: 0 1px 3px rgb(15 15 20 / 0.06), 0 8px 24px -12px rgb(15 15 20 / 0.12);
-  }
 
-  /* Hatch for "væntanlegt" placeholders — ink colour per look. */
-  .hatch {
-    background-image: repeating-linear-gradient(45deg, rgb(var(--c-bone)) 0 1px, transparent 1px 14px);
-  }
-
-  /* Hero scanline (used by the rokk hero). */
-  .hero-scan {
-    background-image: repeating-linear-gradient(0deg, rgb(var(--c-bone)) 0 1px, transparent 1px 5px);
-  }
-
-  /* Sponsor logos: print dark on the light looks. */
-  [data-look="ponk"] .sponsor-logo,
-  [data-look="venjulegt"] .sponsor-logo {
+  /* Sponsor logos print dark on the paper. */
+  .sponsor-logo {
     filter: invert(1);
     mix-blend-mode: multiply;
-  }
-
-  /* Look-specific markup: each hero variant is wrapped in .show-<look>; CSS
-     reveals only the one matching the active look. */
-  .show-rokk,
-  .show-ponk,
-  .show-venjulegt {
-    display: none;
-  }
-  [data-look="rokk"] .show-rokk,
-  :root .show-rokk {
-    display: block;
-  }
-  [data-look="ponk"] .show-ponk {
-    display: block;
-  }
-  [data-look="venjulegt"] .show-venjulegt {
-    display: block;
-  }
-  /* When an explicit look is set, the :root fallback must not also show rokk. */
-  [data-look="ponk"] .show-rokk,
-  [data-look="venjulegt"] .show-rokk {
-    display: none;
   }
 }
 

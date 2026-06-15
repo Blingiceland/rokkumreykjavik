@@ -1,6 +1,5 @@
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
-import { Countdown } from "@/components/countdown";
 import { Schedule } from "@/components/schedule";
 import { ArtistGrid } from "@/components/artist-grid";
 import { PlaylistSection } from "@/components/playlist-section";
@@ -15,7 +14,6 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Countdown />
         <Schedule />
         <ArtistGrid />
         <PlaylistSection />

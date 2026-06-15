@@ -49,9 +49,13 @@ export const sponsors: Sponsor[] = [
   },
 ];
 
-/** Tailwind classes for each logo treatment. */
+/**
+ * Per-treatment classes. On the paper theme every sponsor logo is printed dark
+ * by the shared `.sponsor-logo` rule (invert + multiply), so no extra
+ * per-treatment class is needed here.
+ */
 export const treatmentClass: Record<LogoTreatment, string> = {
-  invert: "invert",
-  lighten: "mix-blend-lighten",
-  "invert-lighten": "invert mix-blend-lighten",
+  invert: "",
+  lighten: "",
+  "invert-lighten": "",
 };

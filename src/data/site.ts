@@ -37,12 +37,11 @@ export const site: SiteConfig = {
   spotifyPlaylistId: "",
 };
 
-/** Short presenter credit, set as type (no logos), e.g.
- * "Dillon og Rás 2 í samstarfi kynna". */
-export const presenterCredit = `${site.presenter} í samstarfi kynna`;
+/** Short presenter credit, set as type (no logos): "Dillon og Rás 2 kynna". */
+export const presenterCredit = `${site.presenter} kynna`;
 
 /** Full presenter lockup for metadata, e.g.
- * "Dillon og Rás 2 í samstarfi kynna: Rokk í Reykjavík 2026". */
+ * "Dillon og Rás 2 kynna: Rokk í Reykjavík 2026". */
 export const presenterLockup = `${presenterCredit}: ${site.name} ${site.yearLabel}`;
 
 export interface VenueConfig {
