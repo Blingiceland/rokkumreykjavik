@@ -34,7 +34,7 @@ export const site: SiteConfig = {
   url: "https://rokkumreykjavik.is",
   description: "Fjórir laugardagar. Sextán bönd. Ein borg sem þarf að heyrast.",
   contactEmail: "info@rokkumreykjavik.is",
-  spotifyPlaylistId: "",
+  spotifyPlaylistId: "5VDX5fXbVUN3pIuIPUnG3Y",
 };
 
 /** Short presenter credit, set as type (no logos): "Dillon og Rás 2 kynna". */
