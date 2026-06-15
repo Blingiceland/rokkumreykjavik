@@ -6,7 +6,7 @@ import { ArrowDown } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { site, venue, presenterCredit, EVENT_YEAR } from "@/data/site";
 import { artists } from "@/data/artists";
-import { getEventDays } from "@/data/events";
+import { getEventDays, dayNumberForDate } from "@/data/events";
 
 const topHeadliners = artists.filter((a) => a.topBilling);
 const subHeadliners = artists.filter((a) => a.headliner && !a.topBilling);
@@ -89,18 +89,21 @@ export function Hero() {
           </span>
         </div>
 
-        {/* Top headliners — biggest, alone on the highlight ink. */}
+        {/* Top headliners — biggest, alone on the highlight ink. Each links to
+            its night in the schedule. */}
         <ul className="mt-8 flex flex-wrap items-end gap-2.5 sm:gap-3">
           {topHeadliners.map((a, i) => (
-            <li
-              key={a.id}
-              className={
-                "border-2 border-bone bg-amber px-4 py-2 font-display text-3xl uppercase leading-none text-bone sm:text-6xl " +
-                tiltClass[i % tiltClass.length]
-              }
-              style={xerox}
-            >
-              {a.name}
+            <li key={a.id}>
+              <a
+                href={`#dagur-${dayNumberForDate(a.date)}`}
+                className={
+                  "block border-2 border-bone bg-amber px-4 py-2 font-display text-3xl uppercase leading-none text-bone transition-transform hover:-translate-y-0.5 sm:text-6xl " +
+                  tiltClass[i % tiltClass.length]
+                }
+                style={xerox}
+              >
+                {a.name}
+              </a>
             </li>
           ))}
         </ul>
@@ -108,15 +111,17 @@ export function Hero() {
         {/* Second-tier headliners. */}
         <ul className="mt-3 flex flex-wrap items-end gap-2.5">
           {subHeadliners.map((a, i) => (
-            <li
-              key={a.id}
-              className={
-                "border-2 border-bone bg-amber px-3 py-1.5 font-display text-xl uppercase leading-none text-bone sm:text-3xl " +
-                tiltClass[(i + 1) % tiltClass.length]
-              }
-              style={xerox}
-            >
-              {a.name}
+            <li key={a.id}>
+              <a
+                href={`#dagur-${dayNumberForDate(a.date)}`}
+                className={
+                  "block border-2 border-bone bg-amber px-3 py-1.5 font-display text-xl uppercase leading-none text-bone transition-transform hover:-translate-y-0.5 sm:text-3xl " +
+                  tiltClass[(i + 1) % tiltClass.length]
+                }
+                style={xerox}
+              >
+                {a.name}
+              </a>
             </li>
           ))}
         </ul>
@@ -127,15 +132,17 @@ export function Hero() {
         </p>
         <ul className="flex flex-wrap items-end gap-2">
           {otherBands.map((a, i) => (
-            <li
-              key={a.id}
-              className={
-                "border-2 border-bone bg-base-card px-2.5 py-1 font-display text-base uppercase leading-none text-bone sm:text-xl " +
-                tiltClass[i % tiltClass.length]
-              }
-              style={xerox}
-            >
-              {a.name}
+            <li key={a.id}>
+              <a
+                href={`#dagur-${dayNumberForDate(a.date)}`}
+                className={
+                  "block border-2 border-bone bg-base-card px-2.5 py-1 font-display text-base uppercase leading-none text-bone transition-colors hover:bg-amber sm:text-xl " +
+                  tiltClass[i % tiltClass.length]
+                }
+                style={xerox}
+              >
+                {a.name}
+              </a>
             </li>
           ))}
         </ul>

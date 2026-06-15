@@ -66,14 +66,15 @@
 }
 
 @layer utilities {
-  /* Heavy xerox tooth — multiply darkens the paper like a photocopy. */
+  /* Xerox tooth over the WHOLE page (above the header too) so the texture —
+     and the background — read uniform everywhere. */
   .grain::before {
     content: "";
     position: fixed;
     inset: -50%;
-    z-index: 1;
+    z-index: 60;
     pointer-events: none;
-    opacity: 0.55;
+    opacity: 0.4;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     animation: grain-shift 8s steps(10) infinite;
@@ -81,7 +82,7 @@
   /* On the dark look, screen so the tooth reads as light film grain. */
   [data-look="svart"] .grain::before {
     mix-blend-mode: screen;
-    opacity: 0.1;
+    opacity: 0.12;
   }
 
   .halftone {

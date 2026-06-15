@@ -82,6 +82,12 @@ export function getDoorsTime(event: RokkEvent): string {
   return `${20 - (event.artistIds.length - 1)}:00`;
 }
 
+/** 1-based day number (#dagur-N anchor) for a band's ISO date. */
+export function dayNumberForDate(date: string): number {
+  const i = events.findIndex((e) => e.date === date);
+  return i < 0 ? 1 : i + 1;
+}
+
 /** Day-of-month for each night, e.g. [4, 11, 18, 25]. */
 export function getEventDays(): number[] {
   return events.map((e) => Number(e.date.slice(-2)));

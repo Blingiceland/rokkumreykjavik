@@ -42,11 +42,13 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: presenterLockup,
     description: `Fjórir laugardagar. Sautján bönd. Ókeypis inn. Júlí ${EVENT_YEAR}.`,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: `${site.name} ${EVENT_YEAR}` }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.name} ${site.yearLabel}`,
     description: `${site.description} Ókeypis inn — júlí ${EVENT_YEAR}.`,
+    images: ["/og.png"],
   },
   robots: { index: true, follow: true },
 };
