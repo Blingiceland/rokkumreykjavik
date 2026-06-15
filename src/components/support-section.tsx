@@ -11,39 +11,25 @@ import { site } from "@/data/site";
  */
 export function SupportSection() {
   return (
-    <section id="styrkja" className="relative z-10 mx-auto max-w-6xl px-4 py-24 sm:px-6">
+    <section id="styrkja" className="relative z-10 mx-auto max-w-3xl px-4 py-16 sm:px-6">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 14 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.5 }}
-        className="poster-frame relative overflow-hidden rounded-3xl border border-base-line bg-base-card px-6 py-16 text-center sm:px-12 sm:py-20"
+        transition={{ duration: 0.4 }}
+        className="flex flex-col items-center gap-3 rounded-2xl border border-base-line bg-base-card px-6 py-8 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left"
       >
-        {/* Faint diagonal print texture */}
-        <span
-          aria-hidden="true"
-          className="hatch pointer-events-none absolute inset-0 opacity-[0.05]"
-        />
-
-        <p className="relative font-mono text-xs uppercase tracking-[0.3em] text-neon">
-          Aðgangur er alltaf ókeypis
-        </p>
-        <h2 className="relative mx-auto mt-4 max-w-3xl font-display text-4xl leading-[0.95] text-bone sm:text-6xl">
-          Frítt inn. <span className="text-neon">Allir velkomnir.</span>
-        </h2>
-        <p className="relative mx-auto mt-5 max-w-xl text-bone-dim">
-          {site.name} lifir á velvild. Enginn miði, ekkert verð — bara tónlist.
-          Viltu hjálpa okkur að halda þessu gangandi?
-        </p>
-
+        <div>
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-neon">Ókeypis aðgangur</p>
+          <p className="mt-1 font-body text-bone-dim">
+            {site.name} lifir á velvild — enginn miði, ekkert verð.
+          </p>
+        </div>
         <a
           href="#"
-          className={
-            buttonVariants({ size: "lg", variant: "primary" }) +
-            " relative mt-9 !h-auto max-w-full !whitespace-normal py-4 text-center leading-tight"
-          }
+          className={buttonVariants({ size: "sm", variant: "ghost" }) + " shrink-0"}
         >
-          Viltu styrkja {site.name}?
+          Styrkja
         </a>
       </motion.div>
     </section>

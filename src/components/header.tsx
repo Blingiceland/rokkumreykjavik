@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { Menu, X } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { site } from "@/data/site";
 import { cn } from "@/lib/utils/cn";
@@ -49,9 +48,6 @@ export function Header() {
               {l.label}
             </a>
           ))}
-          <a href="#styrkja" className={buttonVariants({ size: "sm", variant: "primary" })}>
-            Styrkja
-          </a>
         </div>
 
         <button
@@ -77,13 +73,6 @@ export function Header() {
                 {l.label}
               </a>
             ))}
-            <a
-              href="#styrkja"
-              onClick={() => setOpen(false)}
-              className={buttonVariants({ variant: "primary" }) + " mt-2 w-full"}
-            >
-              Styrkja
-            </a>
           </div>
         </div>
       )}

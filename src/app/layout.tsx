@@ -106,7 +106,7 @@ function EventJsonLd() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="is" data-look="base" suppressHydrationWarning>
+    <html lang="is" data-look="rokk" suppressHydrationWarning>
       <body className="grain min-h-screen">
         {/* Apply the saved look before paint to avoid a flash. */}
         <script

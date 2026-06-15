@@ -9,44 +9,70 @@
     --font-body: "Sora", ui-sans-serif, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-    /* Default (dark) palette — shared by the "base" and "typo" looks.
-       Channel triplets so Tailwind can apply opacity modifiers. */
-    --c-base: 12 8 20;
-    --c-base-deep: 8 5 15;
-    --c-base-card: 22 15 36;
-    --c-base-raised: 31 22 51;
-    --c-base-line: 44 35 66;
-    --c-base-linebright: 58 47 85;
-    --c-bone: 243 238 247;
-    --c-bone-dim: 169 159 192;
-    --c-bone-faint: 111 102 136;
-    --c-neon: 77 255 195;
-    --c-neon-cyan: 58 212 255;
-    --c-neon-deep: 15 174 138;
-    --c-amber: 255 157 60;
-    --c-amber-bright: 255 179 94;
-    --c-amber-deep: 224 122 23;
+    /* Default = ROKK. Channel triplets so Tailwind opacity modifiers work. */
+    --c-base: 13 12 14;
+    --c-base-deep: 8 7 9;
+    --c-base-card: 24 21 25;
+    --c-base-raised: 33 29 34;
+    --c-base-line: 48 43 50;
+    --c-base-linebright: 70 62 72;
+    --c-bone: 245 240 235;
+    --c-bone-dim: 168 160 152;
+    --c-bone-faint: 110 104 99;
+    --c-neon: 230 48 34;          /* rock red */
+    --c-neon-cyan: 240 176 64;    /* dirty gold */
+    --c-neon-deep: 176 30 20;
+    --c-amber: 240 176 64;        /* gold */
+    --c-amber-bright: 255 196 92;
+    --c-amber-deep: 200 140 40;
+    --on-amber: 31 23 16;         /* text colour on the primary button */
   }
 
-  /* "paper" look — light cream silkscreen theme. Token ROLES are preserved
-     (base = surface, bone = ink, neon = vermilion accent), values flipped. */
-  [data-look="paper"] {
+  /* ROKK — loud dark rock poster (same as :root, named for clarity). */
+  [data-look="rokk"] {
+    color-scheme: dark;
+  }
+
+  /* PÖNK — photocopied zine: dirty paper, harsh black, hot pink + highlighter. */
+  [data-look="ponk"] {
     color-scheme: light;
-    --c-base: 236 226 205;
-    --c-base-deep: 227 215 189;
-    --c-base-card: 246 239 221;
-    --c-base-raised: 239 230 208;
-    --c-base-line: 211 192 154;
-    --c-base-linebright: 192 170 126;
-    --c-bone: 34 27 19;
-    --c-bone-dim: 90 79 62;
-    --c-bone-faint: 138 124 100;
-    --c-neon: 195 58 34;
-    --c-neon-cyan: 47 111 120;
-    --c-neon-deep: 156 44 23;
-    --c-amber: 217 116 26;
-    --c-amber-bright: 239 143 51;
-    --c-amber-deep: 179 94 16;
+    --c-base: 233 230 222;
+    --c-base-deep: 224 220 210;
+    --c-base-card: 240 238 231;
+    --c-base-raised: 230 227 218;
+    --c-base-line: 26 24 23;        /* harsh black rules */
+    --c-base-linebright: 58 54 52;
+    --c-bone: 17 16 15;            /* black ink */
+    --c-bone-dim: 64 60 58;
+    --c-bone-faint: 108 102 98;
+    --c-neon: 255 39 110;          /* hot pink spot */
+    --c-neon-cyan: 26 24 23;       /* black secondary */
+    --c-neon-deep: 214 24 88;
+    --c-amber: 232 212 0;          /* highlighter yellow */
+    --c-amber-bright: 245 228 40;
+    --c-amber-deep: 200 182 0;
+    --on-amber: 20 19 18;
+  }
+
+  /* VENJULEGT — clean modern light theme. */
+  [data-look="venjulegt"] {
+    color-scheme: light;
+    --c-base: 250 250 252;
+    --c-base-deep: 244 244 247;
+    --c-base-card: 255 255 255;
+    --c-base-raised: 247 247 250;
+    --c-base-line: 226 226 232;
+    --c-base-linebright: 206 206 216;
+    --c-bone: 28 28 34;            /* slate ink */
+    --c-bone-dim: 90 92 104;
+    --c-bone-faint: 142 144 156;
+    --c-neon: 37 99 235;          /* calm blue */
+    --c-neon-cyan: 13 148 136;    /* teal */
+    --c-neon-deep: 29 78 216;
+    --c-amber: 37 99 235;         /* blue primary */
+    --c-amber-bright: 59 117 245;
+    --c-amber-deep: 29 78 216;
+    --on-amber: 255 255 255;       /* white text on blue */
   }
 
   html {
@@ -55,18 +81,19 @@
 
   body {
     @apply bg-base text-bone font-body antialiased selection:bg-neon selection:text-base;
-    background-image:
-      radial-gradient(55rem 38rem at 75% -8%, rgba(58, 212, 255, 0.10), transparent 60%),
-      radial-gradient(50rem 40rem at -8% 12%, rgba(77, 255, 195, 0.07), transparent 55%),
-      radial-gradient(60rem 50rem at 50% 110%, rgba(255, 157, 60, 0.06), transparent 60%);
     background-attachment: fixed;
   }
-  /* Paper look: faint warm/ink vignette instead of jewel-tone glows. */
-  [data-look="paper"] body {
+  /* ROKK: smoky red/gold glows. */
+  [data-look="rokk"] body,
+  :root body {
     background-image:
-      radial-gradient(55rem 38rem at 75% -8%, rgba(195, 58, 34, 0.06), transparent 60%),
-      radial-gradient(50rem 40rem at -8% 12%, rgba(47, 111, 120, 0.05), transparent 55%),
-      radial-gradient(60rem 50rem at 50% 110%, rgba(34, 27, 19, 0.05), transparent 60%);
+      radial-gradient(55rem 38rem at 75% -8%, rgba(230, 48, 34, 0.10), transparent 60%),
+      radial-gradient(60rem 50rem at 50% 110%, rgba(240, 176, 64, 0.06), transparent 60%);
+  }
+  /* PÖNK + VENJULEGT: flat (no glows). */
+  [data-look="ponk"] body,
+  [data-look="venjulegt"] body {
+    background-image: none;
   }
 
   ::-webkit-scrollbar {
@@ -74,23 +101,14 @@
     height: 10px;
   }
   ::-webkit-scrollbar-track {
-    background: #08050f;
+    background: rgb(var(--c-base-deep));
   }
   ::-webkit-scrollbar-thumb {
-    background: #2c2342;
+    background: rgb(var(--c-base-linebright));
     border-radius: 999px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #4dffc3;
-  }
-  [data-look="paper"] ::-webkit-scrollbar-track {
-    background: #e3d7bd;
-  }
-  [data-look="paper"] ::-webkit-scrollbar-thumb {
-    background: #c0aa7e;
-  }
-  [data-look="paper"] ::-webkit-scrollbar-thumb:hover {
-    background: #c33a22;
+    background: rgb(var(--c-neon));
   }
 
   h1, h2, h3, h4 {
@@ -100,91 +118,97 @@
 }
 
 @layer utilities {
-  /* Film-grain / noise overlay for grit. */
+  /* Grain / ink tooth — intensity + blend per look. */
   .grain::before {
     content: "";
     position: fixed;
     inset: -50%;
     z-index: 1;
     pointer-events: none;
-    opacity: 0.06;
+    opacity: 0.07;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     animation: grain-shift 8s steps(10) infinite;
   }
-  /* On paper, multiply so the noise reads as ink tooth on the cream. */
-  [data-look="paper"] .grain::before {
-    opacity: 0.5;
+  /* PÖNK: heavy xerox tooth (multiply on the dirty paper). */
+  [data-look="ponk"] .grain::before {
+    opacity: 0.55;
     mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  /* VENJULEGT: clean — no grain. */
+  [data-look="venjulegt"] .grain::before {
+    display: none;
   }
 
   .text-stroke {
-    -webkit-text-stroke: 1.5px #f3eef7;
+    -webkit-text-stroke: 1.5px rgb(var(--c-bone));
     color: transparent;
   }
   .text-stroke-neon {
-    -webkit-text-stroke: 1.5px #4dffc3;
+    -webkit-text-stroke: 1.5px rgb(var(--c-neon));
     color: transparent;
   }
-  [data-look="paper"] .text-stroke {
-    -webkit-text-stroke-color: #221b13;
-  }
-  [data-look="paper"] .text-stroke-neon {
-    -webkit-text-stroke-color: #c33a22;
-  }
 
+  /* "glow" — a soft halo on dark, an ink misregistration on light, nothing clean. */
   .glow-neon {
-    text-shadow: 0 0 24px rgba(77, 255, 195, 0.45);
+    text-shadow: 0 0 26px rgb(var(--c-neon) / 0.4);
   }
-  /* Paper has no glows — repurpose as subtle ink misregistration. */
-  [data-look="paper"] .glow-neon {
-    text-shadow: 0.035em 0.04em 0 rgba(47, 111, 120, 0.5);
+  [data-look="ponk"] .glow-neon {
+    text-shadow: 0.04em 0.045em 0 rgb(var(--c-amber) / 0.9);
+  }
+  [data-look="venjulegt"] .glow-neon {
+    text-shadow: none;
   }
 
-  /* Poster-style hairline frame. */
+  /* Poster hairline frame. */
   .poster-frame {
-    box-shadow: inset 0 0 0 1px rgba(58, 47, 85, 0.6);
+    box-shadow: inset 0 0 0 1px rgb(var(--c-base-line) / 0.7);
   }
-  [data-look="paper"] .poster-frame {
-    box-shadow: inset 0 0 0 1px rgba(34, 27, 19, 0.16);
+  [data-look="ponk"] .poster-frame {
+    box-shadow: inset 0 0 0 2px rgb(var(--c-bone));
+  }
+  [data-look="venjulegt"] .poster-frame {
+    box-shadow: 0 1px 3px rgb(15 15 20 / 0.06), 0 8px 24px -12px rgb(15 15 20 / 0.12);
   }
 
-  /* Diagonal print hatch for "væntanlegt" placeholders — ink colour per look. */
+  /* Hatch for "væntanlegt" placeholders — ink colour per look. */
   .hatch {
-    background-image: repeating-linear-gradient(45deg, #fff 0 1px, transparent 1px 14px);
-  }
-  [data-look="paper"] .hatch {
-    background-image: repeating-linear-gradient(45deg, #000 0 1px, transparent 1px 14px);
+    background-image: repeating-linear-gradient(45deg, rgb(var(--c-bone)) 0 1px, transparent 1px 14px);
   }
 
-  /* Hero scanline texture — ink colour per look. */
+  /* Hero scanline (used by the rokk hero). */
   .hero-scan {
-    background-image: repeating-linear-gradient(0deg, #fff 0 1px, transparent 1px 5px);
-  }
-  [data-look="paper"] .hero-scan {
-    background-image: repeating-linear-gradient(0deg, #000 0 1px, transparent 1px 5px);
+    background-image: repeating-linear-gradient(0deg, rgb(var(--c-bone)) 0 1px, transparent 1px 5px);
   }
 
-  /* Brand/sponsor logos: dark theme uses invert/lighten (set in markup); on
-     paper print them dark via multiply. */
-  [data-look="paper"] .brand-logo {
-    filter: none;
-    mix-blend-mode: multiply;
-  }
-  [data-look="paper"] .sponsor-logo {
+  /* Sponsor logos: print dark on the light looks. */
+  [data-look="ponk"] .sponsor-logo,
+  [data-look="venjulegt"] .sponsor-logo {
     filter: invert(1);
     mix-blend-mode: multiply;
   }
 
-  /* Look variants: components render both the standard and typo markup; CSS
-     shows only the one matching the active look. Default = standard. */
-  .only-typo {
+  /* Look-specific markup: each hero variant is wrapped in .show-<look>; CSS
+     reveals only the one matching the active look. */
+  .show-rokk,
+  .show-ponk,
+  .show-venjulegt {
     display: none;
   }
-  [data-look="typo"] .only-standard {
-    display: none;
-  }
-  [data-look="typo"] .only-typo {
+  [data-look="rokk"] .show-rokk,
+  :root .show-rokk {
     display: block;
+  }
+  [data-look="ponk"] .show-ponk {
+    display: block;
+  }
+  [data-look="venjulegt"] .show-venjulegt {
+    display: block;
+  }
+  /* When an explicit look is set, the :root fallback must not also show rokk. */
+  [data-look="ponk"] .show-rokk,
+  [data-look="venjulegt"] .show-rokk {
+    display: none;
   }
 }
 

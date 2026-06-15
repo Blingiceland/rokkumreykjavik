@@ -5,20 +5,21 @@ import * as React from "react";
 // Local-only design switcher. Toggles [data-look] on <html>, which re-themes
 // the whole site via CSS variables and swaps the look-specific hero/headers.
 const LOOKS = [
-  { id: "base", label: "Base" },
-  { id: "typo", label: "Typo" },
-  { id: "paper", label: "Pappír" },
+  { id: "rokk", label: "Rokk" },
+  { id: "ponk", label: "Pönk" },
+  { id: "venjulegt", label: "Venjulegt" },
 ] as const;
 
 type LookId = (typeof LOOKS)[number]["id"];
 
 export function LookSwitcher() {
-  const [look, setLook] = React.useState<LookId>("base");
+  const [look, setLook] = React.useState<LookId>("rokk");
 
   React.useEffect(() => {
-    const saved = (localStorage.getItem("rr-look") as LookId) || "base";
-    setLook(saved);
-    document.documentElement.dataset.look = saved;
+    const saved = localStorage.getItem("rr-look");
+    const next = LOOKS.some((l) => l.id === saved) ? (saved as LookId) : "rokk";
+    setLook(next);
+    document.documentElement.dataset.look = next;
   }, []);
 
   const choose = (id: LookId) => {
