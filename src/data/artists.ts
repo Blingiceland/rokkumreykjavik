@@ -40,6 +40,8 @@ export interface Artist {
   instagramUrl: string;
   /** YouTube video ID (e.g. "abc123XYZ"). Empty -> no video available yet. */
   videoId: string;
+  /** A festival headliner — a big draw, shown highlighted in the hero banner. */
+  headliner: boolean;
 }
 
 /**
@@ -93,6 +95,8 @@ interface ArtistSeed {
   youtubeUrl?: string;
   soundcloudUrl?: string;
   instagramUrl?: string;
+  /** Mark a band as a festival headliner (highlighted in the hero banner). */
+  headliner?: boolean;
 }
 
 /**
@@ -108,6 +112,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
       {
         name: "Spacestation",
         genre: "Rock",
+        headliner: true,
         videoId: "E8n6pXizcHE",
         spotifyUrl: "https://open.spotify.com/artist/0tC0VODFMyQLqetgajNbbh",
       },
@@ -131,6 +136,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
       {
         name: "Vintage Caravan",
         genre: "Hard Rock",
+        headliner: true,
         videoId: "odL0bhBluPE",
         spotifyUrl: "https://open.spotify.com/artist/61MH29rMIyOfuK7KXQznzX",
       },
@@ -156,6 +162,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
       {
         name: "hOFFMAN",
         genre: "Alternative",
+        headliner: true,
         youtubeUrl: "https://www.youtube.com/@hoffmanband238",
       },
       {
@@ -176,11 +183,12 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
       {
         name: "Brain Police",
         genre: "Stoner Rock",
+        headliner: true,
         videoId: "FToInB6v4ac",
         image: "/images/artists/brain1.jpg",
         spotifyUrl: "https://open.spotify.com/artist/3u8Bmkzs6rer0AirAa87iR",
       },
-      { name: "Múr", genre: "" },
+      { name: "Múr", genre: "", headliner: true },
       { name: "Duft", genre: "Punk Rock" },
       { name: "Drungi", genre: "" },
       { name: "Sót", genre: "Rock" },
@@ -207,6 +215,7 @@ export const artists: Artist[] = lineup.flatMap(({ date, displayDate, acts }) =>
       soundcloudUrl: act.soundcloudUrl ?? PLACEHOLDER_SOUNDCLOUD,
       instagramUrl: act.instagramUrl ?? PLACEHOLDER_INSTAGRAM,
       videoId: act.videoId ?? "",
+      headliner: act.headliner ?? false,
     };
   })
 );

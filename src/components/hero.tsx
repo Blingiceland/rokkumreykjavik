@@ -6,11 +6,10 @@ import { ArrowDown } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { site, venue, presenterCredit, EVENT_YEAR } from "@/data/site";
 import { artists } from "@/data/artists";
-import { events, getHeadliner, getEventDays, isMarquee } from "@/data/events";
+import { getEventDays } from "@/data/events";
 
-const headliners = events
-  .map((e) => getHeadliner(e))
-  .filter((a): a is NonNullable<typeof a> => Boolean(a));
+const headlinerBands = artists.filter((a) => a.headliner);
+const otherBands = artists.filter((a) => !a.headliner);
 const days = getEventDays();
 
 const PAPER = "text-[color:rgb(var(--c-base))]";
@@ -89,29 +88,39 @@ export function Hero() {
           </span>
         </div>
 
-        {/* Headliners as torn stickers — the two marquee acts (Vintage Caravan
-            & Brain Police) printed larger on the highlight ink. */}
-        <ul className="mt-8 flex flex-wrap items-end gap-3">
-          {headliners.map((a, i) => {
-            const big = isMarquee(a.id);
-            return (
-              <li
-                key={a.id}
-                className={
-                  "border-2 border-bone font-display uppercase leading-none text-bone " +
-                  (big
-                    ? "bg-amber px-4 py-2 text-3xl sm:text-5xl "
-                    : "bg-base-card px-3 py-1.5 text-xl sm:text-3xl ") +
-                  tiltClass[i % tiltClass.length]
-                }
-                style={xerox}
-              >
-                <a href="#dagskra" className="hover:text-neon">
-                  {a.name}
-                </a>
-              </li>
-            );
-          })}
+        {/* Headliners — big on the highlight ink. */}
+        <ul className="mt-8 flex flex-wrap items-end gap-2.5 sm:gap-3">
+          {headlinerBands.map((a, i) => (
+            <li
+              key={a.id}
+              className={
+                "border-2 border-bone bg-amber px-4 py-2 font-display text-2xl uppercase leading-none text-bone sm:text-5xl " +
+                tiltClass[i % tiltClass.length]
+              }
+              style={xerox}
+            >
+              {a.name}
+            </li>
+          ))}
+        </ul>
+
+        {/* Everyone else — so the whole bill is visible. */}
+        <p className="mb-2 mt-5 font-mono text-[10px] uppercase tracking-[0.35em] text-bone-dim">
+          Og öll hin
+        </p>
+        <ul className="flex flex-wrap items-end gap-2">
+          {otherBands.map((a, i) => (
+            <li
+              key={a.id}
+              className={
+                "border-2 border-bone bg-base-card px-2.5 py-1 font-display text-base uppercase leading-none text-bone sm:text-xl " +
+                tiltClass[i % tiltClass.length]
+              }
+              style={xerox}
+            >
+              {a.name}
+            </li>
+          ))}
         </ul>
 
         <div className="mt-9 flex flex-wrap items-center gap-4">
