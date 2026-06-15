@@ -49,12 +49,10 @@ export interface Artist {
  */
 const SLUGS_WITH_IMAGE = new Set<string>([
   "spacestation",
-  "endless-dark",
   "juno-paul",
   "mukka",
   "vintage-caravan",
   "volcanova",
-  "ultra-magnus",
   "hoffman",
   "superserious",
   "gedbrigdi",
@@ -95,7 +93,11 @@ interface ArtistSeed {
   instagramUrl?: string;
 }
 
-/** Lineup grouped by night. Order within a night is set order. */
+/**
+ * Lineup grouped by night. Order within a night is set order — the FIRST act
+ * each night is the headliner (rendered largest/top in the schedule). Nights
+ * may have a varying number of acts (e.g. 25 July has five).
+ */
 const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
   {
     date: `${EVENT_YEAR}-07-04`,
@@ -108,13 +110,6 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         spotifyUrl: "https://open.spotify.com/artist/0tC0VODFMyQLqetgajNbbh",
       },
       {
-        name: "Endless Dark",
-        genre: "Post-Hardcore",
-        videoId: "OqJ5hS0lnB0",
-        spotifyUrl: "https://open.spotify.com/artist/5AwyVJxKIm2D9dm8unLlqi",
-        youtubeUrl: "https://www.youtube.com/@EndlessDarkOfficial",
-      },
-      {
         name: "Juno Paul",
         genre: "Indie",
         spotifyUrl: "https://open.spotify.com/artist/3H4roNkMDnWHhrcVGHSRGs",
@@ -124,6 +119,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         genre: "Alternative",
         spotifyUrl: "https://open.spotify.com/artist/0ZyPf367VBQPjzOiUISIZW",
       },
+      { name: "Kríurnar", genre: "" },
     ],
   },
   {
@@ -142,16 +138,12 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         videoId: "c4VfzuomC8E",
         spotifyUrl: "https://open.spotify.com/artist/5PxsSQ4uYOq6svb417ravK",
       },
+      { name: "Harma", genre: "Alternative" },
       {
         name: "Krummi & Bjarni",
         genre: "Rock",
         videoId: "xAnmhNy_BdQ",
         spotifyUrl: "https://open.spotify.com/artist/20R75zrEiZGUgJPIdILRdr",
-      },
-      {
-        name: "Ultra Magnus",
-        genre: "Heavy Rock",
-        spotifyUrl: "https://open.spotify.com/artist/12BwwwOSI4XPUsO3OnJr0R",
       },
     ],
   },
@@ -172,7 +164,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         youtubeUrl: "https://www.youtube.com/@superserious_band",
       },
       { name: "Geðbrigði", genre: "Post-Punk" },
-      { name: "Harma", genre: "Alternative" },
+      { name: "Pétur Ben", genre: "" },
     ],
   },
   {
@@ -185,9 +177,10 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         videoId: "FToInB6v4ac",
         spotifyUrl: "https://open.spotify.com/artist/3u8Bmkzs6rer0AirAa87iR",
       },
-      { name: "Sót", genre: "Rock" },
+      { name: "Múr", genre: "" },
       { name: "Duft", genre: "Punk Rock" },
-      { name: "Drunga", genre: "Heavy Rock" },
+      { name: "Drungi", genre: "" },
+      { name: "Sót", genre: "Rock" },
     ],
   },
 ];

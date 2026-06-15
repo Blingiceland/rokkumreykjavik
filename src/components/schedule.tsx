@@ -15,6 +15,10 @@ export function Schedule() {
   const lineup = getEventArtists(event);
   const featured = lineup.find((a) => a.videoId);
   const hasTimes = lineup.some((a) => getSetTime(event, a.id));
+  // First act of the night is the headliner — rendered largest. The rest follow
+  // in set order; nights may have a varying number of acts.
+  const headliner = lineup[0];
+  const support = lineup.slice(1);
 
   // Reset playback when switching days.
   React.useEffect(() => {
@@ -175,42 +179,76 @@ export function Schedule() {
               </figure>
             )}
 
-            {/* Lineup */}
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {lineup.map((artist, i) => (
-                <motion.li
-                  key={artist.id}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
+            {/* Lineup — headliner first (largest), then support acts. */}
+            <div className="flex flex-col gap-3">
+              {/* Headliner */}
+              <motion.a
+                key={`${event.id}-${headliner.id}`}
+                href="#listamenn"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3 }}
+                className="group flex items-center gap-4 rounded-2xl border border-neon/40 bg-base-card p-4 transition-colors hover:border-neon"
+              >
+                <ArtistCover
+                  artist={headliner}
+                  className="h-20 w-20 shrink-0 rounded-xl sm:h-24 sm:w-24"
+                />
+                <div className="min-w-0 flex-1">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-neon">
+                    Headliner
+                  </span>
+                  <p className="mt-1 truncate font-display text-2xl leading-none text-bone transition-colors group-hover:text-neon sm:text-3xl">
+                    {headliner.name}
+                  </p>
+                </div>
+                <span
+                  className={cn(
+                    "shrink-0 font-mono text-[11px] uppercase tracking-widest tabular-nums",
+                    getSetTime(event, headliner.id) ? "text-neon-cyan" : "text-bone-faint"
+                  )}
                 >
-                  <a
-                    href={`#listamenn`}
-                    className="group flex h-full items-center gap-3 rounded-xl border border-base-line bg-base-card p-3 transition-colors hover:border-neon"
+                  {getSetTime(event, headliner.id) ?? "væntanl."}
+                </span>
+              </motion.a>
+
+              {/* Support acts */}
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {support.map((artist, i) => (
+                  <motion.li
+                    key={artist.id}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: (i + 1) * 0.05 }}
                   >
-                    <ArtistCover
-                      artist={artist}
-                      className="h-14 w-14 shrink-0 rounded-lg"
-                    />
-                    <p className="min-w-0 flex-1 font-display text-lg leading-tight text-bone transition-colors group-hover:text-neon">
-                      {artist.name}
-                    </p>
-                    <span
-                      className={cn(
-                        "shrink-0 font-mono text-[10px] uppercase tracking-widest tabular-nums",
-                        getSetTime(event, artist.id) ? "text-neon-cyan" : "text-bone-faint"
-                      )}
+                    <a
+                      href={`#listamenn`}
+                      className="group flex h-full items-center gap-3 rounded-xl border border-base-line bg-base-card p-3 transition-colors hover:border-neon"
                     >
-                      {getSetTime(event, artist.id) ?? "væntanl."}
-                    </span>
-                    <ArrowRight
-                      size={16}
-                      className="shrink-0 text-bone-faint transition-all group-hover:translate-x-0.5 group-hover:text-neon"
-                    />
-                  </a>
-                </motion.li>
-              ))}
-            </ul>
+                      <ArtistCover
+                        artist={artist}
+                        className="h-14 w-14 shrink-0 rounded-lg"
+                      />
+                      <p className="min-w-0 flex-1 font-display text-lg leading-tight text-bone transition-colors group-hover:text-neon">
+                        {artist.name}
+                      </p>
+                      <span
+                        className={cn(
+                          "shrink-0 font-mono text-[10px] uppercase tracking-widest tabular-nums",
+                          getSetTime(event, artist.id) ? "text-neon-cyan" : "text-bone-faint"
+                        )}
+                      >
+                        {getSetTime(event, artist.id) ?? "væntanl."}
+                      </span>
+                      <ArrowRight
+                        size={16}
+                        className="shrink-0 text-bone-faint transition-all group-hover:translate-x-0.5 group-hover:text-neon"
+                      />
+                    </a>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>

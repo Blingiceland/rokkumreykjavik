@@ -30,7 +30,7 @@ export const events: RokkEvent[] = [
     displayDate: "Laugardagur 4. júlí",
     title: "Dagur 1",
     vibe: "",
-    artistIds: ["spacestation", "endless-dark", "juno-paul", "mukka"],
+    artistIds: ["spacestation", "juno-paul", "mukka", "kriurnar"],
   },
   {
     id: "day-2",
@@ -38,7 +38,7 @@ export const events: RokkEvent[] = [
     displayDate: "Laugardagur 11. júlí",
     title: "Dagur 2",
     vibe: "",
-    artistIds: ["vintage-caravan", "volcanova", "krummi-og-bjarni", "ultra-magnus"],
+    artistIds: ["vintage-caravan", "volcanova", "harma", "krummi-og-bjarni"],
   },
   {
     id: "day-3",
@@ -46,7 +46,7 @@ export const events: RokkEvent[] = [
     displayDate: "Laugardagur 18. júlí",
     title: "Dagur 3",
     vibe: "",
-    artistIds: ["hoffman", "superserious", "gedbrigdi", "harma"],
+    artistIds: ["hoffman", "superserious", "gedbrigdi", "petur-ben"],
   },
   {
     id: "day-4",
@@ -54,7 +54,7 @@ export const events: RokkEvent[] = [
     displayDate: "Laugardagur 25. júlí",
     title: "Dagur 4",
     vibe: "",
-    artistIds: ["brain-police", "sot", "duft", "drunga"],
+    artistIds: ["brain-police", "mur", "duft", "drungi", "sot"],
   },
 ];
 
