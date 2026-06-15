@@ -63,6 +63,25 @@ export function getSetTime(event: RokkEvent, artistId: string): string | null {
   return event.setTimes?.[artistId] ?? null;
 }
 
+/**
+ * Provisional set time, derived for a schedule "feel": the headliner (first act
+ * in the billing order) closes at 20:00 and each earlier-billed act plays one
+ * hour before (so the opener of a five-band night starts at 16:00). Subject to
+ * change; an explicit `setTimes` entry always wins.
+ */
+export function getScheduleTime(event: RokkEvent, artistId: string): string {
+  const explicit = getSetTime(event, artistId);
+  if (explicit) return explicit;
+  const i = event.artistIds.indexOf(artistId);
+  if (i < 0) return "";
+  return `${20 - i}:00`;
+}
+
+/** Earliest set time of a night, e.g. "16:00" for a five-band bill. */
+export function getDoorsTime(event: RokkEvent): string {
+  return `${20 - (event.artistIds.length - 1)}:00`;
+}
+
 /** Day-of-month for each night, e.g. [4, 11, 18, 25]. */
 export function getEventDays(): number[] {
   return events.map((e) => Number(e.date.slice(-2)));

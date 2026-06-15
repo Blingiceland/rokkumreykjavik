@@ -4,7 +4,7 @@ import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { MapPin, Play, Clock } from "lucide-react";
 import { ArtistCover } from "@/components/artist-card";
-import { events, getEventArtists, getSetTime } from "@/data/events";
+import { events, getEventArtists, getScheduleTime, getDoorsTime } from "@/data/events";
 import { venue } from "@/data/site";
 import { cn } from "@/lib/utils/cn";
 
@@ -19,8 +19,9 @@ export function Schedule() {
   const event = events[idx];
   const lineup = getEventArtists(event);
   const headliner = lineup[0];
-  const support = lineup.slice(1);
-  const hasTimes = lineup.some((a) => getSetTime(event, a.id));
+  // Support acts in chronological (play) order — earliest first, building up to
+  // the headliner at 20:00. (Billing order is the reverse.)
+  const support = lineup.slice(1).reverse();
   // Only the last night (Brain Police, with Múr warming up) also gets a video.
   const isLast = idx === events.length - 1;
   const canPlay = isLast && Boolean(headliner?.videoId);
@@ -93,15 +94,17 @@ export function Schedule() {
               {venue.name} · {venue.streetAddress}
             </a>
 
-            {!hasTimes && (
-              <div className="mt-6 flex items-center gap-2 border-2 border-dashed border-bone px-4 py-3">
-                <Clock size={15} className="shrink-0 text-neon" />
-                <div>
-                  <p className="font-mono text-[11px] uppercase tracking-widest text-bone">Tímasetningar væntanlegar</p>
-                  <p className="font-mono text-[10px] uppercase tracking-wide text-bone-faint">Dagskrá dagsins birtist fljótlega</p>
-                </div>
+            <div className="mt-6 flex items-center gap-2 border-2 border-bone px-4 py-3">
+              <Clock size={15} className="shrink-0 text-neon" />
+              <div>
+                <p className="font-mono text-[11px] uppercase tracking-widest text-bone">
+                  Fyrsta band kl. {getDoorsTime(event)} · headliner kl. 20:00
+                </p>
+                <p className="font-mono text-[10px] uppercase tracking-wide text-bone-faint">
+                  Klukkutími á milli banda · tímasetningar geta breyst
+                </p>
               </div>
-            )}
+            </div>
 
             <p className="mt-5 inline-block bg-neon px-2 py-1 font-mono text-[11px] uppercase tracking-widest text-[color:rgb(var(--c-base))]">
               Ókeypis inn
@@ -147,7 +150,7 @@ export function Schedule() {
                       <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
                         <div>
                           <span className="bg-bone px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.25em] text-[color:rgb(var(--c-base))]">
-                            Headliner
+                            Headliner · kl. {getScheduleTime(event, headliner.id)}
                           </span>
                           <p className="mt-1.5 font-display text-2xl uppercase leading-none text-bone sm:text-4xl">
                             {headliner.name}
@@ -171,15 +174,15 @@ export function Schedule() {
                     href="#listamenn"
                     className="group flex h-full items-center gap-3 border-2 border-bone bg-base-card p-2.5 transition-colors hover:bg-amber"
                   >
+                    <span className="shrink-0 font-mono text-xs font-medium uppercase tracking-widest tabular-nums text-neon">
+                      {getScheduleTime(event, a.id)}
+                    </span>
                     {hasPhoto(a.image) && (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={a.image} alt="" className="h-11 w-11 shrink-0 object-cover" />
                     )}
                     <span className="min-w-0 flex-1 font-display text-base uppercase leading-tight text-bone sm:text-lg">
                       {a.name}
-                    </span>
-                    <span className="shrink-0 font-mono text-[10px] uppercase tracking-widest text-bone-faint">
-                      {getSetTime(event, a.id) ?? "væntanl."}
                     </span>
                   </a>
                 </li>
