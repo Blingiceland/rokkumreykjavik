@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Menu, X, Ticket } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { site } from "@/data/site";
@@ -11,7 +11,7 @@ const navLinks = [
   { href: "#dagskra", label: "Dagskrá" },
   { href: "#listamenn", label: "Listamenn" },
   { href: "#hlusta", label: "Hlusta" },
-  { href: "#midar", label: "Miðar" },
+  { href: "#samstarf", label: "Samstarf" },
 ];
 
 export function Header() {
@@ -49,8 +49,8 @@ export function Header() {
               {l.label}
             </a>
           ))}
-          <a href={site.defaultTicketUrl} className={buttonVariants({ size: "sm", variant: "primary" })}>
-            <Ticket size={15} /> Miðar
+          <a href="#styrkja" className={buttonVariants({ size: "sm", variant: "primary" })}>
+            Styrkja
           </a>
         </div>
 
@@ -77,8 +77,12 @@ export function Header() {
                 {l.label}
               </a>
             ))}
-            <a href={site.defaultTicketUrl} className={buttonVariants({ variant: "primary" }) + " mt-2 w-full"}>
-              <Ticket size={16} /> Kaupa miða
+            <a
+              href="#styrkja"
+              onClick={() => setOpen(false)}
+              className={buttonVariants({ variant: "primary" }) + " mt-2 w-full"}
+            >
+              Styrkja
             </a>
           </div>
         </div>

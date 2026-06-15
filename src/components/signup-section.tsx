@@ -49,7 +49,7 @@ export function SignupSection() {
           Vertu <span className="text-neon">fyrst</span> að vita
         </h2>
         <p className="mx-auto mt-3 max-w-md text-bone-dim">
-          Skráðu þig á póstlistann og fáðu tilkynningar um miða, ný atriði og aukadaga.
+          Skráðu þig á póstlistann og fáðu tilkynningar um tímasetningar, ný atriði og aukadaga.
         </p>
 
         {status === "done" ? (

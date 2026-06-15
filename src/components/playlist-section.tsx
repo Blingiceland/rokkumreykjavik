@@ -20,7 +20,7 @@ export function PlaylistSection() {
       {id ? (
         <div className="poster-frame overflow-hidden rounded-2xl border border-base-line bg-base-card">
           <iframe
-            title="Rokk(um) Reykjavík spilunarlisti"
+            title={`${site.name} spilunarlisti`}
             src={`https://open.spotify.com/embed/playlist/${id}?utm_source=generator&theme=0`}
             width="100%"
             height="480"

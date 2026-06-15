@@ -7,7 +7,7 @@ import "@fontsource/sora/600.css";
 import "@fontsource/jetbrains-mono/400.css";
 import "@fontsource/jetbrains-mono/500.css";
 import "./globals.css";
-import { site, venue, EVENT_YEAR } from "@/data/site";
+import { site, venue, presenterLockup, EVENT_YEAR } from "@/data/site";
 import { events, getEventArtists } from "@/data/events";
 
 export const viewport: Viewport = {
@@ -19,11 +19,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — ${site.description}`,
+    default: `${site.name} ${site.yearLabel} — ${site.description}`,
     template: `%s · ${site.name}`,
   },
   description:
-    "Fjögurra laugardaga tónlistarröð í garði Dillon í Reykjavík í júlí. Sextán íslensk bönd, rokk, indie, alternative og underground.",
+    `${presenterLockup}. Fjögurra laugardaga tónlistarröð í garði Dillon í Reykjavík í júlí. Sextán íslensk bönd, ókeypis inn — rokk, indie, alternative og underground.`,
   keywords: [
     "Reykjavík",
     "tónleikar",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     "indie",
     "alternative",
     "Iceland music",
-    "Rokkum Reykjavík",
+    "Rokk í Reykjavík",
     "íslensk tónlist",
   ],
   alternates: { canonical: "/" },
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
     locale: "is_IS",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — ${site.description}`,
-    description: `Fjórir laugardagar. Sextán bönd. Rokkum Reykjavík. Júlí ${EVENT_YEAR}.`,
+    title: presenterLockup,
+    description: `Fjórir laugardagar. Sextán bönd. Ókeypis inn. Júlí ${EVENT_YEAR}.`,
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
-    description: site.description,
+    title: `${site.name} ${site.yearLabel}`,
+    description: `${site.description} Ókeypis inn — júlí ${EVENT_YEAR}.`,
   },
   robots: { index: true, follow: true },
 };
@@ -69,7 +69,14 @@ function EventJsonLd() {
         addressCountry: "IS",
       },
     },
-    offers: { "@type": "Offer", url: site.url + e.ticketUrl, availability: "https://schema.org/InStock" },
+    offers: {
+      "@type": "Offer",
+      price: 0,
+      priceCurrency: "ISK",
+      url: site.url,
+      availability: "https://schema.org/InStock",
+    },
+    isAccessibleForFree: true,
     performer: getEventArtists(e).map((a) => ({ "@type": "MusicGroup", name: a.name })),
   }));
 
@@ -77,8 +84,13 @@ function EventJsonLd() {
     "@context": "https://schema.org",
     "@type": "EventSeries",
     name: site.name,
-    description: site.description,
+    description: `${presenterLockup}. ${site.description}`,
     url: site.url,
+    isAccessibleForFree: true,
+    organizer: [
+      { "@type": "Organization", name: "Dillon", url: venue.mapUrl },
+      { "@type": "Organization", name: "Rás 2", url: "https://www.ruv.is/ras2" },
+    ],
     subEvent: subEvents,
   };
 

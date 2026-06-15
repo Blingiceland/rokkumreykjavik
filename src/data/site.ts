@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// Site-wide configuration for Rokk(um) Reykjavík.
+// Site-wide configuration for Rokk í Reykjavík.
 // ---------------------------------------------------------------------------
 
 /** Year of the concert series. Configurable in one place. */
@@ -7,11 +7,14 @@ export const EVENT_YEAR = 2026;
 
 export interface SiteConfig {
   name: string;
+  /** Year shown as subtext under the wordmark and appended in metadata. */
+  yearLabel: string;
+  /** Who presents the festival, e.g. "Dillon og Rás 2". */
+  presenter: string;
   domain: string;
   url: string;
   description: string;
   contactEmail: string;
-  defaultTicketUrl: string;
   /**
    * Spotify playlist ID for the "listen before the party" embed.
    * Paste the ID from a playlist share link
@@ -22,14 +25,20 @@ export interface SiteConfig {
 }
 
 export const site: SiteConfig = {
-  name: "Rokk(um) Reykjavík",
+  // Heritage name — borrows the cult 1982 documentary "Rokk í Reykjavík".
+  // Used with Rás 2's blessing. Treat the wordmark with weight, not as a pun.
+  name: "Rokk í Reykjavík",
+  yearLabel: String(EVENT_YEAR),
+  presenter: "Dillon og Rás 2",
   domain: "rokkumreykjavik.is",
   url: "https://rokkumreykjavik.is",
-  description: "Fjórir laugardagar. Sextán bönd. Rokkum Reykjavík.",
+  description: "Fjórir laugardagar. Sextán bönd. Ein borg sem þarf að heyrast.",
   contactEmail: "info@rokkumreykjavik.is",
-  defaultTicketUrl: "/tickets",
   spotifyPlaylistId: "",
 };
+
+/** Full presenter lockup, e.g. "Dillon og Rás 2 kynna: Rokk í Reykjavík 2026". */
+export const presenterLockup = `${site.presenter} kynna: ${site.name} ${site.yearLabel}`;
 
 export interface VenueConfig {
   /** Full descriptive name shown in hero/about. */

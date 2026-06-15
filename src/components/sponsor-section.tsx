@@ -26,8 +26,8 @@ export function SponsorSection() {
               Verið með <span className="text-neon">okkur</span>
             </h2>
             <p className="mt-3 max-w-md text-bone-dim">
-              Rokk(um) Reykjavík setur íslenska tónlist í forgrunn í fjóra laugardaga. Styrktaraðilar
-              fá sýnileika á öllum stöðum, í dagskrá og á netinu.
+              {site.name} setur íslenska tónlist í forgrunn í fjóra laugardaga — ókeypis fyrir
+              alla. Styrktaraðilar fá sýnileika á öllum stöðum, í dagskrá og á netinu.
             </p>
             <a
               href={`mailto:${site.contactEmail}`}
@@ -57,15 +57,24 @@ export function SponsorSection() {
                   className="group flex flex-col items-center gap-3 rounded-xl border border-base-line bg-base px-4 py-5 transition-colors hover:border-neon"
                 >
                   <div className="flex h-16 w-full items-center justify-center">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={s.logo}
-                      alt={`${s.name} logo`}
-                      className={cn(
-                        "max-h-14 max-w-full object-contain opacity-90 transition-opacity group-hover:opacity-100",
-                        s.treatment && treatmentClass[s.treatment]
-                      )}
-                    />
+                    {s.logo ? (
+                      <>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
+                          src={s.logo}
+                          alt={`${s.name} logo`}
+                          className={cn(
+                            "max-h-14 max-w-full object-contain opacity-90 transition-opacity group-hover:opacity-100",
+                            s.treatment && treatmentClass[s.treatment]
+                          )}
+                        />
+                      </>
+                    ) : (
+                      // No artwork yet — tidy wordmark placeholder.
+                      <span className="font-display text-2xl uppercase tracking-[0.15em] text-bone-dim transition-colors group-hover:text-neon sm:text-3xl">
+                        {s.name}
+                      </span>
+                    )}
                   </div>
                   <span className="font-mono text-[10px] uppercase tracking-wide text-bone-faint">
                     {s.tier}

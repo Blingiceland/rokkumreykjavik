@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// Sponsor / partner data for Rokk(um) Reykjavík.
+// Sponsor / partner data for Rokk í Reykjavík.
 // ---------------------------------------------------------------------------
 
 export type SponsorTier = "Aðalstyrktaraðili" | "Styrktaraðili" | "Samstarfsaðili";
@@ -19,19 +19,25 @@ export interface Sponsor {
   name: string;
   tier: SponsorTier;
   url: string;
-  /** Path to logo asset under /public. */
+  /**
+   * Path to logo asset under /public. Empty string -> the SponsorSection
+   * renders a tidy text wordmark placeholder instead of a broken image
+   * (used until a brand confirms and supplies artwork).
+   */
   logo: string;
   treatment?: LogoTreatment;
 }
 
+// Rás 2 is no longer listed here — it is now a presenter (with Dillon) and
+// appears in the hero lockup instead. Viking is a placeholder for the lead
+// beer sponsor, pending confirmation and logo artwork.
 export const sponsors: Sponsor[] = [
   {
-    id: "ras2",
-    name: "Rás 2",
-    tier: "Samstarfsaðili",
-    url: "https://www.ruv.is/ras2",
-    logo: "/images/logos/ras2.svg",
-    treatment: "invert",
+    id: "viking",
+    name: "VÍKING",
+    tier: "Aðalstyrktaraðili",
+    url: "#",
+    logo: "",
   },
   {
     id: "michters",

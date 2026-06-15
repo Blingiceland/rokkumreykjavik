@@ -1,9 +1,9 @@
 // ---------------------------------------------------------------------------
-// Event data for Rokk(um) Reykjavík.
+// Event data for Rokk í Reykjavík.
 // Four Saturdays in July. Each day references its artists by id.
 // ---------------------------------------------------------------------------
 
-import { EVENT_YEAR, site } from "./site";
+import { EVENT_YEAR } from "./site";
 import { artists, type Artist } from "./artists";
 
 export interface RokkEvent {
@@ -15,7 +15,12 @@ export interface RokkEvent {
   title: string;
   vibe: string;
   artistIds: string[];
-  ticketUrl: string;
+  /**
+   * Per-artist set times, keyed by artist id, e.g. { "mukka": "21:30" }.
+   * The schedule is still being finalised — until an entry exists, that set
+   * renders a tidy "væntanlegt" instead of a blank slot.
+   */
+  setTimes?: Record<string, string>;
 }
 
 export const events: RokkEvent[] = [
@@ -26,7 +31,6 @@ export const events: RokkEvent[] = [
     title: "Dagur 1",
     vibe: "",
     artistIds: ["spacestation", "endless-dark", "juno-paul", "mukka"],
-    ticketUrl: site.defaultTicketUrl,
   },
   {
     id: "day-2",
@@ -35,7 +39,6 @@ export const events: RokkEvent[] = [
     title: "Dagur 2",
     vibe: "",
     artistIds: ["vintage-caravan", "volcanova", "krummi-og-bjarni", "ultra-magnus"],
-    ticketUrl: site.defaultTicketUrl,
   },
   {
     id: "day-3",
@@ -44,7 +47,6 @@ export const events: RokkEvent[] = [
     title: "Dagur 3",
     vibe: "",
     artistIds: ["hoffman", "superserious", "gedbrigdi", "harma"],
-    ticketUrl: site.defaultTicketUrl,
   },
   {
     id: "day-4",
@@ -53,9 +55,13 @@ export const events: RokkEvent[] = [
     title: "Dagur 4",
     vibe: "",
     artistIds: ["brain-police", "sot", "duft", "drunga"],
-    ticketUrl: site.defaultTicketUrl,
   },
 ];
+
+/** A set's start time, or null while the schedule is still being finalised. */
+export function getSetTime(event: RokkEvent, artistId: string): string | null {
+  return event.setTimes?.[artistId] ?? null;
+}
 
 export function getEventById(id: string): RokkEvent | undefined {
   return events.find((e) => e.id === id);

@@ -1,5 +1,5 @@
 // ---------------------------------------------------------------------------
-// Artist data for Rokk(um) Reykjavík.
+// Artist data for Rokk í Reykjavík.
 //
 // PRIVACY: This model intentionally has NO field for any artist financial
 // figure of any kind (fees, costs, payments, internal amounts). Such data must
@@ -10,7 +10,7 @@
 // Replace `PLACEHOLDER_*` values and the `shortBio` text as content arrives.
 // ---------------------------------------------------------------------------
 
-import { EVENT_YEAR, site } from "./site";
+import { EVENT_YEAR } from "./site";
 
 /** Standard placeholder bio. Do not invent factual biographies. */
 export const PLACEHOLDER_BIO =
@@ -40,7 +40,6 @@ export interface Artist {
   instagramUrl: string;
   /** YouTube video ID (e.g. "abc123XYZ"). Empty -> no video available yet. */
   videoId: string;
-  ticketUrl: string;
 }
 
 /**
@@ -212,7 +211,6 @@ export const artists: Artist[] = lineup.flatMap(({ date, displayDate, acts }) =>
       soundcloudUrl: act.soundcloudUrl ?? PLACEHOLDER_SOUNDCLOUD,
       instagramUrl: act.instagramUrl ?? PLACEHOLDER_INSTAGRAM,
       videoId: act.videoId ?? "",
-      ticketUrl: site.defaultTicketUrl,
     };
   })
 );

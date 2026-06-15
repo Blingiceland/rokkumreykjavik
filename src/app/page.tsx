@@ -4,7 +4,7 @@ import { Countdown } from "@/components/countdown";
 import { Schedule } from "@/components/schedule";
 import { ArtistGrid } from "@/components/artist-grid";
 import { PlaylistSection } from "@/components/playlist-section";
-import { TicketsSection } from "@/components/tickets-section";
+import { SupportSection } from "@/components/support-section";
 import { SignupSection } from "@/components/signup-section";
 import { SponsorSection } from "@/components/sponsor-section";
 import { Footer } from "@/components/footer";
@@ -19,7 +19,7 @@ export default function Home() {
         <Schedule />
         <ArtistGrid />
         <PlaylistSection />
-        <TicketsSection />
+        <SupportSection />
         <SignupSection />
         <SponsorSection />
       </main>

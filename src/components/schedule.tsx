@@ -2,10 +2,9 @@
 
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Ticket, ArrowRight, MapPin, Play } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
+import { ArrowRight, MapPin, Play, Clock } from "lucide-react";
 import { ArtistCover } from "@/components/artist-card";
-import { events, getEventArtists } from "@/data/events";
+import { events, getEventArtists, getSetTime } from "@/data/events";
 import { venue } from "@/data/site";
 import { cn } from "@/lib/utils/cn";
 
@@ -15,6 +14,7 @@ export function Schedule() {
   const event = events[idx];
   const lineup = getEventArtists(event);
   const featured = lineup.find((a) => a.videoId);
+  const hasTimes = lineup.some((a) => getSetTime(event, a.id));
 
   // Reset playback when switching days.
   React.useEffect(() => {
@@ -97,12 +97,25 @@ export function Schedule() {
               <MapPin size={13} className="text-neon-cyan" />
               {venue.name} · {venue.streetAddress}
             </a>
-            <a
-              href={event.ticketUrl}
-              className={buttonVariants({ variant: "primary" }) + " mt-6 w-full"}
-            >
-              <Ticket size={16} /> Miðar á þennan dag
-            </a>
+
+            {/* Times are still being finalised — show a tidy placeholder until set. */}
+            {!hasTimes && (
+              <div className="mt-6 flex items-center gap-2 rounded-xl border border-dashed border-base-line bg-base px-4 py-3">
+                <Clock size={15} className="shrink-0 text-neon-cyan" />
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-bone">
+                    Tímasetningar væntanlegar
+                  </p>
+                  <p className="font-mono text-[10px] uppercase tracking-wide text-bone-faint">
+                    Dagskrá dagsins birtist fljótlega
+                  </p>
+                </div>
+              </div>
+            )}
+
+            <p className="mt-4 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-neon">
+              Ókeypis inn
+            </p>
           </div>
 
           {/* Right column: featured video + lineup */}
@@ -182,6 +195,14 @@ export function Schedule() {
                     <p className="min-w-0 flex-1 font-display text-lg leading-tight text-bone transition-colors group-hover:text-neon">
                       {artist.name}
                     </p>
+                    <span
+                      className={cn(
+                        "shrink-0 font-mono text-[10px] uppercase tracking-widest tabular-nums",
+                        getSetTime(event, artist.id) ? "text-neon-cyan" : "text-bone-faint"
+                      )}
+                    >
+                      {getSetTime(event, artist.id) ?? "væntanl."}
+                    </span>
                     <ArrowRight
                       size={16}
                       className="shrink-0 text-bone-faint transition-all group-hover:translate-x-0.5 group-hover:text-neon"

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Privacy guard for Rokk(um) Reykjavík.
+ * Privacy guard for Rokk í Reykjavík.
  *
  * The internal lineup spreadsheet contained artist costs/fees. Those must NEVER
  * surface in the public site. This script scans the source tree for forbidden

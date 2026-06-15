@@ -1,7 +1,8 @@
-# Rokk(um) Reykjavík
+# Rokk í Reykjavík
 
-Interactive event platform for the July concert series in Reykjavík.
-**Fjórir föstudagar. Sextán bönd. Ein borg sem þarf að heyrast.**
+Interactive event platform for the July concert series in Reykjavík, presented by
+Dillon and Rás 2. **Fjórir laugardagar. Sextán bönd. Ein borg sem þarf að heyrast.**
+Admission is always free — there is no ticket sales flow.
 
 Built with Next.js (App Router) · TypeScript · Tailwind CSS · Framer Motion · lucide-react. Self-hosted fonts, mobile-first, accessible, SEO-ready, deployable to Vercel.
 
@@ -24,30 +25,30 @@ src/
     globals.css          Theme tokens, grain texture, reduced-motion
     api/subscribe/route.ts  Newsletter endpoint (wire to your provider)
     sitemap.ts, robots.ts   SEO routes
-  components/            Hero, ScheduleExplorer, ArtistGrid, MediaEmbed, etc.
+  components/            Hero, Schedule, ArtistGrid, SupportSection, etc.
   components/ui/         Button + accessible Dialog primitives
-  lib/data/
-    types.ts             PUBLIC data schema (see privacy note below)
-    artists.ts           The 16 artists
-    schedule.ts          Event meta, 4 nights, sponsors
+  data/
+    artists.ts           The 16 artists + the public Artist schema (privacy note below)
+    events.ts            Event meta, 4 Saturdays, optional set times
+    site.ts              Name, year, presenters, venue
+    sponsors.ts          Sponsors
 scripts/
   check-no-financials.mjs  Build-time privacy guard
 ```
 
 ## Editing content
 
-Everything is data-driven. To change the lineup, edit `src/lib/data/artists.ts`
-and `src/lib/data/schedule.ts`. Each night's `lineup` references artists by
-`slug`. To embed real media, fill the `src` fields on an artist's `media`
-entries (Spotify/YouTube/SoundCloud **embed** URLs); empty `src` renders a
-"væntanlegt" placeholder automatically.
+Everything is data-driven. To change the lineup, edit `src/data/artists.ts`
+and `src/data/events.ts`. Each Saturday's lineup references artists by `id`.
+Set times live in each event's optional `setTimes` map; until an entry exists,
+that set renders a "væntanlegt" placeholder automatically.
 
 ## Privacy: no artist financials, ever
 
 The internal lineup data included artist costs/fees. **These must never appear
 on the public site.** Two safeguards enforce this:
 
-1. The public `Artist` type in `types.ts` has no field for any financial figure,
+1. The public `Artist` type in `artists.ts` has no field for any financial figure,
    so there is nowhere to put one.
 2. `scripts/check-no-financials.mjs` scans the source on every build
    (`npm run build` → `prebuild` → `guard`) and fails the build if a forbidden
@@ -71,6 +72,6 @@ validates and returns success without storing anything.
 
 ## Future app expansion
 
-The data layer is already decoupled from the UI, so the same `lib/data` types
+The data layer is already decoupled from the UI, so the same `data` types
 can back a mobile app or a PWA. The footer teases this; a natural next step is a
 per-artist "watchlist" using local storage and push reminders per set time.

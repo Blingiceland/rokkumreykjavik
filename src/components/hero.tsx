@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, Ticket, CalendarRange, Users, MapPin, Sun } from "lucide-react";
+import { ArrowDown, CalendarRange, Users, MapPin, BadgeCheck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { site, venue, EVENT_YEAR } from "@/data/site";
 import { artists } from "@/data/artists";
@@ -13,11 +13,11 @@ const meta = [
   { Icon: CalendarRange, label: `${events.length} laugardagar` },
   { Icon: Users, label: `${artists.length} listamenn` },
   { Icon: MapPin, label: venue.shortName },
-  { Icon: Sun, label: "Júlí" },
+  { Icon: BadgeCheck, label: "Ókeypis inn" },
 ];
 
 const supporting =
-  "Fjóra laugardaga í júlí í garðinum á Dillon. Sextán bönd, fjögur sett á dag. Rokkpartý.";
+  "Fjóra laugardaga í júlí í garðinum á Dillon. Sextán bönd, fjögur sett á dag. Ókeypis inn.";
 
 export function Hero() {
   const reduce = useReducedMotion();
@@ -73,59 +73,60 @@ export function Hero() {
           </a>
         </motion.p>
 
-        {/* Host × partner lockup */}
+        {/* Presenter lockup — "Dillon og Rás 2 kynna" */}
         <motion.div
           variants={item}
-          className="mb-6 flex flex-wrap items-center gap-x-5 gap-y-3"
+          className="mb-6 flex flex-wrap items-center gap-x-4 gap-y-3"
         >
           <a
             href={venue.mapUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-3"
-            aria-label={`Hýst af ${venue.shortName}`}
+            className="group flex items-center"
+            aria-label={venue.shortName}
           >
-            <span className="font-mono text-[10px] uppercase tracking-widest text-bone-faint">
-              Hýst af
-            </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logos/dillon.png"
               alt="Dillon"
-              className="h-12 w-auto object-contain opacity-90 invert mix-blend-lighten transition-opacity group-hover:opacity-100 sm:h-14"
+              className="h-11 w-auto object-contain opacity-90 invert mix-blend-lighten transition-opacity group-hover:opacity-100 sm:h-12"
             />
           </a>
-          <span className="font-display text-2xl text-bone-faint">×</span>
+          <span className="font-mono text-[10px] uppercase tracking-widest text-bone-faint">og</span>
           <a
             href="https://www.ruv.is/ras2"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-3"
-            aria-label="Í samstarfi við Rás 2"
+            className="group flex items-center"
+            aria-label="Rás 2"
           >
-            <span className="font-mono text-[10px] uppercase tracking-widest text-bone-faint">
-              Í samstarfi við
-            </span>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/images/logos/ras2.svg"
               alt="Rás 2"
-              className="h-8 w-auto object-contain opacity-90 invert transition-opacity group-hover:opacity-100 sm:h-9"
+              className="h-7 w-auto object-contain opacity-90 invert transition-opacity group-hover:opacity-100 sm:h-8"
             />
           </a>
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-bone-faint">kynna</span>
         </motion.div>
 
         <motion.h1
           variants={item}
-          className="font-display text-[14vw] leading-[0.85] tracking-tight sm:text-[8.5rem]"
+          className="font-display text-[15vw] leading-[0.82] tracking-tight sm:text-[8.5rem]"
         >
-          Rokk
-          <span className="text-neon glow-neon animate-flicker">(um)</span>
+          Rokk í
           <br />
-          <span className="text-stroke">Reykjavík</span>
+          <span className="text-neon glow-neon">Reykjavík</span>
         </motion.h1>
 
-        <motion.p variants={item} className="mt-8 max-w-2xl font-body text-xl text-bone sm:text-2xl">
+        <motion.p
+          variants={item}
+          className="mt-4 font-display text-xl tracking-[0.5em] text-bone-dim sm:text-2xl"
+        >
+          {site.yearLabel}
+        </motion.p>
+
+        <motion.p variants={item} className="mt-7 max-w-2xl font-body text-xl text-bone sm:text-2xl">
           {site.description}
         </motion.p>
 
@@ -137,8 +138,8 @@ export function Hero() {
           <a href="#dagskra" className={buttonVariants({ size: "lg", variant: "neon" })}>
             Sjá dagskrá
           </a>
-          <a href={site.defaultTicketUrl} className={buttonVariants({ size: "lg", variant: "primary" })}>
-            <Ticket size={18} /> Kaupa miða
+          <a href="#styrkja" className={buttonVariants({ size: "lg", variant: "primary" })}>
+            Styrkja
           </a>
         </motion.div>
 

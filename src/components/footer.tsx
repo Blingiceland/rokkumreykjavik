@@ -7,7 +7,7 @@ import { site, venue, EVENT_YEAR } from "@/data/site";
 const footerLinks = [
   { href: "#dagskra", label: "Dagskrá" },
   { href: "#listamenn", label: "Listamenn" },
-  { href: "#midar", label: "Miðar" },
+  { href: "#styrkja", label: "Styrkja" },
 ];
 
 export function Footer() {

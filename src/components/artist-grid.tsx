@@ -2,11 +2,10 @@
 
 import * as React from "react";
 import { motion } from "framer-motion";
-import { Music2, Youtube, AudioLines, Instagram, Play, Ticket, type LucideIcon } from "lucide-react";
+import { Music2, Youtube, AudioLines, Instagram, Play, BadgeCheck, type LucideIcon } from "lucide-react";
 import { Dialog } from "@/components/ui/dialog";
 import { ArtistCard, ArtistCover } from "@/components/artist-card";
 import { SectionLabel } from "@/components/schedule";
-import { buttonVariants } from "@/components/ui/button";
 import { artists, type Artist } from "@/data/artists";
 import { cn } from "@/lib/utils/cn";
 
@@ -149,12 +148,9 @@ export function ArtistGrid() {
                 <VideoBlock artist={active} />
               </div>
 
-              <a
-                href={active.ticketUrl}
-                className={buttonVariants({ variant: "primary" }) + " w-full"}
-              >
-                <Ticket size={16} /> Miðar
-              </a>
+              <p className="flex items-center justify-center gap-2 rounded-full border border-neon/40 bg-neon/5 px-4 py-3 font-mono text-xs uppercase tracking-widest text-neon">
+                <BadgeCheck size={15} /> Ókeypis inn · {active.displayDate}
+              </p>
             </div>
           </div>
         )}
