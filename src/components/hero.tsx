@@ -6,7 +6,7 @@ import { ArrowDown } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { site, venue, presenterCredit, EVENT_YEAR } from "@/data/site";
 import { artists } from "@/data/artists";
-import { events, getHeadliner, getEventDays } from "@/data/events";
+import { events, getHeadliner, getEventDays, isMarquee } from "@/data/events";
 
 const headliners = events
   .map((e) => getHeadliner(e))
@@ -89,22 +89,29 @@ export function Hero() {
           </span>
         </div>
 
-        {/* Headliners as torn stickers. */}
-        <ul className="mt-8 flex flex-wrap gap-3">
-          {headliners.map((a, i) => (
-            <li
-              key={a.id}
-              className={
-                "border-2 border-bone bg-base-card px-3 py-1.5 font-display text-xl uppercase leading-none text-bone sm:text-3xl " +
-                tiltClass[i % tiltClass.length]
-              }
-              style={xerox}
-            >
-              <a href="#dagskra" className="hover:text-neon">
-                {a.name}
-              </a>
-            </li>
-          ))}
+        {/* Headliners as torn stickers — the two marquee acts (Vintage Caravan
+            & Brain Police) printed larger on the highlight ink. */}
+        <ul className="mt-8 flex flex-wrap items-end gap-3">
+          {headliners.map((a, i) => {
+            const big = isMarquee(a.id);
+            return (
+              <li
+                key={a.id}
+                className={
+                  "border-2 border-bone font-display uppercase leading-none text-bone " +
+                  (big
+                    ? "bg-amber px-4 py-2 text-3xl sm:text-5xl "
+                    : "bg-base-card px-3 py-1.5 text-xl sm:text-3xl ") +
+                  tiltClass[i % tiltClass.length]
+                }
+                style={xerox}
+              >
+                <a href="#dagskra" className="hover:text-neon">
+                  {a.name}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <div className="mt-9 flex flex-wrap items-center gap-4">

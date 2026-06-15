@@ -9,55 +9,78 @@
     --font-body: "Sora", ui-sans-serif, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-    /* PÖNK — photocopied zine on cheap paper. Channel triplets so Tailwind
-       opacity modifiers work. Roles: base = paper, bone = black ink,
-       neon = hot pink spot, neon-cyan = teal plate, amber = highlighter. */
-    --c-base: 232 228 218;        /* dirty newsprint */
+    /* Default = BLEIKT: hot pink + highlighter yellow + teal on dirty paper. */
+    --c-base: 232 228 218;
     --c-base-deep: 222 217 205;
     --c-base-card: 238 234 224;
     --c-base-raised: 228 223 211;
-    --c-base-line: 24 22 21;       /* harsh black rules */
+    --c-base-line: 24 22 21;
     --c-base-linebright: 58 54 52;
-    --c-bone: 18 16 15;           /* black ink */
+    --c-bone: 18 16 15;
     --c-bone-dim: 60 56 54;
     --c-bone-faint: 104 98 94;
-    --c-neon: 232 41 110;         /* hot pink spot */
-    --c-neon-cyan: 32 110 112;    /* teal plate */
+    --c-neon: 232 41 110;
+    --c-neon-cyan: 32 110 112;
     --c-neon-deep: 200 28 92;
-    --c-amber: 230 208 0;         /* highlighter yellow */
+    --c-amber: 230 208 0;
     --c-amber-bright: 244 226 36;
     --c-amber-deep: 198 178 0;
-    --on-amber: 18 16 15;         /* ink text on the highlighter button */
+    --on-amber: 18 16 15;
   }
 
-  html {
-    scroll-behavior: smooth;
+  /* RAUTT: blood red + goldenrod + slate-blue on warm cream. */
+  [data-look="rautt"] {
+    --c-base: 236 230 216;
+    --c-base-deep: 226 219 203;
+    --c-base-card: 242 237 224;
+    --c-base-raised: 232 226 211;
+    --c-base-line: 26 20 16;
+    --c-base-linebright: 60 50 44;
+    --c-bone: 22 16 12;
+    --c-bone-dim: 64 54 46;
+    --c-bone-faint: 110 98 86;
+    --c-neon: 207 43 34;
+    --c-neon-cyan: 44 74 92;
+    --c-neon-deep: 168 30 24;
+    --c-amber: 217 158 36;
+    --c-amber-bright: 232 176 56;
+    --c-amber-deep: 184 128 20;
+    --on-amber: 22 16 12;
   }
+
+  /* SÝRA: magenta + acid green + ink on cool grey-cream. */
+  [data-look="acid"] {
+    --c-base: 230 230 222;
+    --c-base-deep: 220 220 210;
+    --c-base-card: 238 238 230;
+    --c-base-raised: 228 228 218;
+    --c-base-line: 20 20 18;
+    --c-base-linebright: 54 54 50;
+    --c-bone: 16 16 14;
+    --c-bone-dim: 58 58 54;
+    --c-bone-faint: 100 100 94;
+    --c-neon: 214 42 138;
+    --c-neon-cyan: 30 28 26;
+    --c-neon-deep: 176 28 110;
+    --c-amber: 140 196 28;
+    --c-amber-bright: 158 214 46;
+    --c-amber-deep: 110 156 20;
+    --on-amber: 16 16 14;
+  }
+
+  html { scroll-behavior: smooth; }
 
   body {
     @apply bg-base text-bone font-body antialiased selection:bg-neon selection:text-base;
     background-attachment: fixed;
   }
 
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #ddd9cd;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: #18100f;
-    border-radius: 0;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #e8296e;
-  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: rgb(var(--c-base-deep)); }
+  ::-webkit-scrollbar-thumb { background: rgb(var(--c-bone)); border-radius: 0; }
+  ::-webkit-scrollbar-thumb:hover { background: rgb(var(--c-neon)); }
 
-  h1, h2, h3, h4 {
-    @apply font-display;
-    text-wrap: balance;
-  }
+  h1, h2, h3, h4 { @apply font-display; text-wrap: balance; }
 }
 
 @layer utilities {
@@ -74,55 +97,36 @@
     animation: grain-shift 8s steps(10) infinite;
   }
 
-  /* Halftone dot field — laid over surfaces with multiply for a printed tone. */
   .halftone {
-    background-image: radial-gradient(rgba(18, 16, 15, 0.6) 1px, transparent 1.4px);
+    background-image: radial-gradient(rgb(var(--c-bone) / 0.6) 1px, transparent 1.4px);
     background-size: 5px 5px;
     mix-blend-mode: multiply;
   }
 
-  /* Diagonal ink hatch for "væntanlegt" placeholders. */
   .hatch {
     background-image: repeating-linear-gradient(45deg, rgb(var(--c-bone)) 0 1px, transparent 1px 14px);
     mix-blend-mode: multiply;
   }
 
-  .text-stroke {
-    -webkit-text-stroke: 1.5px rgb(var(--c-bone));
-    color: transparent;
-  }
-  .text-stroke-neon {
-    -webkit-text-stroke: 1.5px rgb(var(--c-neon));
-    color: transparent;
-  }
+  .text-stroke { -webkit-text-stroke: 1.5px rgb(var(--c-bone)); color: transparent; }
+  .text-stroke-neon { -webkit-text-stroke: 1.5px rgb(var(--c-neon)); color: transparent; }
 
-  /* Misregistration "glow" — a pink plate nudged off behind the ink. */
-  .glow-neon {
-    text-shadow: 0.04em 0.045em 0 rgb(var(--c-neon) / 0.9);
-  }
+  /* Misregistration "glow" — a highlight plate nudged off behind the ink. */
+  .glow-neon { text-shadow: 0.04em 0.045em 0 rgb(var(--c-amber) / 0.9); }
 
   /* Poster frame — heavy black rule. */
-  .poster-frame {
-    box-shadow: inset 0 0 0 2px rgb(var(--c-bone));
-  }
+  .poster-frame { box-shadow: inset 0 0 0 2px rgb(var(--c-bone)); }
 
   /* Sponsor logos print dark on the paper. */
-  .sponsor-logo {
-    filter: invert(1);
-    mix-blend-mode: multiply;
-  }
+  .sponsor-logo { filter: invert(1); mix-blend-mode: multiply; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .grain::before {
-    animation: none;
-  }
+  .grain::before { animation: none; }
 }

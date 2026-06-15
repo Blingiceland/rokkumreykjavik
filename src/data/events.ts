@@ -68,6 +68,16 @@ export function getEventDays(): number[] {
   return events.map((e) => Number(e.date.slice(-2)));
 }
 
+/**
+ * The festival's marquee headliners — the biggest draws across the whole
+ * series, shown larger than the other nights' toppers. (Other strong acts like
+ * Múr play support slots, e.g. warming up for Brain Police.)
+ */
+export const MARQUEE_SLUGS = ["vintage-caravan", "brain-police"];
+export function isMarquee(artistId: string): boolean {
+  return MARQUEE_SLUGS.includes(artistId);
+}
+
 export function getEventById(id: string): RokkEvent | undefined {
   return events.find((e) => e.id === id);
 }

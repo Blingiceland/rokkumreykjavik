@@ -1,6 +1,5 @@
 "use client";
 
-import { Smartphone } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { site, venue, EVENT_YEAR } from "@/data/site";
 
@@ -14,24 +13,6 @@ export function Footer() {
   return (
     <footer className="relative z-10 border-t border-base-line">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        {/* Future-app teaser — structured for later expansion into an app */}
-        <div className="mb-12 flex flex-col items-start justify-between gap-4 rounded-2xl border border-dashed border-base-line bg-base-card p-6 sm:flex-row sm:items-center">
-          <div className="flex items-center gap-4">
-            <span className="grid h-11 w-11 place-items-center rounded-full border border-base-line text-neon-cyan">
-              <Smartphone size={18} />
-            </span>
-            <div>
-              <p className="font-display text-lg text-bone">Appið er á leiðinni</p>
-              <p className="font-mono text-xs text-bone-dim">
-                Dagskráin í vasann, vaktaðu uppáhalds böndin þín og fáðu áminningar.
-              </p>
-            </div>
-          </div>
-          <span className="rounded-full bg-base-raised px-3 py-1 font-mono text-[11px] uppercase tracking-wide text-bone-faint">
-            Væntanlegt
-          </span>
-        </div>
-
         <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <Logo className="text-2xl" />
