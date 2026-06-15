@@ -50,48 +50,6 @@
     --on-amber: 18 16 15;
   }
 
-  /* RAUTT — blood red + goldenrod + slate-blue on warm cream. */
-  [data-look="rautt"] {
-    color-scheme: light;
-    --c-base: 236 230 216;
-    --c-base-deep: 226 219 203;
-    --c-base-card: 236 230 216;
-    --c-base-raised: 236 230 216;
-    --c-base-line: 26 20 16;
-    --c-base-linebright: 60 50 44;
-    --c-bone: 22 16 12;
-    --c-bone-dim: 64 54 46;
-    --c-bone-faint: 110 98 86;
-    --c-neon: 207 43 34;
-    --c-neon-cyan: 44 74 92;
-    --c-neon-deep: 168 30 24;
-    --c-amber: 217 158 36;
-    --c-amber-bright: 232 176 56;
-    --c-amber-deep: 184 128 20;
-    --on-amber: 22 16 12;
-  }
-
-  /* BLÁR — electric blue + orange on cool light paper. */
-  [data-look="blar"] {
-    color-scheme: light;
-    --c-base: 230 232 235;
-    --c-base-deep: 220 223 227;
-    --c-base-card: 230 232 235;
-    --c-base-raised: 230 232 235;
-    --c-base-line: 22 24 28;
-    --c-base-linebright: 56 60 66;
-    --c-bone: 20 22 26;
-    --c-bone-dim: 64 68 76;
-    --c-bone-faint: 110 116 126;
-    --c-neon: 24 92 220;
-    --c-neon-cyan: 228 88 28;
-    --c-neon-deep: 18 70 180;
-    --c-amber: 240 130 28;
-    --c-amber-bright: 250 152 56;
-    --c-amber-deep: 200 102 16;
-    --on-amber: 20 22 26;
-  }
-
   html { scroll-behavior: smooth; }
 
   body {

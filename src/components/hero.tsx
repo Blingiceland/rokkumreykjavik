@@ -8,7 +8,8 @@ import { site, venue, presenterCredit, EVENT_YEAR } from "@/data/site";
 import { artists } from "@/data/artists";
 import { getEventDays } from "@/data/events";
 
-const headlinerBands = artists.filter((a) => a.headliner);
+const topHeadliners = artists.filter((a) => a.topBilling);
+const subHeadliners = artists.filter((a) => a.headliner && !a.topBilling);
 const otherBands = artists.filter((a) => !a.headliner);
 const days = getEventDays();
 
@@ -88,14 +89,30 @@ export function Hero() {
           </span>
         </div>
 
-        {/* Headliners — big on the highlight ink. */}
+        {/* Top headliners — biggest, alone on the highlight ink. */}
         <ul className="mt-8 flex flex-wrap items-end gap-2.5 sm:gap-3">
-          {headlinerBands.map((a, i) => (
+          {topHeadliners.map((a, i) => (
             <li
               key={a.id}
               className={
-                "border-2 border-bone bg-amber px-4 py-2 font-display text-2xl uppercase leading-none text-bone sm:text-5xl " +
+                "border-2 border-bone bg-amber px-4 py-2 font-display text-3xl uppercase leading-none text-bone sm:text-6xl " +
                 tiltClass[i % tiltClass.length]
+              }
+              style={xerox}
+            >
+              {a.name}
+            </li>
+          ))}
+        </ul>
+
+        {/* Second-tier headliners. */}
+        <ul className="mt-3 flex flex-wrap items-end gap-2.5">
+          {subHeadliners.map((a, i) => (
+            <li
+              key={a.id}
+              className={
+                "border-2 border-bone bg-amber px-3 py-1.5 font-display text-xl uppercase leading-none text-bone sm:text-3xl " +
+                tiltClass[(i + 1) % tiltClass.length]
               }
               style={xerox}
             >

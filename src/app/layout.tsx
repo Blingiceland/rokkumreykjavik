@@ -9,7 +9,6 @@ import "@fontsource/jetbrains-mono/500.css";
 import "./globals.css";
 import { site, venue, presenterLockup, EVENT_YEAR } from "@/data/site";
 import { events, getEventArtists } from "@/data/events";
-import { LookSwitcher } from "@/components/look-switcher";
 
 export const viewport: Viewport = {
   themeColor: "#e8e4da",
@@ -124,7 +123,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Hoppa í aðalefni
         </a>
         {children}
-        {process.env.NODE_ENV !== "production" && <LookSwitcher />}
       </body>
     </html>
   );

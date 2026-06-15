@@ -42,6 +42,8 @@ export interface Artist {
   videoId: string;
   /** A festival headliner — a big draw, shown highlighted in the hero banner. */
   headliner: boolean;
+  /** Top billing — the very top tier of headliners (biggest in the banner). */
+  topBilling: boolean;
 }
 
 /**
@@ -97,6 +99,8 @@ interface ArtistSeed {
   instagramUrl?: string;
   /** Mark a band as a festival headliner (highlighted in the hero banner). */
   headliner?: boolean;
+  /** Top-tier headliner (printed biggest, alone at the top of the banner). */
+  topBilling?: boolean;
 }
 
 /**
@@ -136,7 +140,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
       {
         name: "Vintage Caravan",
         genre: "Hard Rock",
-        headliner: true,
+        topBilling: true,
         videoId: "odL0bhBluPE",
         spotifyUrl: "https://open.spotify.com/artist/61MH29rMIyOfuK7KXQznzX",
       },
@@ -160,9 +164,10 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
     displayDate: "18. júlí",
     acts: [
       {
-        name: "hOFFMAN",
+        name: "hOFFMANN",
         genre: "Alternative",
         headliner: true,
+        image: "/images/artists/hoffman.jpg",
         youtubeUrl: "https://www.youtube.com/@hoffmanband238",
       },
       {
@@ -183,12 +188,12 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
       {
         name: "Brain Police",
         genre: "Stoner Rock",
-        headliner: true,
+        topBilling: true,
         videoId: "FToInB6v4ac",
         image: "/images/artists/brain1.jpg",
         spotifyUrl: "https://open.spotify.com/artist/3u8Bmkzs6rer0AirAa87iR",
       },
-      { name: "Múr", genre: "", headliner: true },
+      { name: "Múr", genre: "", topBilling: true },
       { name: "Duft", genre: "Punk Rock" },
       { name: "Drungi", genre: "" },
       { name: "Sót", genre: "Rock" },
@@ -215,7 +220,8 @@ export const artists: Artist[] = lineup.flatMap(({ date, displayDate, acts }) =>
       soundcloudUrl: act.soundcloudUrl ?? PLACEHOLDER_SOUNDCLOUD,
       instagramUrl: act.instagramUrl ?? PLACEHOLDER_INSTAGRAM,
       videoId: act.videoId ?? "",
-      headliner: act.headliner ?? false,
+      headliner: act.headliner ?? act.topBilling ?? false,
+      topBilling: act.topBilling ?? false,
     };
   })
 );
