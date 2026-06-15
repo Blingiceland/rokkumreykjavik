@@ -9,11 +9,12 @@
     --font-body: "Sora", ui-sans-serif, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-    /* Default = BLEIKT: hot pink + highlighter yellow + teal on dirty paper. */
+    /* Default = BLEIKT: hot pink + highlighter yellow + teal on dirty paper.
+       base-card/raised match base so the whole page reads as one flat ground. */
     --c-base: 232 228 218;
     --c-base-deep: 222 217 205;
-    --c-base-card: 238 234 224;
-    --c-base-raised: 228 223 211;
+    --c-base-card: 232 228 218;
+    --c-base-raised: 232 228 218;
     --c-base-line: 24 22 21;
     --c-base-linebright: 58 54 52;
     --c-bone: 18 16 15;
@@ -33,8 +34,8 @@
     color-scheme: dark;
     --c-base: 18 16 15;
     --c-base-deep: 10 9 8;
-    --c-base-card: 28 25 23;
-    --c-base-raised: 40 36 33;
+    --c-base-card: 18 16 15;
+    --c-base-raised: 18 16 15;
     --c-base-line: 84 78 72;
     --c-base-linebright: 112 104 96;
     --c-bone: 236 232 222;
@@ -54,8 +55,8 @@
     color-scheme: light;
     --c-base: 236 230 216;
     --c-base-deep: 226 219 203;
-    --c-base-card: 242 237 224;
-    --c-base-raised: 232 226 211;
+    --c-base-card: 236 230 216;
+    --c-base-raised: 236 230 216;
     --c-base-line: 26 20 16;
     --c-base-linebright: 60 50 44;
     --c-bone: 22 16 12;
@@ -75,8 +76,8 @@
     color-scheme: light;
     --c-base: 230 232 235;
     --c-base-deep: 220 223 227;
-    --c-base-card: 240 242 245;
-    --c-base-raised: 228 231 235;
+    --c-base-card: 230 232 235;
+    --c-base-raised: 230 232 235;
     --c-base-line: 22 24 28;
     --c-base-linebright: 56 60 66;
     --c-bone: 20 22 26;
