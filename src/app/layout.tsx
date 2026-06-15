@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description:
-    `${presenterLockup}. Fjögurra laugardaga tónlistarröð í garði Dillon í Reykjavík í júlí. Sextán íslensk bönd, ókeypis inn — rokk, indie, alternative og underground.`,
+    `${presenterLockup}. Fjögurra laugardaga tónlistarröð í garði Dillon í Reykjavík í júlí. Sautján íslensk bönd, ókeypis inn — rokk, indie, alternative og underground.`,
   keywords: [
     "Reykjavík",
     "tónleikar",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     url: site.url,
     siteName: site.name,
     title: presenterLockup,
-    description: `Fjórir laugardagar. Sextán bönd. Ókeypis inn. Júlí ${EVENT_YEAR}.`,
+    description: `Fjórir laugardagar. Sautján bönd. Ókeypis inn. Júlí ${EVENT_YEAR}.`,
   },
   twitter: {
     card: "summary_large_image",

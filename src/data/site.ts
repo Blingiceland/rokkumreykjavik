@@ -32,7 +32,7 @@ export const site: SiteConfig = {
   presenter: "Dillon og Rás 2",
   domain: "rokkumreykjavik.is",
   url: "https://rokkumreykjavik.is",
-  description: "Fjórir laugardagar. Sextán bönd. Ein borg sem þarf að heyrast.",
+  description: "Fjórir laugardagar. Sautján bönd. Ein borg sem þarf að heyrast.",
   contactEmail: "info@rokkumreykjavik.is",
   spotifyPlaylistId: "5VDX5fXbVUN3pIuIPUnG3Y",
 };
