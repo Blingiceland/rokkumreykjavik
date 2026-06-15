@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MapPin, Play, Clock } from "lucide-react";
+import { Play } from "lucide-react";
 import { ArtistCover } from "@/components/artist-card";
 import { events, getEventArtists, getScheduleTime, getDoorsTime } from "@/data/events";
 import { venue } from "@/data/site";
@@ -78,36 +78,20 @@ export function Schedule() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.3 }}
-          className="grid gap-6 lg:grid-cols-[1fr_1.5fr]"
+          className="mx-auto w-full max-w-3xl"
         >
-          {/* Day meta */}
-          <div className="border-2 border-bone bg-base-card p-6">
-            <p className="font-mono text-xs uppercase tracking-widest text-neon">{event.title}</p>
-            <h3 className="mt-2 font-display text-3xl uppercase text-bone">{event.displayDate}</h3>
-            <a
-              href={venue.mapUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-widest text-bone-dim transition-colors hover:text-neon"
-            >
-              <MapPin size={13} className="text-neon" />
-              {venue.name} · {venue.streetAddress}
-            </a>
-
-            <div className="mt-6 flex items-center gap-2 border-2 border-bone px-4 py-3">
-              <Clock size={15} className="shrink-0 text-neon" />
-              <div>
-                <p className="font-mono text-[11px] uppercase tracking-widest text-bone">
-                  Fyrsta band kl. {getDoorsTime(event)} · headliner kl. 20:00
-                </p>
-                <p className="font-mono text-[10px] uppercase tracking-wide text-bone-faint">
-                  Klukkutími á milli banda · tímasetningar geta breyst
-                </p>
-              </div>
+          {/* Day header — no side panel, just the schedule. */}
+          <div className="mb-5 border-b-2 border-bone pb-4">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+              <h3 className="font-display text-3xl uppercase leading-none text-bone sm:text-4xl">
+                {event.displayDate}
+              </h3>
+              <span className="bg-neon px-2 py-1 font-mono text-[11px] uppercase tracking-widest text-[color:rgb(var(--c-base))]">
+                Ókeypis inn
+              </span>
             </div>
-
-            <p className="mt-5 inline-block bg-neon px-2 py-1 font-mono text-[11px] uppercase tracking-widest text-[color:rgb(var(--c-base))]">
-              Ókeypis inn
+            <p className="mt-2 font-mono text-[11px] uppercase tracking-widest text-bone-dim">
+              Fyrsta band kl. {getDoorsTime(event)} · headliner kl. 20:00 · klukkutími á milli banda · {venue.shortName}
             </p>
           </div>
 
