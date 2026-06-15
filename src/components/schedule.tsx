@@ -111,11 +111,32 @@ export function Schedule() {
             </p>
           </div>
 
-          {/* Headliner photo (last night also plays a video) + support acts. */}
-          <div className="flex flex-col gap-4">
+          {/* Hourly timetable — a band each hour, building up to the 20:00
+              headliner finale. */}
+          <div className="flex flex-col gap-2.5">
+            {support.map((band) => (
+              <a
+                key={band.id}
+                href="#listamenn"
+                className="group flex items-stretch border-2 border-bone bg-base-card transition-colors hover:bg-amber"
+              >
+                <span className="flex w-[4.25rem] shrink-0 items-center justify-center bg-bone font-display text-xl tabular-nums leading-none text-[color:rgb(var(--c-base))] sm:w-24 sm:text-3xl">
+                  {getScheduleTime(event, band.id)}
+                </span>
+                {hasPhoto(band.image) && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={band.image} alt="" className="h-16 w-16 shrink-0 object-cover sm:h-20 sm:w-20" />
+                )}
+                <span className="flex flex-1 items-center px-4 font-display text-xl uppercase leading-none text-bone sm:text-3xl">
+                  {band.name}
+                </span>
+              </a>
+            ))}
+
+            {/* Headliner — the 20:00 finale; the last night also plays a video. */}
             {headliner && (
-              <figure className="group relative overflow-hidden border-2 border-bone bg-base-card">
-                <div className="relative aspect-[4/3] sm:aspect-video">
+              <figure className="group relative mt-0.5 overflow-hidden border-2 border-bone bg-base-card">
+                <div className="relative aspect-[4/3] sm:aspect-[16/9]">
                   {canPlay && playing ? (
                     <iframe
                       key={headliner.id}
@@ -134,7 +155,7 @@ export function Schedule() {
                       ) : (
                         <ArtistCover artist={headliner} className="absolute inset-0" />
                       )}
-                      <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-base via-base/10 to-transparent" />
+                      <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-base via-base/20 to-transparent" />
                       {canPlay && (
                         <button
                           type="button"
@@ -147,12 +168,12 @@ export function Schedule() {
                           </span>
                         </button>
                       )}
-                      <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
+                      <figcaption className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4 sm:p-5">
                         <div>
-                          <span className="bg-bone px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.25em] text-[color:rgb(var(--c-base))]">
-                            Headliner · kl. {getScheduleTime(event, headliner.id)}
+                          <span className="inline-block bg-neon px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[color:rgb(var(--c-base))]">
+                            kl. {getScheduleTime(event, headliner.id)} · Headliner
                           </span>
-                          <p className="mt-1.5 font-display text-2xl uppercase leading-none text-bone sm:text-4xl">
+                          <p className="mt-2 font-display text-3xl uppercase leading-[0.9] text-bone sm:text-5xl">
                             {headliner.name}
                           </p>
                         </div>
@@ -165,29 +186,6 @@ export function Schedule() {
                 </div>
               </figure>
             )}
-
-            {/* Support acts — a photo only where we have one. */}
-            <ul className="grid gap-2 sm:grid-cols-2">
-              {support.map((a) => (
-                <li key={a.id}>
-                  <a
-                    href="#listamenn"
-                    className="group flex h-full items-center gap-3 border-2 border-bone bg-base-card p-2.5 transition-colors hover:bg-amber"
-                  >
-                    <span className="shrink-0 font-mono text-xs font-medium uppercase tracking-widest tabular-nums text-neon">
-                      {getScheduleTime(event, a.id)}
-                    </span>
-                    {hasPhoto(a.image) && (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img src={a.image} alt="" className="h-11 w-11 shrink-0 object-cover" />
-                    )}
-                    <span className="min-w-0 flex-1 font-display text-base uppercase leading-tight text-bone sm:text-lg">
-                      {a.name}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
           </div>
         </motion.div>
       </AnimatePresence>

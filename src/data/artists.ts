@@ -86,6 +86,8 @@ interface ArtistSeed {
   genre: string;
   /** Optional YouTube video ID for in-page video embed. */
   videoId?: string;
+  /** Explicit image path under /public; overrides the slug-based default. */
+  image?: string;
   /** Real media links. Omit to fall back to the disabled placeholder chip. */
   spotifyUrl?: string;
   youtubeUrl?: string;
@@ -175,6 +177,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         name: "Brain Police",
         genre: "Stoner Rock",
         videoId: "FToInB6v4ac",
+        image: "/images/artists/brain1.jpg",
         spotifyUrl: "https://open.spotify.com/artist/3u8Bmkzs6rer0AirAa87iR",
       },
       { name: "Múr", genre: "" },
@@ -196,9 +199,9 @@ export const artists: Artist[] = lineup.flatMap(({ date, displayDate, acts }) =>
       displayDate,
       genre: act.genre,
       shortBio: PLACEHOLDER_BIO,
-      image: SLUGS_WITH_IMAGE.has(slug)
-        ? `/images/artists/${slug}.jpg`
-        : PLACEHOLDER_IMAGE,
+      image:
+        act.image ??
+        (SLUGS_WITH_IMAGE.has(slug) ? `/images/artists/${slug}.jpg` : PLACEHOLDER_IMAGE),
       spotifyUrl: act.spotifyUrl ?? PLACEHOLDER_SPOTIFY,
       youtubeUrl: act.youtubeUrl ?? PLACEHOLDER_YOUTUBE,
       soundcloudUrl: act.soundcloudUrl ?? PLACEHOLDER_SOUNDCLOUD,
