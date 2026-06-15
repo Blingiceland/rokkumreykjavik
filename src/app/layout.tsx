@@ -9,6 +9,7 @@ import "@fontsource/jetbrains-mono/500.css";
 import "./globals.css";
 import { site, venue, presenterLockup, EVENT_YEAR } from "@/data/site";
 import { events, getEventArtists } from "@/data/events";
+import { LookSwitcher } from "@/components/look-switcher";
 
 export const viewport: Viewport = {
   themeColor: "#e8e4da",
@@ -105,8 +106,16 @@ function EventJsonLd() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="is">
+    <html lang="is" data-look="bleikt" suppressHydrationWarning>
       <body className="grain min-h-screen">
+        {/* Apply the saved palette before paint to avoid a flash (local only). */}
+        <script
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var l=localStorage.getItem('rr-look');if(l)document.documentElement.setAttribute('data-look',l);}catch(e){}",
+          }}
+        />
         <EventJsonLd />
         <a
           href="#top"
@@ -115,6 +124,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Hoppa í aðalefni
         </a>
         {children}
+        {process.env.NODE_ENV !== "production" && <LookSwitcher />}
       </body>
     </html>
   );

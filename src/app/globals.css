@@ -9,8 +9,7 @@
     --font-body: "Sora", ui-sans-serif, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-    /* BLEIKT — photocopied zine: hot pink + highlighter yellow + teal on
-       dirty paper. Black ink, harsh rules. */
+    /* Default = BLEIKT: hot pink + highlighter yellow + teal on dirty paper. */
     --c-base: 232 228 218;
     --c-base-deep: 222 217 205;
     --c-base-card: 238 234 224;
@@ -29,6 +28,69 @@
     --on-amber: 18 16 15;
   }
 
+  /* SVART — same zine on a near-black ground, pink + yellow, cream knock-outs. */
+  [data-look="svart"] {
+    color-scheme: dark;
+    --c-base: 18 16 15;
+    --c-base-deep: 10 9 8;
+    --c-base-card: 28 25 23;
+    --c-base-raised: 40 36 33;
+    --c-base-line: 84 78 72;
+    --c-base-linebright: 112 104 96;
+    --c-bone: 236 232 222;
+    --c-bone-dim: 170 164 154;
+    --c-bone-faint: 120 114 106;
+    --c-neon: 240 52 120;
+    --c-neon-cyan: 56 190 192;
+    --c-neon-deep: 212 32 98;
+    --c-amber: 240 218 22;
+    --c-amber-bright: 250 232 60;
+    --c-amber-deep: 208 188 0;
+    --on-amber: 18 16 15;
+  }
+
+  /* RAUTT — blood red + goldenrod + slate-blue on warm cream. */
+  [data-look="rautt"] {
+    color-scheme: light;
+    --c-base: 236 230 216;
+    --c-base-deep: 226 219 203;
+    --c-base-card: 242 237 224;
+    --c-base-raised: 232 226 211;
+    --c-base-line: 26 20 16;
+    --c-base-linebright: 60 50 44;
+    --c-bone: 22 16 12;
+    --c-bone-dim: 64 54 46;
+    --c-bone-faint: 110 98 86;
+    --c-neon: 207 43 34;
+    --c-neon-cyan: 44 74 92;
+    --c-neon-deep: 168 30 24;
+    --c-amber: 217 158 36;
+    --c-amber-bright: 232 176 56;
+    --c-amber-deep: 184 128 20;
+    --on-amber: 22 16 12;
+  }
+
+  /* BLÁR — electric blue + orange on cool light paper. */
+  [data-look="blar"] {
+    color-scheme: light;
+    --c-base: 230 232 235;
+    --c-base-deep: 220 223 227;
+    --c-base-card: 240 242 245;
+    --c-base-raised: 228 231 235;
+    --c-base-line: 22 24 28;
+    --c-base-linebright: 56 60 66;
+    --c-bone: 20 22 26;
+    --c-bone-dim: 64 68 76;
+    --c-bone-faint: 110 116 126;
+    --c-neon: 24 92 220;
+    --c-neon-cyan: 228 88 28;
+    --c-neon-deep: 18 70 180;
+    --c-amber: 240 130 28;
+    --c-amber-bright: 250 152 56;
+    --c-amber-deep: 200 102 16;
+    --on-amber: 20 22 26;
+  }
+
   html { scroll-behavior: smooth; }
 
   body {
@@ -45,7 +107,7 @@
 }
 
 @layer utilities {
-  /* Heavy xerox tooth — multiply darkens the dirty paper like a photocopy. */
+  /* Heavy xerox tooth — multiply darkens the paper like a photocopy. */
   .grain::before {
     content: "";
     position: fixed;
@@ -57,17 +119,24 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     animation: grain-shift 8s steps(10) infinite;
   }
+  /* On the dark look, screen so the tooth reads as light film grain. */
+  [data-look="svart"] .grain::before {
+    mix-blend-mode: screen;
+    opacity: 0.1;
+  }
 
   .halftone {
     background-image: radial-gradient(rgb(var(--c-bone) / 0.6) 1px, transparent 1.4px);
     background-size: 5px 5px;
     mix-blend-mode: multiply;
   }
+  [data-look="svart"] .halftone { mix-blend-mode: screen; }
 
   .hatch {
     background-image: repeating-linear-gradient(45deg, rgb(var(--c-bone)) 0 1px, transparent 1px 14px);
     mix-blend-mode: multiply;
   }
+  [data-look="svart"] .hatch { mix-blend-mode: screen; }
 
   .text-stroke { -webkit-text-stroke: 1.5px rgb(var(--c-bone)); color: transparent; }
   .text-stroke-neon { -webkit-text-stroke: 1.5px rgb(var(--c-neon)); color: transparent; }
@@ -75,11 +144,12 @@
   /* Misregistration "glow" — a highlight plate nudged off behind the ink. */
   .glow-neon { text-shadow: 0.04em 0.045em 0 rgb(var(--c-amber) / 0.9); }
 
-  /* Poster frame — heavy black rule. */
+  /* Poster frame — heavy rule. */
   .poster-frame { box-shadow: inset 0 0 0 2px rgb(var(--c-bone)); }
 
-  /* Sponsor logos print dark on the paper. */
+  /* Sponsor logos: print dark on paper, light on the dark look. */
   .sponsor-logo { filter: invert(1); mix-blend-mode: multiply; }
+  [data-look="svart"] .sponsor-logo { filter: none; mix-blend-mode: lighten; }
 }
 
 @media (prefers-reduced-motion: reduce) {
