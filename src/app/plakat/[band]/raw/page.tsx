@@ -32,7 +32,7 @@ export default function RawPosterPage({
   const variant: PosterVariant = (["mynd", "typo", "klassik"] as const).includes(searchParams.utgafa as PosterVariant)
     ? (searchParams.utgafa as PosterVariant)
     : "mynd";
-  const format: PosterFormat = (["a3", "story", "square"] as const).includes(searchParams.snid as PosterFormat)
+  const format: PosterFormat = (["a3", "p45", "story", "square"] as const).includes(searchParams.snid as PosterFormat)
     ? (searchParams.snid as PosterFormat)
     : "a3";
   const theme: PosterTheme = searchParams.thema === "svart" ? "svart" : "bleikt";

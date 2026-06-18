@@ -13,7 +13,7 @@ export const maxDuration = 60;
 
 const KINDS = ["band", "dagur", "forsida"] as const;
 const VARIANTS = ["mynd", "typo", "klassik"] as const;
-const FORMATS = ["a3", "story", "square"] as const;
+const FORMATS = ["a3", "p45", "story", "square"] as const;
 const EXTS = { pdf: "application/pdf", jpeg: "image/jpeg", png: "image/png" } as const;
 
 type Kind = (typeof KINDS)[number];

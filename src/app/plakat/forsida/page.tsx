@@ -11,6 +11,7 @@ export default function FrontPosterPage({ searchParams }: { searchParams: Search
       title="Plakat — Forsíða"
       subtitle="Öll hátíðin á einu plakati — fjórir dagar, öll böndin."
       values={values}
+      variantLabels={{ typo: "Dagskrá", klassik: "Öll böndin", mynd: "Mynda-grid" }}
       downloadBase="/api/plakat?kind=forsida&id=forsida"
       shareNote="Aðalplakat hátíðarinnar — deildu því hvar sem er."
       preview={

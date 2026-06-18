@@ -4,6 +4,7 @@
  */
 import * as React from "react";
 import { events, getEventArtists } from "@/data/events";
+import { artists } from "@/data/artists";
 import { venue, presenterPartner, site, EVENT_YEAR } from "@/data/site";
 import { getEventDays } from "@/data/events";
 import { PosterFilters, PosterGrain, PosterHalftone, plate, xerox } from "./poster-filters";
@@ -34,7 +35,7 @@ export function FrontPoster({
       <PosterFilters />
       {variant === "mynd" && <MyndFront />}
       {variant === "typo" && <TypoFront />}
-      {variant === "klassik" && <KlassikFront />}
+      {variant === "klassik" && <AllBandsFront />}
       <PosterHalftone className="z-40 opacity-[0.16]" />
       <PosterGrain />
     </div>
@@ -157,27 +158,39 @@ function TypoFront() {
   );
 }
 
-/* Variant 3 — framed full bill ------------------------------------- */
+/* Variant 3 — every band billed equally (all headliners) ----------- */
 
-function KlassikFront() {
+function AllBandsFront() {
   return (
-    <div className="absolute inset-[3cqw] flex flex-col border-[0.6cqw] border-bone">
-      <div className="border-b-[0.4cqw] border-bone bg-bone px-[4cqw] py-[3cqw] text-[color:rgb(var(--c-base))]">
-        <p className="font-mono uppercase leading-none tracking-[0.2em]" style={{ fontSize: "1.9cqw" }}>
-          {site.presenter} í samstarfi við {presenterPartner} kynna
-        </p>
-        <h1 className="mt-[1.5cqw] font-display uppercase leading-[0.82]" style={{ fontSize: "13cqw" }}>
-          {site.name}
-        </h1>
-        <p className="mt-[1cqw] font-display uppercase leading-none" style={{ fontSize: "4cqw" }}>
-          {getEventDays().join("·")} júlí {EVENT_YEAR} · Ókeypis inn
-        </p>
+    <div className="absolute inset-0 flex flex-col gap-[3cqw] p-[6cqw]">
+      <PosterHalftone className="z-0 opacity-[0.2]" />
+      <div className="relative z-10 flex flex-col gap-[2cqw]">
+        <TitleBlock />
+        <DatesStrip />
       </div>
-      <div className="grid flex-1 grid-cols-2 gap-x-[4cqw] gap-y-[3cqw] content-start px-[4cqw] py-[4cqw]">
-        {events.map((_, i) => (
-          <DayColumn key={i} idx={i} />
+
+      {/* Wall of names — no hierarchy, everyone billed the same size. */}
+      <div className="relative z-10 flex flex-1 flex-wrap content-center items-baseline gap-x-[2.5cqw] gap-y-[0.5cqw]">
+        {artists.map((a, i) => (
+          <span key={a.id} className="inline-flex items-baseline gap-x-[2.5cqw]">
+            <span
+              className={"font-display leading-[0.86] " + (a.keepCase ? "normal-case" : "uppercase")}
+              style={{ fontSize: "7cqw" }}
+            >
+              {a.name}
+            </span>
+            {i < artists.length - 1 && (
+              <span className="font-display leading-[0.86] text-neon" style={{ fontSize: "7cqw" }}>
+                ·
+              </span>
+            )}
+          </span>
         ))}
       </div>
+
+      <p className="relative z-10 font-mono uppercase leading-none tracking-[0.18em] text-bone-dim" style={{ fontSize: "1.9cqw" }}>
+        {venue.name} · {venue.streetAddress} · Ókeypis inn · {site.domain}
+      </p>
     </div>
   );
 }

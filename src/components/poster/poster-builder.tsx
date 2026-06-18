@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ArrowLeft, Download } from "lucide-react";
+import { Download } from "lucide-react";
+import { BackLink } from "./back-link";
 import {
   POSTER_SIZES,
   POSTER_VARIANTS,
@@ -19,7 +20,7 @@ export function coercePosterValues(
   const variant: PosterVariant = (["mynd", "typo", "klassik"] as const).includes(search.utgafa as PosterVariant)
     ? (search.utgafa as PosterVariant)
     : defaultVariant;
-  const format: PosterFormat = (["a3", "story", "square"] as const).includes(search.snid as PosterFormat)
+  const format: PosterFormat = (["a3", "p45", "story", "square"] as const).includes(search.snid as PosterFormat)
     ? (search.snid as PosterFormat)
     : "a3";
   const theme: PosterTheme = search.thema === "svart" ? "svart" : "bleikt";
@@ -77,6 +78,7 @@ export function PosterBuilder({
   downloadBase,
   shareNote,
   preview,
+  variantLabels = POSTER_VARIANTS,
 }: {
   title: string;
   subtitle: string;
@@ -85,6 +87,8 @@ export function PosterBuilder({
   downloadBase: string;
   shareNote: string;
   preview: React.ReactNode;
+  /** Per-poster variant labels (the front poster names them differently). */
+  variantLabels?: Record<PosterVariant, string>;
 }) {
   const { variant, format, theme } = values;
   const base = { utgafa: variant, snid: format, thema: theme } as Record<string, string>;
@@ -93,9 +97,7 @@ export function PosterBuilder({
   return (
     <main className="min-h-screen px-4 py-10 sm:px-8">
       <div className="mx-auto max-w-5xl">
-        <Link href="/#dagskra" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-bone-dim hover:text-neon">
-          <ArrowLeft size={14} /> Dagskrá
-        </Link>
+        <BackLink />
 
         <h1 className="mt-4 font-display text-4xl uppercase leading-none text-bone sm:text-6xl">{title}</h1>
         <p className="mt-2 font-mono text-xs uppercase tracking-widest text-bone-dim">{subtitle}</p>
@@ -103,8 +105,8 @@ export function PosterBuilder({
         <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_auto]">
           <div className="flex flex-col gap-6">
             <Control label="Útgáfa">
-              {(Object.keys(POSTER_VARIANTS) as PosterVariant[]).map((v) => (
-                <Pill key={v} base={base} current={variant} param="utgafa" value={v} label={POSTER_VARIANTS[v]} />
+              {(Object.keys(variantLabels) as PosterVariant[]).map((v) => (
+                <Pill key={v} base={base} current={variant} param="utgafa" value={v} label={variantLabels[v]} />
               ))}
             </Control>
             <Control label="Snið">

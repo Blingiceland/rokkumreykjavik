@@ -13,13 +13,14 @@ import { venue, presenterPartner, site, EVENT_YEAR } from "@/data/site";
 import { PosterFilters, PosterGrain, PosterHalftone, plate, xerox } from "./poster-filters";
 
 export type PosterVariant = "mynd" | "typo" | "klassik";
-export type PosterFormat = "a3" | "story" | "square";
+export type PosterFormat = "a3" | "p45" | "story" | "square";
 export type PosterTheme = "bleikt" | "svart";
 
 /** Display pixel sizes. Headless capture multiplies these via deviceScaleFactor
  * for print resolution, so these stay screen-friendly. */
 export const POSTER_SIZES: Record<PosterFormat, { w: number; h: number; label: string }> = {
   a3: { w: 794, h: 1123, label: "A3 · prent (2:3)" },
+  p45: { w: 1080, h: 1350, label: "4:5 · samfélagsmiðlar" },
   story: { w: 720, h: 1280, label: "Story · 9:16" },
   square: { w: 1080, h: 1080, label: "Square · 1:1" },
 };
