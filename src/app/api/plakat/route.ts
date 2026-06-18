@@ -5,8 +5,11 @@ import { events } from "@/data/events";
 import { POSTER_SIZES, type PosterFormat } from "@/components/poster/band-poster";
 
 // Puppeteer needs the Node runtime; never cache (params drive the output).
+// maxDuration gives headless Chrome room to cold-start on Vercel (Pro+; Hobby
+// caps at 10s, which can be tight for the first render).
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const KINDS = ["band", "dagur", "forsida"] as const;
 const VARIANTS = ["mynd", "typo", "klassik"] as const;
