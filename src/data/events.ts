@@ -46,7 +46,7 @@ export const events: RokkEvent[] = [
     displayDate: "Laugardagur 18. júlí",
     title: "Dagur 3",
     vibe: "",
-    artistIds: ["hoffmann", "superserious", "gedbrigdi", "petur-ben"],
+    artistIds: ["hoffman", "superserious", "gedbrigdi", "petur-ben"],
   },
   {
     id: "day-4",

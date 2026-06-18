@@ -10,9 +10,11 @@ export type SponsorTier = "Aðalstyrktaraðili" | "Styrktaraðili" | "Samstarfsa
  *  - "lighten": light-on-black raster (Michter's); blend hides the black plate.
  *  - "invert-lighten": black-on-white raster (Dillon); invert + blend yields
  *    a white logo on the site bg with no visible plate.
+ *  - "keep": render with original colours, no invert/blend (Thule's red art on
+ *    a transparent bg — reads as red ink on both the paper and dark themes).
  *  - undefined: render as-is (logo already designed for dark bg).
  */
-export type LogoTreatment = "invert" | "lighten" | "invert-lighten";
+export type LogoTreatment = "invert" | "lighten" | "invert-lighten" | "keep";
 
 export interface Sponsor {
   id: string;
@@ -29,15 +31,16 @@ export interface Sponsor {
 }
 
 // Rás 2 is no longer listed here — it is now a presenter (with Dillon) and
-// appears in the hero lockup instead. Viking is a placeholder for the lead
-// beer sponsor, pending confirmation and logo artwork.
+// appears in the hero lockup instead. Thule is the lead (beer) sponsor and is
+// also elevated into the presenter lockup in the hero.
 export const sponsors: Sponsor[] = [
   {
-    id: "viking",
-    name: "VÍKING",
+    id: "thule",
+    name: "Thule",
     tier: "Aðalstyrktaraðili",
     url: "#",
-    logo: "",
+    logo: "/images/logos/thule.png",
+    treatment: "keep",
   },
   {
     id: "michters",
@@ -58,4 +61,5 @@ export const treatmentClass: Record<LogoTreatment, string> = {
   invert: "",
   lighten: "",
   "invert-lighten": "",
+  keep: "",
 };

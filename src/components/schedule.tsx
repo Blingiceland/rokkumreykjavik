@@ -37,7 +37,7 @@ function DaySchedule({ event, dayNum }: { event: RokkEvent; dayNum: number }) {
           </span>
         </div>
         <p className="mt-2 font-mono text-[11px] uppercase tracking-widest text-bone-dim">
-          Headliner kl. 20:00 · fyrsta band kl. {getDoorsTime(event)} · klukkutími á milli banda · {venue.shortName}
+          Fyrsta band kl. {getDoorsTime(event)} · síðasta band kl. 20:00 · klukkutími á milli banda · {venue.shortName}
         </p>
       </div>
 
@@ -48,16 +48,26 @@ function DaySchedule({ event, dayNum }: { event: RokkEvent; dayNum: number }) {
             <div className="relative aspect-[4/3] sm:aspect-[16/9]">
               {hasPhoto(headliner.image) ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={headliner.image} alt={headliner.name} className="h-full w-full object-cover" />
+                <img
+                  src={headliner.image}
+                  alt={headliner.name}
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: headliner.imagePosition }}
+                />
               ) : (
                 <ArtistCover artist={headliner} className="absolute inset-0" />
               )}
               <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-base via-base/20 to-transparent" />
               <figcaption className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
                 <span className="inline-block bg-neon px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-[color:rgb(var(--c-base))]">
-                  kl. {getScheduleTime(event, headliner.id)} · Headliner
+                  kl. {getScheduleTime(event, headliner.id)}
                 </span>
-                <p className="mt-2 font-display text-3xl uppercase leading-[0.9] text-bone sm:text-5xl">
+                <p
+                  className={
+                    "mt-2 font-display text-3xl leading-[0.9] text-bone sm:text-5xl " +
+                    (headliner.keepCase ? "normal-case" : "uppercase")
+                  }
+                >
                   {headliner.name}
                 </p>
               </figcaption>
@@ -67,27 +77,25 @@ function DaySchedule({ event, dayNum }: { event: RokkEvent; dayNum: number }) {
 
         {support.map((band) => (
           <div key={band.id} className="flex items-stretch border-2 border-bone bg-base-card">
-            <span
-              className={
-                "flex w-[4.25rem] shrink-0 items-center justify-center font-display text-xl tabular-nums leading-none sm:w-24 sm:text-3xl " +
-                (band.headliner
-                  ? "bg-amber text-bone"
-                  : "bg-bone text-[color:rgb(var(--c-base))]")
-              }
-            >
+            <span className="flex w-[4.25rem] shrink-0 items-center justify-center bg-bone font-display text-xl tabular-nums leading-none text-[color:rgb(var(--c-base))] sm:w-24 sm:text-3xl">
               {getScheduleTime(event, band.id)}
             </span>
             {hasPhoto(band.image) && (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={band.image} alt="" className="h-16 w-16 shrink-0 object-cover sm:h-20 sm:w-20" />
+              <img
+                src={band.image}
+                alt=""
+                className="h-16 w-16 shrink-0 object-cover sm:h-20 sm:w-20"
+                style={{ objectPosition: band.imagePosition }}
+              />
             )}
-            <span className="flex flex-1 items-center gap-2 px-4 font-display text-xl uppercase leading-none text-bone sm:text-3xl">
+            <span
+              className={
+                "flex flex-1 items-center gap-2 px-4 font-display text-xl leading-none text-bone sm:text-3xl " +
+                (band.keepCase ? "normal-case" : "uppercase")
+              }
+            >
               {band.name}
-              {band.headliner && (
-                <span className="bg-amber px-1.5 py-0.5 font-mono text-[9px] tracking-widest text-bone">
-                  Headliner
-                </span>
-              )}
             </span>
           </div>
         ))}

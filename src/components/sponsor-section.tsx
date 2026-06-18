@@ -64,7 +64,10 @@ export function SponsorSection() {
                           src={s.logo}
                           alt={`${s.name} logo`}
                           className={cn(
-                            "sponsor-logo max-h-14 max-w-full object-contain opacity-90 transition-opacity group-hover:opacity-100",
+                            "max-h-14 max-w-full object-contain opacity-90 transition-opacity group-hover:opacity-100",
+                            // "keep" preserves the logo's own colours (Thule red);
+                            // everything else is printed dark by `.sponsor-logo`.
+                            s.treatment !== "keep" && "sponsor-logo",
                             s.treatment && treatmentClass[s.treatment]
                           )}
                         />

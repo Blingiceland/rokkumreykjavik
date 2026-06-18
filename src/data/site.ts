@@ -32,13 +32,17 @@ export const site: SiteConfig = {
   presenter: "Dillon og Rás 2",
   domain: "rokkumreykjavik.is",
   url: "https://rokkumreykjavik.is",
-  description: "Fjórir laugardagar. Sautján bönd. Ein borg sem þarf að heyrast.",
-  contactEmail: "info@rokkumreykjavik.is",
+  description: "Fjórir laugardagar. Sautján bönd.",
+  contactEmail: "dillon@dillon.is",
   spotifyPlaylistId: "5VDX5fXbVUN3pIuIPUnG3Y",
 };
 
-/** Short presenter credit, set as type (no logos): "Dillon og Rás 2 kynna". */
-export const presenterCredit = `${site.presenter} kynna`;
+/** Main partner elevated into the presenter lockup (alongside the presenters). */
+export const presenterPartner = "Thule";
+
+/** Plain-text presenter credit (used in metadata / alt text). The hero renders a
+ * richer version with the Thule wordmark in place of the partner name. */
+export const presenterCredit = `${site.presenter} í samstarfi við ${presenterPartner} kynna`;
 
 /** Full presenter lockup for metadata, e.g.
  * "Dillon og Rás 2 kynna: Rokk í Reykjavík 2026". */

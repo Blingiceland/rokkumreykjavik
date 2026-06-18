@@ -1,6 +1,6 @@
 # Rokk í Reykjavík
 
-Vefsíða fyrir rokkhátíð á Dillon. **Dillon og Rás 2 kynna: Rokk í Reykjavík 2026.** Fjórir laugardagar í júlí. Sextán bönd. Ein borg sem þarf að heyrast.
+Vefsíða fyrir rokkhátíð á Dillon. **Dillon og Rás 2 kynna: Rokk í Reykjavík 2026.** Fjórir laugardagar í júlí. Sautján bönd. Ein borg sem þarf að heyrast.
 
 Nafnið vísar í cult-heimildarmyndina *Rokk í Reykjavík* (1982) og er notað með blessun Rás 2 — farðu vel með það, þetta er ekki orðaleikur. **Aðgangur er alltaf ókeypis — engin miðasala.**
 
@@ -16,7 +16,7 @@ Nafnið vísar í cult-heimildarmyndina *Rokk í Reykjavík* (1982) og er notað
 
 Allt er gagnadrifið — aldrei harðkóða lineup inn í component.
 
-- `src/data/artists.ts` — bönd (16), vísað til með `id`. Hér býr líka `Artist`-týpan (PUBLIC schema — sjá privacy-reglu að neðan).
+- `src/data/artists.ts` — bönd (17), vísað til með `id`. Hér býr líka `Artist`-týpan (PUBLIC schema — sjá privacy-reglu að neðan).
 - `src/data/events.ts` — 4 laugardagar, event-meta, valfrjálsar tímasetningar (`setTimes`).
 - `src/data/site.ts` — nafn, ár, kynnendur, venue.
 - `src/data/sponsors.ts` — styrktaraðilar.

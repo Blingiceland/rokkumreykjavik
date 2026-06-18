@@ -4,7 +4,7 @@ import * as React from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { site, venue, presenterCredit, EVENT_YEAR } from "@/data/site";
+import { site, venue, EVENT_YEAR } from "@/data/site";
 import { artists } from "@/data/artists";
 import { getEventDays, dayNumberForDate } from "@/data/events";
 
@@ -50,12 +50,21 @@ export function Hero() {
         transition={{ duration: reduce ? 0 : 0.5 }}
         className="relative z-10 mx-auto w-full max-w-5xl"
       >
-        {/* Presenter — prominent stamped sticker. */}
+        {/* Presenter — prominent stamped sticker. Thule (main partner) appears
+            as its own wordmark in place of the name. */}
         <p
-          className={`mb-7 inline-block -rotate-1 bg-bone px-4 py-2 font-display text-sm uppercase leading-none tracking-tight sm:text-xl ${PAPER}`}
+          className={`mb-7 inline-flex flex-wrap items-center gap-x-2 gap-y-1 -rotate-1 bg-bone px-4 py-2.5 font-display text-sm uppercase leading-none tracking-tight sm:text-xl ${PAPER}`}
           style={plate("rgb(var(--c-neon))")}
         >
-          {presenterCredit}
+          <span>{site.presenter} í samstarfi við</span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/logos/thule-wordmark.png"
+            alt="Thule"
+            className="inline-block h-[1.05em] w-auto translate-y-[0.03em]"
+            style={xerox}
+          />
+          <span>kynna:</span>
         </p>
 
         {/* Ransom-note title — each word an off-register plate. */}
@@ -115,7 +124,8 @@ export function Hero() {
               <a
                 href={`#dagur-${dayNumberForDate(a.date)}`}
                 className={
-                  "block border-2 border-bone bg-amber px-3 py-1.5 font-display text-xl uppercase leading-none text-bone transition-transform hover:-translate-y-0.5 sm:text-3xl " +
+                  "block border-2 border-bone bg-amber px-3 py-1.5 font-display text-xl leading-none text-bone transition-transform hover:-translate-y-0.5 sm:text-3xl " +
+                  (a.keepCase ? "normal-case " : "uppercase ") +
                   tiltClass[(i + 1) % tiltClass.length]
                 }
                 style={xerox}

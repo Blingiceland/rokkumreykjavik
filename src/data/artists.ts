@@ -44,6 +44,10 @@ export interface Artist {
   headliner: boolean;
   /** Top billing — the very top tier of headliners (biggest in the banner). */
   topBilling: boolean;
+  /** CSS object-position for the cover crop (e.g. "center top"). Omitted -> center. */
+  imagePosition?: string;
+  /** Render the name verbatim instead of forcing uppercase (e.g. "hOFFMAN"). */
+  keepCase?: boolean;
 }
 
 /**
@@ -57,6 +61,7 @@ const SLUGS_WITH_IMAGE = new Set<string>([
   "mukka",
   "vintage-caravan",
   "volcanova",
+  "harma",
   "hoffman",
   "superserious",
   "gedbrigdi",
@@ -101,6 +106,10 @@ interface ArtistSeed {
   headliner?: boolean;
   /** Top-tier headliner (printed biggest, alone at the top of the banner). */
   topBilling?: boolean;
+  /** CSS object-position for the cover crop (e.g. "center top"). */
+  imagePosition?: string;
+  /** Render the name verbatim instead of forcing uppercase (e.g. "hOFFMAN"). */
+  keepCase?: boolean;
 }
 
 /**
@@ -141,6 +150,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         name: "Vintage Caravan",
         genre: "Hard Rock",
         topBilling: true,
+        imagePosition: "center top",
         videoId: "odL0bhBluPE",
         spotifyUrl: "https://open.spotify.com/artist/61MH29rMIyOfuK7KXQznzX",
       },
@@ -164,10 +174,11 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
     displayDate: "18. júlí",
     acts: [
       {
-        name: "hOFFMANN",
+        name: "hOFFMAN",
         genre: "Alternative",
         headliner: true,
-        image: "/images/artists/hoffman.jpg",
+        keepCase: true,
+        imagePosition: "center 35%",
         youtubeUrl: "https://www.youtube.com/@hoffmanband238",
       },
       {
@@ -222,6 +233,8 @@ export const artists: Artist[] = lineup.flatMap(({ date, displayDate, acts }) =>
       videoId: act.videoId ?? "",
       headliner: act.headliner ?? act.topBilling ?? false,
       topBilling: act.topBilling ?? false,
+      imagePosition: act.imagePosition,
+      keepCase: act.keepCase,
     };
   })
 );
