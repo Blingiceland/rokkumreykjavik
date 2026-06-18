@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import puppeteer from "puppeteer";
+import { getPosterBrowser } from "@/lib/poster-browser";
 import { getArtistBySlug } from "@/data/artists";
 import { events } from "@/data/events";
 import { POSTER_SIZES, type PosterFormat } from "@/components/poster/band-poster";
@@ -52,7 +52,7 @@ export async function GET(req: Request) {
 
   let browser;
   try {
-    browser = await puppeteer.launch({ headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"] });
+    browser = await getPosterBrowser();
     const page = await browser.newPage();
     await page.setViewport({ width: size.w, height: size.h, deviceScaleFactor: scaleFactor });
     await page.goto(rawUrl, { waitUntil: "networkidle0", timeout: 30_000 });
