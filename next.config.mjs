@@ -11,6 +11,10 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["puppeteer-core", "@sparticuz/chromium"],
   },
+  // /admin is an alias for the poster hub (kept working out of habit).
+  async redirects() {
+    return [{ source: "/admin", destination: "/artist", permanent: false }];
+  },
 };
 
 export default nextConfig;
