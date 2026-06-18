@@ -12,9 +12,11 @@ export type SponsorTier = "Aðalstyrktaraðili" | "Styrktaraðili" | "Samstarfsa
  *    a white logo on the site bg with no visible plate.
  *  - "keep": render with original colours, no invert/blend (Thule's red art on
  *    a transparent bg — reads as red ink on both the paper and dark themes).
+ *  - "ink": flatten the logo to a single ink (black on paper, cream on the dark
+ *    look) via `.sponsor-ink`. Keeps every partner visually consistent.
  *  - undefined: render as-is (logo already designed for dark bg).
  */
-export type LogoTreatment = "invert" | "lighten" | "invert-lighten" | "keep";
+export type LogoTreatment = "invert" | "lighten" | "invert-lighten" | "keep" | "ink";
 
 export interface Sponsor {
   id: string;
@@ -43,12 +45,44 @@ export const sponsors: Sponsor[] = [
     treatment: "keep",
   },
   {
+    id: "four-roses",
+    name: "Four Roses",
+    tier: "Styrktaraðili",
+    url: "#",
+    logo: "/images/logos/four-roses.png",
+    treatment: "ink",
+  },
+  {
+    id: "helix7",
+    name: "Helix7 Vodka",
+    tier: "Styrktaraðili",
+    url: "#",
+    logo: "/images/logos/helix7.png",
+    treatment: "ink",
+  },
+  {
+    id: "askur",
+    name: "Askur Yggdrasil",
+    tier: "Styrktaraðili",
+    url: "#",
+    logo: "/images/logos/askur.png",
+    treatment: "ink",
+  },
+  {
+    id: "icelandic-glacial",
+    name: "Icelandic Glacial",
+    tier: "Styrktaraðili",
+    url: "#",
+    logo: "/images/logos/icelandic-glacial.png",
+    treatment: "ink",
+  },
+  {
     id: "michters",
     name: "Michter's",
     tier: "Styrktaraðili",
     url: "https://michters.com",
     logo: "/images/logos/michters.png",
-    treatment: "lighten",
+    treatment: "ink",
   },
 ];
 
@@ -62,4 +96,5 @@ export const treatmentClass: Record<LogoTreatment, string> = {
   lighten: "",
   "invert-lighten": "",
   keep: "",
+  ink: "sponsor-ink",
 };

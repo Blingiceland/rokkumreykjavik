@@ -110,6 +110,11 @@
   /* Sponsor logos: print dark on paper, light on the dark look. */
   .sponsor-logo { filter: invert(1); mix-blend-mode: multiply; }
   [data-look="svart"] .sponsor-logo { filter: none; mix-blend-mode: lighten; }
+
+  /* Single-ink sponsor mark — any logo flattened to one ink, theme-aware
+     (black on paper, cream on the dark look). Keeps the source aspect ratio. */
+  .sponsor-ink { filter: brightness(0); }
+  [data-look="svart"] .sponsor-ink { filter: brightness(0) invert(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {

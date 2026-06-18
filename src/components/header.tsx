@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Logo } from "@/components/logo";
+import { SponsorStrip } from "@/components/sponsor-strip";
 import { site } from "@/data/site";
 
 const navLinks = [
@@ -73,6 +74,8 @@ export function Header() {
           </button>
         </div>
       </nav>
+
+      <SponsorStrip />
 
       {open && (
         <div className="border-y-2 border-bone bg-base md:hidden">

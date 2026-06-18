@@ -3,9 +3,9 @@
 import { motion } from "framer-motion";
 import { Handshake, ArrowUpRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { sponsors, treatmentClass } from "@/data/sponsors";
+import { SponsorMark } from "@/components/sponsor-mark";
+import { sponsors } from "@/data/sponsors";
 import { site } from "@/data/site";
-import { cn } from "@/lib/utils/cn";
 
 export function SponsorSection() {
   return (
@@ -58,20 +58,10 @@ export function SponsorSection() {
                 >
                   <div className="flex h-16 w-full items-center justify-center">
                     {s.logo ? (
-                      <>
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={s.logo}
-                          alt={`${s.name} logo`}
-                          className={cn(
-                            "max-h-14 max-w-full object-contain opacity-90 transition-opacity group-hover:opacity-100",
-                            // "keep" preserves the logo's own colours (Thule red);
-                            // everything else is printed dark by `.sponsor-logo`.
-                            s.treatment !== "keep" && "sponsor-logo",
-                            s.treatment && treatmentClass[s.treatment]
-                          )}
-                        />
-                      </>
+                      <SponsorMark
+                        sponsor={s}
+                        className="max-h-14 max-w-full opacity-90 transition-opacity group-hover:opacity-100"
+                      />
                     ) : (
                       // No artwork yet — tidy wordmark placeholder.
                       <span className="font-display text-2xl uppercase tracking-[0.15em] text-bone-dim transition-colors group-hover:text-neon sm:text-3xl">
