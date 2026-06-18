@@ -10,3 +10,7 @@ next-env.d.ts
 
 # Playwright MCP screenshot/log artifacts
 /.playwright-mcp
+
+# Local Claude config + raw working assets (not part of the deployed site)
+/.claude
+/assets
