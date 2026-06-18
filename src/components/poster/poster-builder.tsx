@@ -10,11 +10,15 @@ import {
 
 export type PosterValues = { variant: PosterVariant; format: PosterFormat; theme: PosterTheme };
 
-/** Parse + clamp the shared poster query params. */
-export function coercePosterValues(search: { utgafa?: string; snid?: string; thema?: string }): PosterValues {
+/** Parse + clamp the shared poster query params. `defaultVariant` sets the
+ * look when none is in the URL (e.g. the front poster leads with the full bill). */
+export function coercePosterValues(
+  search: { utgafa?: string; snid?: string; thema?: string },
+  defaultVariant: PosterVariant = "mynd"
+): PosterValues {
   const variant: PosterVariant = (["mynd", "typo", "klassik"] as const).includes(search.utgafa as PosterVariant)
     ? (search.utgafa as PosterVariant)
-    : "mynd";
+    : defaultVariant;
   const format: PosterFormat = (["a3", "story", "square"] as const).includes(search.snid as PosterFormat)
     ? (search.snid as PosterFormat)
     : "a3";

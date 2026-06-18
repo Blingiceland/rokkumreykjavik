@@ -62,7 +62,12 @@ export function AdminHub({ logout }: { logout: () => void }) {
         </div>
 
         <Section title="Forsíða">
-          <Row label="Rokk í Reykjavík" builder="/plakat/forsida" dl={`/api/plakat?kind=forsida&id=forsida&${q}`} lead />
+          <Row
+            label="Rokk í Reykjavík"
+            builder="/plakat/forsida"
+            dl="/api/plakat?kind=forsida&id=forsida&utgafa=typo&snid=a3&thema=bleikt"
+            lead
+          />
         </Section>
 
         <Section title="Dagar">

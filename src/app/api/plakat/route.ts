@@ -40,7 +40,7 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const kind = pick(KINDS, url.searchParams.get("kind"), "band") as Kind;
   const id = url.searchParams.get("id") ?? url.searchParams.get("band") ?? "";
-  const variant = pick(VARIANTS, url.searchParams.get("utgafa"), "mynd");
+  const variant = pick(VARIANTS, url.searchParams.get("utgafa"), kind === "forsida" ? "typo" : "mynd");
   const format = pick(FORMATS, url.searchParams.get("snid"), "a3") as PosterFormat;
   const theme = url.searchParams.get("thema") === "svart" ? "svart" : "bleikt";
   const ext = pick(Object.keys(EXTS) as Ext[], url.searchParams.get("ext"), "pdf") as Ext;

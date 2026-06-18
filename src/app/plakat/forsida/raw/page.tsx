@@ -6,7 +6,7 @@ type Search = { utgafa?: string; snid?: string; thema?: string };
 
 /** Bare, full-size front poster for headless capture (/api/plakat drives this). */
 export default function RawFrontPosterPage({ searchParams }: { searchParams: Search }) {
-  const { variant, format, theme } = coercePosterValues(searchParams);
+  const { variant, format, theme } = coercePosterValues(searchParams, "typo");
   const size = POSTER_SIZES[format];
 
   return (

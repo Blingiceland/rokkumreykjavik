@@ -4,7 +4,7 @@ import { PosterBuilder, PosterPreview, coercePosterValues } from "@/components/p
 type Search = { utgafa?: string; snid?: string; thema?: string };
 
 export default function FrontPosterPage({ searchParams }: { searchParams: Search }) {
-  const values = coercePosterValues(searchParams);
+  const values = coercePosterValues(searchParams, "typo");
 
   return (
     <PosterBuilder
