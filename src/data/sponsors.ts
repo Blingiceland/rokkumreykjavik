@@ -76,6 +76,14 @@ export const sponsors: Sponsor[] = [
     logo: "/images/logos/icelandic-glacial.png",
     treatment: "ink",
   },
+  {
+    id: "planteray",
+    name: "Planteray Rum",
+    tier: "Styrktaraðili",
+    url: "#",
+    logo: "/images/logos/planteray.png",
+    treatment: "ink",
+  },
 ];
 
 /**
