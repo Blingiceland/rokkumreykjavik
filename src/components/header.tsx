@@ -9,6 +9,7 @@ import { site } from "@/data/site";
 const navLinks = [
   { href: "#dagskra", label: "Dagskrá" },
   { href: "#hlusta", label: "Hlusta" },
+  { href: "#samstarf", label: "Samstarf" },
 ];
 
 type Look = "bleikt" | "svart";
