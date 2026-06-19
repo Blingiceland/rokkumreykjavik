@@ -67,6 +67,7 @@ const SLUGS_WITH_IMAGE = new Set<string>([
   "gedbrigdi",
   "brain-police",
   "krummi-og-bjarni",
+  "duft",
 ]);
 
 /** Build a URL-safe slug from an artist name (handles Icelandic glyphs). */

@@ -3,7 +3,8 @@
 import * as React from "react";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { SponsorStrip } from "@/components/sponsor-strip";
+import { SponsorMark } from "@/components/sponsor-mark";
+import { sponsors } from "@/data/sponsors";
 import { site } from "@/data/site";
 
 const navLinks = [
@@ -38,12 +39,26 @@ export function Header() {
     // Opaque, same colour as the page (no blur band) so the background reads
     // uniform — the bar just matches the ground behind it.
     <header className="fixed inset-x-0 top-0 z-40 bg-base">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" aria-label={site.name} className="flex items-center">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:gap-6 sm:px-6">
+        <a href="#top" aria-label={site.name} className="flex shrink-0 items-center">
           <Logo className="text-lg sm:text-xl" />
         </a>
 
-        <div className="flex items-center gap-4 sm:gap-6">
+        {/* Sponsors, inline on the same row as the wordmark. Scrolls if tight. */}
+        <div className="flex min-w-0 flex-1 items-center gap-4 overflow-x-auto sm:gap-6 [&::-webkit-scrollbar]:hidden">
+          {sponsors.map((s) => (
+            <a
+              key={s.id}
+              href="#samstarf"
+              aria-label={s.name}
+              className="shrink-0 opacity-80 transition-opacity hover:opacity-100"
+            >
+              <SponsorMark sponsor={s} className="h-6 w-auto sm:h-7" />
+            </a>
+          ))}
+        </div>
+
+        <div className="flex shrink-0 items-center gap-4 sm:gap-6">
           <div className="hidden items-center gap-6 md:flex">
             {navLinks.map((l) => (
               <a
@@ -60,13 +75,13 @@ export function Header() {
             type="button"
             onClick={toggleTheme}
             aria-label={look === "svart" ? "Skipta í ljóst" : "Skipta í dökkt"}
-            className="grid h-9 w-9 place-items-center border-2 border-bone text-bone transition-colors hover:bg-amber"
+            className="grid h-9 w-9 shrink-0 place-items-center border-2 border-bone text-bone transition-colors hover:bg-amber"
           >
             {look === "svart" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
           <button
-            className="grid h-9 w-9 place-items-center text-bone md:hidden"
+            className="grid h-9 w-9 shrink-0 place-items-center text-bone md:hidden"
             aria-label={open ? "Loka valmynd" : "Opna valmynd"}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
@@ -75,8 +90,6 @@ export function Header() {
           </button>
         </div>
       </nav>
-
-      <SponsorStrip />
 
       {open && (
         <div className="border-y-2 border-bone bg-base md:hidden">

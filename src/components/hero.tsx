@@ -31,7 +31,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-4 pt-28 sm:px-6"
+      className="relative flex min-h-[100svh] flex-col justify-center overflow-hidden px-4 pt-24 sm:px-6"
     >
       {/* Worn xerox edge filter. */}
       <svg aria-hidden="true" className="pointer-events-none absolute h-0 w-0">
