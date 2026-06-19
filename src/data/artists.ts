@@ -69,6 +69,7 @@ const SLUGS_WITH_IMAGE = new Set<string>([
   "krummi-og-bjarni",
   "duft",
   "drungi",
+  "petur-ben",
 ]);
 
 /** Build a URL-safe slug from an artist name (handles Icelandic glyphs). */
@@ -191,7 +192,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         youtubeUrl: "https://www.youtube.com/@superserious_band",
       },
       { name: "Geðbrigði", genre: "Post-Punk" },
-      { name: "Pétur Ben", genre: "" },
+      { name: "Pétur Ben", genre: "", imagePosition: "center 22%" },
     ],
   },
   {
