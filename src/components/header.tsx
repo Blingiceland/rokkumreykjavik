@@ -39,13 +39,14 @@ export function Header() {
     // Opaque, same colour as the page (no blur band) so the background reads
     // uniform — the bar just matches the ground behind it.
     <header className="fixed inset-x-0 top-0 z-40 bg-base">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center gap-3 px-4 sm:gap-6 sm:px-6">
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:gap-6 sm:px-6">
         <a href="#top" aria-label={site.name} className="flex shrink-0 items-center">
           <Logo className="text-lg sm:text-xl" />
         </a>
 
-        {/* Sponsors, inline on the same row as the wordmark. Scrolls if tight. */}
-        <div className="flex min-w-0 flex-1 items-center gap-4 overflow-x-auto sm:gap-6 [&::-webkit-scrollbar]:hidden">
+        {/* Sponsors inline beside the wordmark — desktop only (mobile gets the
+            dedicated scroll row below). */}
+        <div className="hidden min-w-0 flex-1 items-center gap-4 overflow-x-auto sm:gap-6 md:flex [&::-webkit-scrollbar]:hidden">
           {sponsors.map((s) => (
             <a
               key={s.id}
@@ -53,7 +54,7 @@ export function Header() {
               aria-label={s.name}
               className="shrink-0 opacity-80 transition-opacity hover:opacity-100"
             >
-              <SponsorMark sponsor={s} className="h-6 w-auto sm:h-7" />
+              <SponsorMark sponsor={s} className="h-7 w-auto" />
             </a>
           ))}
         </div>
@@ -90,6 +91,22 @@ export function Header() {
           </button>
         </div>
       </nav>
+
+      {/* Mobile: a dedicated horizontally-scrollable sponsor row. */}
+      <div className="border-t border-base-line md:hidden">
+        <div className="flex items-center gap-6 overflow-x-auto px-4 py-2 [&::-webkit-scrollbar]:hidden">
+          {sponsors.map((s) => (
+            <a
+              key={s.id}
+              href="#samstarf"
+              aria-label={s.name}
+              className="shrink-0 opacity-80 transition-opacity hover:opacity-100"
+            >
+              <SponsorMark sponsor={s} className="h-6 w-auto" />
+            </a>
+          ))}
+        </div>
+      </div>
 
       {open && (
         <div className="border-y-2 border-bone bg-base md:hidden">
