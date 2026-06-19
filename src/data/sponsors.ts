@@ -76,14 +76,6 @@ export const sponsors: Sponsor[] = [
     logo: "/images/logos/icelandic-glacial.png",
     treatment: "ink",
   },
-  {
-    id: "michters",
-    name: "Michter's",
-    tier: "Styrktaraðili",
-    url: "https://michters.com",
-    logo: "/images/logos/michters.png",
-    treatment: "ink",
-  },
 ];
 
 /**
