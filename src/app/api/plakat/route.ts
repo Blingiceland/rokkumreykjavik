@@ -86,11 +86,7 @@ export async function GET(req: Request) {
     });
   } catch (err) {
     console.error("[plakat] export failed", err);
-    // TEMP: surface the message to diagnose the Vercel Chromium launch.
-    return NextResponse.json(
-      { error: "Tókst ekki að búa til plakat", detail: err instanceof Error ? err.message : String(err) },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Tókst ekki að búa til plakat" }, { status: 500 });
   } finally {
     await browser?.close();
   }
