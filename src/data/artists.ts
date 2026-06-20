@@ -71,6 +71,8 @@ const SLUGS_WITH_IMAGE = new Set<string>([
   "drungi",
   "petur-ben",
   "sot",
+  "mur",
+  "kriurnar",
 ]);
 
 /** Build a URL-safe slug from an artist name (handles Icelandic glyphs). */
@@ -143,7 +145,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         genre: "Alternative",
         spotifyUrl: "https://open.spotify.com/artist/0ZyPf367VBQPjzOiUISIZW",
       },
-      { name: "Kríurnar", genre: "" },
+      { name: "Kríurnar", genre: "", imagePosition: "center 30%" },
     ],
   },
   {
@@ -208,7 +210,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         image: "/images/artists/brain1.jpg",
         spotifyUrl: "https://open.spotify.com/artist/3u8Bmkzs6rer0AirAa87iR",
       },
-      { name: "Múr", genre: "", topBilling: true },
+      { name: "Múr", genre: "", topBilling: true, imagePosition: "center 35%" },
       { name: "Duft", genre: "Punk Rock" },
       { name: "Drungi", genre: "" },
       { name: "Sót", genre: "Rock" },
