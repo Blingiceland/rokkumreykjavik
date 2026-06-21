@@ -26,6 +26,7 @@ export function FrontPoster({
   theme?: PosterTheme;
 }) {
   const size = POSTER_SIZES[format];
+  const landscape = size.w > size.h;
   return (
     <div
       data-poster
@@ -36,9 +37,15 @@ export function FrontPoster({
       <PosterFilters />
       <PosterSponsorTop />
       <div className="relative flex-1 overflow-hidden">
-        {variant === "mynd" && <MyndFront />}
-        {variant === "typo" && <TypoFront />}
-        {variant === "klassik" && <AllBandsFront format={format} />}
+        {landscape ? (
+          <LandscapeFront />
+        ) : (
+          <>
+            {variant === "mynd" && <MyndFront />}
+            {variant === "typo" && <TypoFront />}
+            {variant === "klassik" && <AllBandsFront format={format} />}
+          </>
+        )}
       </div>
       <PosterSponsorBottom />
       <PosterHalftone className="z-40 opacity-[0.16]" />
@@ -159,6 +166,79 @@ function TypoFront() {
       <p className="relative z-10 font-mono uppercase leading-none tracking-[0.18em] text-bone-dim" style={{ fontSize: "1.9cqw" }}>
         {venue.name} · {venue.streetAddress} · {site.domain}
       </p>
+    </div>
+  );
+}
+
+/* Landscape — FB event cover / Page banner (1.91:1 · 16:9) ---------- */
+
+/** Wide layout for the two `fb*` formats: identity block on the left, the four
+ * days (with every band) on the right. Sizes in `cqh` since height is the
+ * constraint in landscape. Content sits inside generous padding so it survives
+ * Facebook's edge-cropping on the page-cover placement. */
+function LandscapeFront() {
+  return (
+    <div className="absolute inset-0 flex items-stretch gap-[4cqh] p-[5cqh]">
+      <PosterHalftone className="z-0 opacity-[0.2]" />
+
+      {/* Left — festival identity */}
+      <div className="relative z-10 flex shrink-0 basis-[37%] flex-col justify-between">
+        <div className="flex flex-col gap-[2.4cqh]">
+          <p className="font-mono uppercase leading-none tracking-[0.16em] text-bone-dim" style={{ fontSize: "1.9cqh" }}>
+            {site.presenter} í samstarfi við {presenterPartner} kynna
+          </p>
+          <h1 className="font-display uppercase leading-[0.82]" style={{ fontSize: "11cqh" }}>
+            <span className="-rotate-1 inline-block bg-bone px-[1.4cqh] text-[color:rgb(var(--c-base))]" style={plate("rgb(var(--c-neon))")}>
+              Rokk
+            </span>{" "}
+            <span className="rotate-1 inline-block bg-neon px-[1.4cqh] text-[color:rgb(var(--c-base))]" style={plate("rgb(var(--c-neon-cyan))")}>
+              í
+            </span>{" "}
+            <span className="-rotate-1 inline-block border-[0.4cqh] border-bone px-[1.4cqh]" style={xerox}>
+              Reykjavík
+            </span>
+          </h1>
+        </div>
+        <div className="flex flex-col gap-[2cqh]">
+          <div className="flex flex-wrap items-center gap-[1.6cqh]">
+            <span className="-rotate-1 bg-amber px-[1.6cqh] py-[0.8cqh] font-display uppercase leading-none text-[color:rgb(var(--c-base))]" style={{ ...xerox, fontSize: "3cqh" }}>
+              {getEventDays().join("·")} júlí {EVENT_YEAR}
+            </span>
+            <span className="rotate-1 bg-neon px-[1.6cqh] py-[0.8cqh] font-display uppercase leading-none text-[color:rgb(var(--c-base))]" style={{ ...plate("rgb(var(--c-bone))"), fontSize: "3cqh" }}>
+              Ókeypis inn
+            </span>
+          </div>
+          <p className="font-mono uppercase leading-none tracking-[0.16em] text-bone-dim" style={{ fontSize: "1.7cqh" }}>
+            {venue.name} · {venue.streetAddress} · {site.domain}
+          </p>
+        </div>
+      </div>
+
+      {/* Right — the four days, every band */}
+      <div className="relative z-10 grid flex-1 grid-cols-2 gap-x-[4cqh] gap-y-[2.4cqh] content-center">
+        {events.map((event, idx) => {
+          const date = event.displayDate.replace("Laugardagur ", "");
+          const lineup = getEventArtists(event);
+          return (
+            <div key={idx} className="flex flex-col gap-[0.8cqh] border-t-[0.35cqh] border-bone pt-[1.2cqh]">
+              <p className="font-mono uppercase leading-none tracking-[0.15em] text-neon" style={{ fontSize: "1.9cqh" }}>
+                Dagur {idx + 1} · {date}
+              </p>
+              <ul className="flex flex-col gap-[0.4cqh]">
+                {lineup.map((a, i) => (
+                  <li
+                    key={a.id}
+                    className={"font-display leading-[0.95] " + (a.keepCase ? "normal-case" : "uppercase")}
+                    style={{ fontSize: i === 0 ? "3.6cqh" : "2.7cqh" }}
+                  >
+                    {a.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

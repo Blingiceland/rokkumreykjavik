@@ -14,17 +14,25 @@ import { PosterFilters, PosterGrain, PosterHalftone, plate, xerox } from "./post
 import { PosterSponsorTop, PosterSponsorBottom } from "./poster-sponsors";
 
 export type PosterVariant = "mynd" | "typo" | "klassik";
-export type PosterFormat = "a3" | "p45" | "story" | "square";
+export type PosterFormat = "a3" | "p45" | "story" | "square" | "fbcover" | "fbpage";
 export type PosterTheme = "bleikt" | "svart";
 
 /** Display pixel sizes. Headless capture multiplies these via deviceScaleFactor
- * for print resolution, so these stay screen-friendly. */
+ * for print resolution, so these stay screen-friendly. The two `fb*` formats are
+ * landscape (only the front poster renders them) and capture at native size. */
 export const POSTER_SIZES: Record<PosterFormat, { w: number; h: number; label: string }> = {
   a3: { w: 794, h: 1123, label: "A3 · prent (2:3)" },
   p45: { w: 1080, h: 1350, label: "4:5 · samfélagsmiðlar" },
   story: { w: 720, h: 1280, label: "Story · 9:16" },
   square: { w: 1080, h: 1080, label: "Square · 1:1" },
+  fbcover: { w: 1920, h: 1005, label: "FB viðburður · 1.91:1" },
+  fbpage: { w: 1640, h: 924, label: "FB síða · 16:9" },
 };
+
+/** Portrait formats shared by every poster type; the landscape `fb*` formats are
+ * front-page only (offered explicitly by the front builder). */
+export const PORTRAIT_FORMATS: PosterFormat[] = ["a3", "p45", "story", "square"];
+export const LANDSCAPE_FORMATS: PosterFormat[] = ["fbcover", "fbpage"];
 
 export const POSTER_VARIANTS: Record<PosterVariant, string> = {
   mynd: "Mynd-þung",

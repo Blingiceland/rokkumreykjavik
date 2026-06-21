@@ -4,6 +4,7 @@ import { BackLink } from "./back-link";
 import {
   POSTER_SIZES,
   POSTER_VARIANTS,
+  PORTRAIT_FORMATS,
   type PosterVariant,
   type PosterFormat,
   type PosterTheme,
@@ -20,7 +21,7 @@ export function coercePosterValues(
   const variant: PosterVariant = (["mynd", "typo", "klassik"] as const).includes(search.utgafa as PosterVariant)
     ? (search.utgafa as PosterVariant)
     : defaultVariant;
-  const format: PosterFormat = (["a3", "p45", "story", "square"] as const).includes(search.snid as PosterFormat)
+  const format: PosterFormat = Object.prototype.hasOwnProperty.call(POSTER_SIZES, search.snid ?? "")
     ? (search.snid as PosterFormat)
     : "a3";
   const theme: PosterTheme = search.thema === "svart" ? "svart" : "bleikt";
@@ -79,16 +80,19 @@ export function PosterBuilder({
   shareNote,
   preview,
   variantLabels = POSTER_VARIANTS,
+  formats = PORTRAIT_FORMATS,
 }: {
   title: string;
   subtitle: string;
   values: PosterValues;
-  /** e.g. "/api/plakat?kind=band&id=vintage-caravan" — ext is appended. */
+  /** e.g. "/api/plakat?kind=band&id=the-vintage-caravan" — ext is appended. */
   downloadBase: string;
   shareNote: string;
   preview: React.ReactNode;
   /** Per-poster variant labels (the front poster names them differently). */
   variantLabels?: Record<PosterVariant, string>;
+  /** Which size pills to offer (front adds the landscape fb* formats). */
+  formats?: PosterFormat[];
 }) {
   const { variant, format, theme } = values;
   const base = { utgafa: variant, snid: format, thema: theme } as Record<string, string>;
@@ -110,7 +114,7 @@ export function PosterBuilder({
               ))}
             </Control>
             <Control label="Snið">
-              {(Object.keys(POSTER_SIZES) as PosterFormat[]).map((f) => (
+              {formats.map((f) => (
                 <Pill key={f} base={base} current={format} param="snid" value={f} label={POSTER_SIZES[f].label} />
               ))}
             </Control>

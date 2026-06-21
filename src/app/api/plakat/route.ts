@@ -13,7 +13,7 @@ export const maxDuration = 60;
 
 const KINDS = ["band", "dagur", "forsida"] as const;
 const VARIANTS = ["mynd", "typo", "klassik"] as const;
-const FORMATS = ["a3", "p45", "story", "square"] as const;
+const FORMATS = ["a3", "p45", "story", "square", "fbcover", "fbpage"] as const;
 const EXTS = { pdf: "application/pdf", jpeg: "image/jpeg", png: "image/png" } as const;
 
 type Kind = (typeof KINDS)[number];
@@ -49,7 +49,9 @@ export async function GET(req: Request) {
   if (!target) return NextResponse.json({ error: "Óþekkt plakat" }, { status: 404 });
 
   const size = POSTER_SIZES[format];
-  const scaleFactor = format === "a3" ? 3 : 2; // print DPI; PDF is vector regardless
+  // Print formats upscale for DPI; the large landscape FB formats capture at
+  // native size (already 1640–1920px wide). PDF is vector regardless.
+  const scaleFactor = size.w > size.h ? 1 : format === "a3" ? 3 : 2;
 
   const rawUrl = `${url.origin}${target.rawPath}?utgafa=${variant}&snid=${format}&thema=${theme}`;
 

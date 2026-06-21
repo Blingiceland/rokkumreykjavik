@@ -6,7 +6,10 @@
  *
  * Logos print in a single ink (`.sponsor-ink` → black on the paper theme, cream
  * on `svart`), matching the site. Thule keeps its red (treatment "keep").
- * Sized in container-query units like the rest of the poster.
+ *
+ * Sized in `cqmin` (1% of the poster's *shorter* side) so the strips stay a sane
+ * height in both portrait and landscape. For every portrait format width ≤ height,
+ * so cqmin == cqw and nothing changes; only the landscape fb* formats differ.
  */
 import * as React from "react";
 import { sponsors } from "@/data/sponsors";
@@ -25,23 +28,23 @@ function Logo({ src, alt, h, keep = false }: { src: string; alt: string; h: numb
       src={src}
       alt={alt}
       className={keep ? "" : "sponsor-ink"}
-      style={{ height: `${h}cqw`, width: "auto", objectFit: "contain" }}
+      style={{ height: `${h}cqmin`, width: "auto", objectFit: "contain" }}
     />
   );
 }
 
 /** A hairline ink divider between logo clusters. */
 function Rule({ h }: { h: number }) {
-  return <span aria-hidden className="shrink-0 bg-bone" style={{ height: `${h}cqw`, width: "0.3cqw" }} />;
+  return <span aria-hidden className="shrink-0 bg-bone" style={{ height: `${h}cqmin`, width: "0.3cqmin" }} />;
 }
 
 export function PosterSponsorTop() {
   const thule = byId("thule");
   const fourRoses = byId("four-roses");
   return (
-    <div className="relative z-[45] flex items-center justify-between gap-[4cqw] border-b-[0.35cqw] border-bone px-[5cqw] py-[2.4cqw]">
+    <div className="relative z-[45] flex items-center justify-between gap-[4cqmin] border-b-[0.35cqmin] border-bone px-[5cqmin] py-[2.4cqmin]">
       <Logo src={RAS2} alt="Rás 2" h={3.6} />
-      <div className="flex items-center gap-[3cqw]">
+      <div className="flex items-center gap-[3cqmin]">
         {thule && <Logo src={thule.logo} alt={thule.name} h={5.6} keep />}
         {fourRoses && <Logo src={fourRoses.logo} alt={fourRoses.name} h={3.4} />}
       </div>
@@ -51,7 +54,7 @@ export function PosterSponsorTop() {
 
 export function PosterSponsorBottom() {
   return (
-    <div className="relative z-[45] flex flex-wrap items-center justify-center gap-x-[3.4cqw] gap-y-[1.6cqw] border-t-[0.35cqw] border-bone px-[5cqw] py-[2.6cqw]">
+    <div className="relative z-[45] flex flex-wrap items-center justify-center gap-x-[3.4cqmin] gap-y-[1.6cqmin] border-t-[0.35cqmin] border-bone px-[5cqmin] py-[2.6cqmin]">
       <Logo src={RAS2} alt="Rás 2" h={3.2} />
       <Rule h={3.6} />
       {sponsors.map((s) => (
