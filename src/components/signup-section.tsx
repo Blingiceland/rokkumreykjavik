@@ -13,6 +13,7 @@ type Status = "idle" | "loading" | "done" | "error";
  * nothing itself.
  */
 export function SignupSection() {
+  const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [status, setStatus] = React.useState<Status>("idle");
   const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -28,13 +29,15 @@ export function SignupSection() {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, name: name.trim() }),
       }).catch(() => null);
       if (res && !res.ok) throw new Error("bad");
       setStatus("done");
+      setName("");
       setEmail("");
     } catch {
       setStatus("done");
+      setName("");
       setEmail("");
     }
   }
@@ -66,28 +69,41 @@ export function SignupSection() {
             <Check size={16} /> Takk! Þú ert komin/n á listann.
           </p>
         ) : (
-          <form onSubmit={onSubmit} noValidate className="relative mt-7 flex max-w-xl flex-col gap-3 sm:flex-row">
-            <label htmlFor="signup-email" className="sr-only">
-              Netfang
-            </label>
-            <input
-              id="signup-email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                if (status === "error") setStatus("idle");
-              }}
-              placeholder="netfang@example.is"
-              aria-invalid={status === "error"}
-              aria-describedby={status === "error" ? "signup-error" : undefined}
-              className="h-12 flex-1 border-2 border-bone bg-base px-4 font-mono text-sm text-bone outline-none transition-colors placeholder:text-bone-faint focus:border-neon"
-            />
+          <form onSubmit={onSubmit} noValidate className="relative mt-7 flex max-w-xl flex-col gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <label htmlFor="signup-name" className="sr-only">
+                Nafn
+              </label>
+              <input
+                id="signup-name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Nafn (valfrjálst)"
+                className="h-12 flex-1 border-2 border-bone bg-base px-4 font-mono text-sm text-bone outline-none transition-colors placeholder:text-bone-faint focus:border-neon"
+              />
+              <label htmlFor="signup-email" className="sr-only">
+                Netfang
+              </label>
+              <input
+                id="signup-email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (status === "error") setStatus("idle");
+                }}
+                placeholder="netfang@example.is"
+                aria-invalid={status === "error"}
+                aria-describedby={status === "error" ? "signup-error" : undefined}
+                className="h-12 flex-1 border-2 border-bone bg-base px-4 font-mono text-sm text-bone outline-none transition-colors placeholder:text-bone-faint focus:border-neon"
+              />
+            </div>
             <button
               type="submit"
               disabled={status === "loading"}
-              className="inline-flex h-12 items-center justify-center gap-2 border-2 border-bone bg-amber px-6 font-display text-sm uppercase tracking-wide text-bone transition-colors hover:bg-neon hover:text-[color:rgb(var(--c-base))] disabled:opacity-60"
+              className="inline-flex h-12 items-center justify-center gap-2 self-start border-2 border-bone bg-amber px-6 font-display text-sm uppercase tracking-wide text-bone transition-colors hover:bg-neon hover:text-[color:rgb(var(--c-base))] disabled:opacity-60"
             >
               {status === "loading" ? <Loader2 size={16} className="animate-spin" /> : "Skrá mig"}
             </button>

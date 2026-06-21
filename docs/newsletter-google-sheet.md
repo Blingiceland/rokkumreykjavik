@@ -6,10 +6,17 @@ gögnin, engin þriðja-aðila þjónusta.
 Flæðið: gestur skráir netfang → `/api/subscribe` (á Vercel) → áframsendir á Google
 Apps Script web-app → bætir línu í Sheet-ið þitt.
 
+> ⚠️ **Ekki rugla saman tveimur hlekkjum.** „Publish to web" (File → Share →
+> Publish to web) gefur þér **CSV-hlekk sem endar á `/pub?...output=csv`** — hann
+> er bara til að **lesa** blaðið og getur ALDREI tekið við skráningum. Hlekkurinn
+> sem fer í `NEWSLETTER_WEBHOOK` er **Apps Script „Web app" hlekkurinn sem endar á
+> `/exec`** (skref 3 að neðan).
+
 ## 1. Búðu til Sheet
 
 1. Nýtt Google Sheet (t.d. „Rokk í Reykjavík – póstlisti").
-2. Skrifaðu fyrirsagnir í fyrstu línu: `Dagsetning` | `Netfang` | `Uppruni`.
+2. Skrifaðu fyrirsagnir í fyrstu línu: `Dagsetning` | `Netfang` | `Nafn` | `Uppruni`
+   (A1–D1).
 
 ## 2. Settu inn Apps Script
 
@@ -27,7 +34,8 @@ function doPost(e) {
     // Sleppa tvíteknum netföngum (dálkur B).
     var existing = sheet.getRange("B:B").getValues().flat();
     if (existing.indexOf(email) === -1) {
-      sheet.appendRow([new Date(), email, data.source || ""]);
+      // Dagsetning | Netfang | Nafn | Uppruni
+      sheet.appendRow([new Date(), email, data.name || "", data.source || ""]);
     }
     return ContentService.createTextOutput("ok");
   } catch (err) {

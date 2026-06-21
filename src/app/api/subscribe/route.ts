@@ -7,9 +7,11 @@ import { NextResponse } from "next/server";
 // style hooks. Stores nothing here itself.
 export async function POST(req: Request) {
   let email = "";
+  let name = "";
   try {
     const body = await req.json();
     email = String(body?.email ?? "").trim().toLowerCase();
+    name = String(body?.name ?? "").trim().slice(0, 120);
   } catch {
     return NextResponse.json({ ok: false, error: "invalid_body" }, { status: 400 });
   }
@@ -25,7 +27,7 @@ export async function POST(req: Request) {
       await fetch(hook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, ts: new Date().toISOString(), source: "rokkumreykjavik.is" }),
+        body: JSON.stringify({ email, name, ts: new Date().toISOString(), source: "rokkumreykjavik.is" }),
       });
     } catch {
       return NextResponse.json({ ok: false, error: "provider_error" }, { status: 502 });
