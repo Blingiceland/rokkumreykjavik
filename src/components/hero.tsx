@@ -12,6 +12,16 @@ import { getEventDays, dayNumberForDate } from "@/data/events";
 // bigger draws just print larger: the headliners plus a few hand-picked names.
 const EMPHASIS_EXTRA = new Set(["petur-ben", "krummi-og-bjarni", "mur"]);
 const isEmphasis = (a: (typeof artists)[number]) => a.headliner || EMPHASIS_EXTRA.has(a.id);
+
+// The three top-billed acts lead the hero bill; everyone else follows in
+// lineup order, unchanged.
+const TOP_BILL = ["the-vintage-caravan", "brain-police", "mur"];
+const heroBill = [
+  ...TOP_BILL.map((id) => artists.find((a) => a.id === id)).filter(
+    (a): a is (typeof artists)[number] => Boolean(a)
+  ),
+  ...artists.filter((a) => !TOP_BILL.includes(a.id)),
+];
 const days = getEventDays();
 
 const PAPER = "text-[color:rgb(var(--c-base))]";
@@ -102,7 +112,7 @@ export function Hero() {
         {/* The whole bill on one amber ground — bigger draws print larger, the
             rest are right there with them. Each links to its night. */}
         <ul className="mt-8 flex flex-wrap items-end gap-2.5 sm:gap-3">
-          {artists.map((a, i) => (
+          {heroBill.map((a, i) => (
             <li key={a.id}>
               <a
                 href={`#dagur-${dayNumberForDate(a.date)}`}
