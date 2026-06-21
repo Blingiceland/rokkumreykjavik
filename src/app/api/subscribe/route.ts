@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 
 // Minimal, privacy-respecting subscribe endpoint.
-// Wire `process.env.NEWSLETTER_WEBHOOK` (Mailchimp/Buttondown/etc.) to forward.
-// Stores nothing here by default.
+// Wire `process.env.NEWSLETTER_WEBHOOK` to forward each signup. By default this
+// is a Google Apps Script web-app URL that appends a row to a Sheet
+// (see docs/newsletter-google-sheet.md). Works the same for Buttondown/Zapier
+// style hooks. Stores nothing here itself.
 export async function POST(req: Request) {
   let email = "";
   try {
     const body = await req.json();
-    email = String(body?.email ?? "").trim();
+    email = String(body?.email ?? "").trim().toLowerCase();
   } catch {
     return NextResponse.json({ ok: false, error: "invalid_body" }, { status: 400 });
   }
@@ -23,7 +25,7 @@ export async function POST(req: Request) {
       await fetch(hook, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, ts: new Date().toISOString(), source: "rokkumreykjavik.is" }),
       });
     } catch {
       return NextResponse.json({ ok: false, error: "provider_error" }, { status: 502 });
