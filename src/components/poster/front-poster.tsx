@@ -27,12 +27,24 @@ export function FrontPoster({
 }) {
   const size = POSTER_SIZES[format];
   const landscape = size.w > size.h;
+  // The FB page-cover placement crops the top/bottom (desktop) and sides
+  // (mobile), so inset the whole lockup into the safe zone — Rás 2 (top/bottom
+  // corners) must never be cropped. The background + grain still bleed full.
+  const safe =
+    format === "fbpage"
+      ? {
+          paddingTop: size.h * 0.16,
+          paddingBottom: size.h * 0.16,
+          paddingLeft: size.w * 0.04,
+          paddingRight: size.w * 0.04,
+        }
+      : undefined;
   return (
     <div
       data-poster
       data-look={theme === "svart" ? "svart" : undefined}
       className="relative flex flex-col overflow-hidden bg-base text-bone"
-      style={{ width: size.w, height: size.h, containerType: "size" }}
+      style={{ width: size.w, height: size.h, containerType: "size", ...safe }}
     >
       <PosterFilters />
       <PosterSponsorTop />
