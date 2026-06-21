@@ -259,10 +259,10 @@ function LandscapeFront() {
 
 /** The wall scales with the format's aspect ratio: cqw is width-based, but it is
  * vertical room (17 names) that runs out first, so taller formats can go bigger. */
-const WALL_FS: Record<PosterFormat, number> = { a3: 5.7, p45: 5.0, story: 6.6, square: 3.9 };
+const WALL_FS: Partial<Record<PosterFormat, number>> = { a3: 5.7, p45: 5.0, story: 6.6, square: 3.9 };
 
 function AllBandsFront({ format }: { format: PosterFormat }) {
-  const fs = WALL_FS[format];
+  const fs = WALL_FS[format] ?? 5.7;
   return (
     <div className="absolute inset-0 flex flex-col gap-[3cqw] p-[6cqw]">
       <PosterHalftone className="z-0 opacity-[0.2]" />

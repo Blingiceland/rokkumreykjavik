@@ -1,12 +1,7 @@
 import { notFound } from "next/navigation";
 import { getArtistBySlug, artists } from "@/data/artists";
-import {
-  BandPoster,
-  POSTER_SIZES,
-  type PosterVariant,
-  type PosterFormat,
-  type PosterTheme,
-} from "@/components/poster/band-poster";
+import { BandPoster, POSTER_SIZES } from "@/components/poster/band-poster";
+import { coercePosterValues } from "@/components/poster/poster-builder";
 
 export function generateStaticParams() {
   return artists.map((a) => ({ band: a.slug }));
@@ -29,13 +24,7 @@ export default function RawPosterPage({
   const artist = getArtistBySlug(params.band);
   if (!artist) notFound();
 
-  const variant: PosterVariant = (["mynd", "typo", "klassik"] as const).includes(searchParams.utgafa as PosterVariant)
-    ? (searchParams.utgafa as PosterVariant)
-    : "mynd";
-  const format: PosterFormat = (["a3", "p45", "story", "square"] as const).includes(searchParams.snid as PosterFormat)
-    ? (searchParams.snid as PosterFormat)
-    : "a3";
-  const theme: PosterTheme = searchParams.thema === "svart" ? "svart" : "bleikt";
+  const { variant, format, theme } = coercePosterValues(searchParams);
   const size = POSTER_SIZES[format];
 
   return (
