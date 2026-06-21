@@ -59,7 +59,7 @@ const SLUGS_WITH_IMAGE = new Set<string>([
   "spacestation",
   "juno-paul",
   "mukka",
-  "vintage-caravan",
+  "the-vintage-caravan",
   "volcanova",
   "harma",
   "hoffman",
@@ -132,6 +132,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
         name: "Spacestation",
         genre: "Rock",
         headliner: true,
+        imagePosition: "center 35%",
         videoId: "E8n6pXizcHE",
         spotifyUrl: "https://open.spotify.com/artist/0tC0VODFMyQLqetgajNbbh",
       },
@@ -153,7 +154,7 @@ const lineup: { date: string; displayDate: string; acts: ArtistSeed[] }[] = [
     displayDate: "11. júlí",
     acts: [
       {
-        name: "Vintage Caravan",
+        name: "The Vintage Caravan",
         genre: "Hard Rock",
         topBilling: true,
         imagePosition: "center top",

@@ -38,7 +38,7 @@ export const events: RokkEvent[] = [
     displayDate: "Laugardagur 11. júlí",
     title: "Dagur 2",
     vibe: "",
-    artistIds: ["vintage-caravan", "volcanova", "harma", "krummi-og-bjarni"],
+    artistIds: ["the-vintage-caravan", "volcanova", "harma", "krummi-og-bjarni"],
   },
   {
     id: "day-3",
