@@ -8,6 +8,7 @@ import type { RokkEvent } from "@/data/events";
 import { getEventArtists, getScheduleTime, dayNumberForDate } from "@/data/events";
 import { venue, presenterPartner, site, EVENT_YEAR } from "@/data/site";
 import { PosterFilters, PosterGrain, PosterHalftone, plate, xerox } from "./poster-filters";
+import { PosterSponsorTop, PosterSponsorBottom } from "./poster-sponsors";
 import type { PosterVariant, PosterFormat, PosterTheme } from "./band-poster";
 import { POSTER_SIZES } from "./band-poster";
 
@@ -15,10 +16,11 @@ function hasPhoto(image: string): boolean {
   return Boolean(image) && !image.includes("placeholder");
 }
 
-/** Font size (cqw) so the longest band name fits one bill line. */
+/** Font size (cqw) so the longest band name fits one bill line. The divisor
+ * leaves room for the time column + gap on the line (else long names clip). */
 function billNameSize(names: string[]): number {
   const longest = Math.max(...names.map((n) => n.length), 1);
-  return Math.min(9, Math.floor(70 / (longest * 0.62)));
+  return Math.min(9, Math.floor(60 / (longest * 0.62)));
 }
 
 export function DayPoster({
@@ -37,13 +39,17 @@ export function DayPoster({
     <div
       data-poster
       data-look={theme === "svart" ? "svart" : undefined}
-      className="relative overflow-hidden bg-base text-bone"
+      className="relative flex flex-col overflow-hidden bg-base text-bone"
       style={{ width: size.w, height: size.h, containerType: "size" }}
     >
       <PosterFilters />
-      {variant === "mynd" && <MyndDay event={event} />}
-      {variant === "typo" && <TypoDay event={event} />}
-      {variant === "klassik" && <KlassikDay event={event} />}
+      <PosterSponsorTop />
+      <div className="relative flex-1 overflow-hidden">
+        {variant === "mynd" && <MyndDay event={event} />}
+        {variant === "typo" && <TypoDay event={event} />}
+        {variant === "klassik" && <KlassikDay event={event} />}
+      </div>
+      <PosterSponsorBottom />
       <PosterHalftone className="z-40 opacity-[0.16]" />
       <PosterGrain />
     </div>

@@ -11,6 +11,7 @@ import type { Artist } from "@/data/artists";
 import { getEventByDate, getScheduleTime, dayNumberForDate } from "@/data/events";
 import { venue, presenterPartner, site, EVENT_YEAR } from "@/data/site";
 import { PosterFilters, PosterGrain, PosterHalftone, plate, xerox } from "./poster-filters";
+import { PosterSponsorTop, PosterSponsorBottom } from "./poster-sponsors";
 
 export type PosterVariant = "mynd" | "typo" | "klassik";
 export type PosterFormat = "a3" | "p45" | "story" | "square";
@@ -70,13 +71,17 @@ export function BandPoster({
     <div
       data-poster
       data-look={theme === "svart" ? "svart" : undefined}
-      className="relative overflow-hidden bg-base text-bone"
+      className="relative flex flex-col overflow-hidden bg-base text-bone"
       style={{ width: size.w, height: size.h, containerType: "size" }}
     >
       <PosterFilters />
-      {variant === "mynd" && <MyndPoster artist={artist} />}
-      {variant === "typo" && <TypoPoster artist={artist} />}
-      {variant === "klassik" && <KlassikPoster artist={artist} />}
+      <PosterSponsorTop />
+      <div className="relative flex-1 overflow-hidden">
+        {variant === "mynd" && <MyndPoster artist={artist} />}
+        {variant === "typo" && <TypoPoster artist={artist} />}
+        {variant === "klassik" && <KlassikPoster artist={artist} />}
+      </div>
+      <PosterSponsorBottom />
       <PosterHalftone className="z-40 opacity-[0.18]" />
       <PosterGrain />
     </div>

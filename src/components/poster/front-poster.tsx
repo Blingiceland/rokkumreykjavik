@@ -8,6 +8,7 @@ import { artists } from "@/data/artists";
 import { venue, presenterPartner, site, EVENT_YEAR } from "@/data/site";
 import { getEventDays } from "@/data/events";
 import { PosterFilters, PosterGrain, PosterHalftone, plate, xerox } from "./poster-filters";
+import { PosterSponsorTop, PosterSponsorBottom } from "./poster-sponsors";
 import type { PosterVariant, PosterFormat, PosterTheme } from "./band-poster";
 import { POSTER_SIZES } from "./band-poster";
 
@@ -29,13 +30,17 @@ export function FrontPoster({
     <div
       data-poster
       data-look={theme === "svart" ? "svart" : undefined}
-      className="relative overflow-hidden bg-base text-bone"
+      className="relative flex flex-col overflow-hidden bg-base text-bone"
       style={{ width: size.w, height: size.h, containerType: "size" }}
     >
       <PosterFilters />
-      {variant === "mynd" && <MyndFront />}
-      {variant === "typo" && <TypoFront />}
-      {variant === "klassik" && <AllBandsFront />}
+      <PosterSponsorTop />
+      <div className="relative flex-1 overflow-hidden">
+        {variant === "mynd" && <MyndFront />}
+        {variant === "typo" && <TypoFront />}
+        {variant === "klassik" && <AllBandsFront format={format} />}
+      </div>
+      <PosterSponsorBottom />
       <PosterHalftone className="z-40 opacity-[0.16]" />
       <PosterGrain />
     </div>
@@ -160,7 +165,12 @@ function TypoFront() {
 
 /* Variant 3 — every band billed equally (all headliners) ----------- */
 
-function AllBandsFront() {
+/** The wall scales with the format's aspect ratio: cqw is width-based, but it is
+ * vertical room (17 names) that runs out first, so taller formats can go bigger. */
+const WALL_FS: Record<PosterFormat, number> = { a3: 5.7, p45: 5.0, story: 6.6, square: 3.9 };
+
+function AllBandsFront({ format }: { format: PosterFormat }) {
+  const fs = WALL_FS[format];
   return (
     <div className="absolute inset-0 flex flex-col gap-[3cqw] p-[6cqw]">
       <PosterHalftone className="z-0 opacity-[0.2]" />
@@ -175,12 +185,12 @@ function AllBandsFront() {
           <span key={a.id} className="inline-flex items-baseline gap-x-[2.5cqw]">
             <span
               className={"font-display leading-[0.86] " + (a.keepCase ? "normal-case" : "uppercase")}
-              style={{ fontSize: "7cqw" }}
+              style={{ fontSize: `${fs}cqw` }}
             >
               {a.name}
             </span>
             {i < artists.length - 1 && (
-              <span className="font-display leading-[0.86] text-neon" style={{ fontSize: "7cqw" }}>
+              <span className="font-display leading-[0.86] text-neon" style={{ fontSize: `${fs}cqw` }}>
                 ·
               </span>
             )}

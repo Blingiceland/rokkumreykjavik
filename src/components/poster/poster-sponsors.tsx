@@ -1,0 +1,62 @@
+/**
+ * Sponsor lockup for every generated poster. Two reserved strips so they can
+ * never collide with the artwork:
+ *   - top: Rás 2 + Thule (lead sponsor, prominent) + Four Roses (a touch smaller)
+ *   - bottom: Rás 2 + the full sponsor row, all together
+ *
+ * Logos print in a single ink (`.sponsor-ink` → black on the paper theme, cream
+ * on `svart`), matching the site. Thule keeps its red (treatment "keep").
+ * Sized in container-query units like the rest of the poster.
+ */
+import * as React from "react";
+import { sponsors } from "@/data/sponsors";
+
+const RAS2 = "/images/logos/ras2.svg";
+
+function byId(id: string) {
+  return sponsors.find((s) => s.id === id);
+}
+
+/** One logo, inked unless it opts to keep its own colour (Thule). */
+function Logo({ src, alt, h, keep = false }: { src: string; alt: string; h: number; keep?: boolean }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt={alt}
+      className={keep ? "" : "sponsor-ink"}
+      style={{ height: `${h}cqw`, width: "auto", objectFit: "contain" }}
+    />
+  );
+}
+
+/** A hairline ink divider between logo clusters. */
+function Rule({ h }: { h: number }) {
+  return <span aria-hidden className="shrink-0 bg-bone" style={{ height: `${h}cqw`, width: "0.3cqw" }} />;
+}
+
+export function PosterSponsorTop() {
+  const thule = byId("thule");
+  const fourRoses = byId("four-roses");
+  return (
+    <div className="relative z-[45] flex items-center justify-between gap-[4cqw] border-b-[0.35cqw] border-bone px-[5cqw] py-[2.4cqw]">
+      <Logo src={RAS2} alt="Rás 2" h={3.6} />
+      <div className="flex items-center gap-[3cqw]">
+        {thule && <Logo src={thule.logo} alt={thule.name} h={5.6} keep />}
+        {fourRoses && <Logo src={fourRoses.logo} alt={fourRoses.name} h={3.4} />}
+      </div>
+    </div>
+  );
+}
+
+export function PosterSponsorBottom() {
+  return (
+    <div className="relative z-[45] flex flex-wrap items-center justify-center gap-x-[3.4cqw] gap-y-[1.6cqw] border-t-[0.35cqw] border-bone px-[5cqw] py-[2.6cqw]">
+      <Logo src={RAS2} alt="Rás 2" h={3.2} />
+      <Rule h={3.6} />
+      {sponsors.map((s) => (
+        <Logo key={s.id} src={s.logo} alt={s.name} h={s.id === "thule" ? 3.2 : 2.8} keep={s.treatment === "keep"} />
+      ))}
+    </div>
+  );
+}
