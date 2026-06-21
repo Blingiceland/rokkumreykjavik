@@ -8,9 +8,10 @@ import { site, venue, EVENT_YEAR } from "@/data/site";
 import { artists } from "@/data/artists";
 import { getEventDays, dayNumberForDate } from "@/data/events";
 
-const topHeadliners = artists.filter((a) => a.topBilling);
-const subHeadliners = artists.filter((a) => a.headliner && !a.topBilling);
-const otherBands = artists.filter((a) => !a.headliner);
+// Everyone is billed on the same amber ground — no grey "lesser" tier. The
+// bigger draws just print larger: the headliners plus a few hand-picked names.
+const EMPHASIS_EXTRA = new Set(["petur-ben", "krummi-og-bjarni", "mur"]);
+const isEmphasis = (a: (typeof artists)[number]) => a.headliner || EMPHASIS_EXTRA.has(a.id);
 const days = getEventDays();
 
 const PAPER = "text-[color:rgb(var(--c-base))]";
@@ -98,55 +99,17 @@ export function Hero() {
           </span>
         </div>
 
-        {/* Top headliners — biggest, alone on the highlight ink. Each links to
-            its night in the schedule. */}
+        {/* The whole bill on one amber ground — bigger draws print larger, the
+            rest are right there with them. Each links to its night. */}
         <ul className="mt-8 flex flex-wrap items-end gap-2.5 sm:gap-3">
-          {topHeadliners.map((a, i) => (
+          {artists.map((a, i) => (
             <li key={a.id}>
               <a
                 href={`#dagur-${dayNumberForDate(a.date)}`}
                 className={
-                  "block border-2 border-bone bg-amber px-4 py-2 font-display text-3xl uppercase leading-none text-bone transition-transform hover:-translate-y-0.5 sm:text-6xl " +
-                  tiltClass[i % tiltClass.length]
-                }
-                style={xerox}
-              >
-                {a.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* Second-tier headliners. */}
-        <ul className="mt-3 flex flex-wrap items-end gap-2.5">
-          {subHeadliners.map((a, i) => (
-            <li key={a.id}>
-              <a
-                href={`#dagur-${dayNumberForDate(a.date)}`}
-                className={
-                  "block border-2 border-bone bg-amber px-3 py-1.5 font-display text-xl leading-none text-bone transition-transform hover:-translate-y-0.5 sm:text-3xl " +
+                  "block border-2 border-bone bg-amber px-3 py-1.5 font-display leading-none text-bone transition-transform hover:-translate-y-0.5 " +
+                  (isEmphasis(a) ? "px-4 py-2 text-2xl sm:text-5xl " : "text-base sm:text-2xl ") +
                   (a.keepCase ? "normal-case " : "uppercase ") +
-                  tiltClass[(i + 1) % tiltClass.length]
-                }
-                style={xerox}
-              >
-                {a.name}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        {/* Everyone else — so the whole bill is visible. */}
-        <p className="mb-2 mt-5 font-mono text-[10px] uppercase tracking-[0.35em] text-bone-dim">
-          Og öll hin
-        </p>
-        <ul className="flex flex-wrap items-end gap-2">
-          {otherBands.map((a, i) => (
-            <li key={a.id}>
-              <a
-                href={`#dagur-${dayNumberForDate(a.date)}`}
-                className={
-                  "block border-2 border-bone bg-base-card px-2.5 py-1 font-display text-base uppercase leading-none text-bone transition-colors hover:bg-amber sm:text-xl " +
                   tiltClass[i % tiltClass.length]
                 }
                 style={xerox}

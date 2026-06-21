@@ -54,7 +54,7 @@ export const events: RokkEvent[] = [
     displayDate: "Laugardagur 25. júlí",
     title: "Dagur 4",
     vibe: "",
-    artistIds: ["brain-police", "mur", "duft", "drungi", "sot"],
+    artistIds: ["brain-police", "mur", "sot", "duft", "drungi"],
   },
 ];
 
