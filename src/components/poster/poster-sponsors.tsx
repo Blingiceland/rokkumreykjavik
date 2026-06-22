@@ -43,10 +43,12 @@ export function PosterSponsorTop() {
   const fourRoses = byId("four-roses");
   return (
     <div className="relative z-[45] flex items-center justify-between gap-[4cqmin] border-b-[0.35cqmin] border-bone px-[5cqmin] py-[2.4cqmin]">
-      <Logo src={RAS2} alt="Rás 2" h={3.6} />
+      {/* Rás 2 (presenter, leads the festival) and Thule (lead sponsor) are the
+          two prominent marks; Four Roses sits a step smaller. */}
+      <Logo src={RAS2} alt="Rás 2" h={5.2} />
       <div className="flex items-center gap-[3cqmin]">
-        {thule && <Logo src={thule.logo} alt={thule.name} h={5.6} keep />}
-        {fourRoses && <Logo src={fourRoses.logo} alt={fourRoses.name} h={3.4} />}
+        {thule && <Logo src={thule.logo} alt={thule.name} h={6.4} keep />}
+        {fourRoses && <Logo src={fourRoses.logo} alt={fourRoses.name} h={3.6} />}
       </div>
     </div>
   );
@@ -55,10 +57,10 @@ export function PosterSponsorTop() {
 export function PosterSponsorBottom() {
   return (
     <div className="relative z-[45] flex flex-wrap items-center justify-center gap-x-[3.4cqmin] gap-y-[1.6cqmin] border-t-[0.35cqmin] border-bone px-[5cqmin] py-[2.6cqmin]">
-      <Logo src={RAS2} alt="Rás 2" h={3.2} />
-      <Rule h={3.6} />
+      <Logo src={RAS2} alt="Rás 2" h={4} />
+      <Rule h={4.2} />
       {sponsors.map((s) => (
-        <Logo key={s.id} src={s.logo} alt={s.name} h={s.id === "thule" ? 3.2 : 2.8} keep={s.treatment === "keep"} />
+        <Logo key={s.id} src={s.logo} alt={s.name} h={s.id === "thule" ? 4 : 2.8} keep={s.treatment === "keep"} />
       ))}
     </div>
   );
