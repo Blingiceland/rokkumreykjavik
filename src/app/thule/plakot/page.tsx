@@ -33,13 +33,13 @@ export default function ThulePosterHubPage({ searchParams }: { searchParams: { v
   // every poster link defaults to the same Thule theme.
   if (isAdmin())
     return (
-      <div data-look="thule-fani" className="min-h-screen bg-base">
-        <AdminHub logout={logout} theme="thule-fani" eyebrow="Thule · plaköt" title="Thule plakat-miðstöð" />
+      <div data-look="thule-dos" className="min-h-screen bg-base">
+        <AdminHub logout={logout} theme="thule-dos" eyebrow="Thule · plaköt" title="Thule plakat-miðstöð" />
       </div>
     );
 
   return (
-    <div data-look="thule-fani" className="min-h-screen bg-base">
+    <div data-look="thule-dos" className="min-h-screen bg-base">
       <main className="grid min-h-screen place-items-center px-4">
         <form action={login} className="w-full max-w-sm">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-neon">Thule · plaköt</p>
