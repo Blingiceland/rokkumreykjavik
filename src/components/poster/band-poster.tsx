@@ -41,6 +41,13 @@ export function posterLook(theme: PosterTheme): string | undefined {
   return theme === "bleikt" ? undefined : theme;
 }
 
+/** Themes with a dark ground — knock-outs read light, so the white Rás 2 mark
+ *  is used as-is; light themes ink the SVG black instead. */
+const DARK_THEMES = new Set<PosterTheme>(["svart", "thule-fani", "thule-dos", "thule-xerox"]);
+export function isDarkTheme(theme: PosterTheme): boolean {
+  return DARK_THEMES.has(theme);
+}
+
 /** Display pixel sizes. Headless capture multiplies these via deviceScaleFactor
  * for print resolution, so these stay screen-friendly. The two `fb*` formats are
  * landscape (only the front poster renders them) and capture at native size. */
@@ -107,13 +114,13 @@ export function BandPoster({
       style={{ width: size.w, height: size.h, containerType: "size" }}
     >
       <PosterFilters />
-      <PosterSponsorTop />
+      <PosterSponsorTop theme={theme} />
       <div className="relative flex-1 overflow-hidden">
         {variant === "mynd" && <MyndPoster artist={artist} />}
         {variant === "typo" && <TypoPoster artist={artist} />}
         {variant === "klassik" && <KlassikPoster artist={artist} />}
       </div>
-      <PosterSponsorBottom />
+      <PosterSponsorBottom theme={theme} />
       <PosterHalftone className="z-40 opacity-[0.18]" />
       <PosterGrain />
     </div>

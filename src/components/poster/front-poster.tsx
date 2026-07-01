@@ -47,7 +47,7 @@ export function FrontPoster({
       style={{ width: size.w, height: size.h, containerType: "size", ...safe }}
     >
       <PosterFilters />
-      <PosterSponsorTop />
+      <PosterSponsorTop theme={theme} />
       <div className="relative flex-1 overflow-hidden">
         {landscape ? (
           <LandscapeFront />
@@ -59,7 +59,7 @@ export function FrontPoster({
           </>
         )}
       </div>
-      <PosterSponsorBottom />
+      <PosterSponsorBottom theme={theme} />
       <PosterHalftone className="z-40 opacity-[0.16]" />
       <PosterGrain />
     </div>

@@ -43,13 +43,13 @@ export function DayPoster({
       style={{ width: size.w, height: size.h, containerType: "size" }}
     >
       <PosterFilters />
-      <PosterSponsorTop />
+      <PosterSponsorTop theme={theme} />
       <div className="relative flex-1 overflow-hidden">
         {variant === "mynd" && <MyndDay event={event} />}
         {variant === "typo" && <TypoDay event={event} />}
         {variant === "klassik" && <KlassikDay event={event} />}
       </div>
-      <PosterSponsorBottom />
+      <PosterSponsorBottom theme={theme} />
       <PosterHalftone className="z-40 opacity-[0.16]" />
       <PosterGrain />
     </div>
