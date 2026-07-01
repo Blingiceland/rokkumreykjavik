@@ -13,7 +13,9 @@ import { thuleVariants, defaultThuleVariant } from "@/data/thule-variants";
 type NavMark = { logo: string; name: string; treatment?: string; h: number };
 
 function navMark(id: string, h: number): NavMark {
-  if (id === "ras2") return { logo: "/images/logos/ras2.svg", name: "Rás 2", treatment: "ink", h };
+  // New Rás 2 mark is already white art (transparent bg) — render as-is on the
+  // dark nav ground, no inking.
+  if (id === "ras2") return { logo: "/images/logos/Ras2_White.png", name: "Rás 2", treatment: "keep", h };
   const s = sponsors.find((x) => x.id === id)!;
   return { logo: s.logo, name: s.name, treatment: s.treatment, h };
 }
