@@ -30,8 +30,11 @@ export const site: SiteConfig = {
   name: "Rokk í Reykjavík",
   yearLabel: String(EVENT_YEAR),
   presenter: "Dillon og Rás 2",
-  domain: "rokkumreykjavik.is",
-  url: "https://rokkumreykjavik.is",
+  // Live domain is rokkireykjavik.is (apex 308-redirects to www, the Vercel
+  // primary). The og:image / canonical URLs must use the domain that actually
+  // resolves, or social scrapers can't fetch the preview image.
+  domain: "rokkireykjavik.is",
+  url: "https://www.rokkireykjavik.is",
   description: "Fjórir laugardagar. Sautján bönd.",
   contactEmail: "dillon@dillon.is",
   spotifyPlaylistId: "5VDX5fXbVUN3pIuIPUnG3Y",
