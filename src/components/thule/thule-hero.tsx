@@ -135,6 +135,7 @@ function RansomLayout({ variant }: { variant: ThuleVariant }) {
             Dillon og Rás 2 í samstarfi við
           </p>
           <ThuleLockup logo={variant.logo} className="rotate-1" />
+          <span className="font-display text-sm uppercase leading-none tracking-tight text-bone sm:text-lg">kynna</span>
         </div>
 
         <h1 className="flex flex-wrap items-center gap-2 font-display uppercase leading-none sm:gap-3">
@@ -246,7 +247,7 @@ function CanLayout({ variant }: { variant: ThuleVariant }) {
 
           <div className="my-6 flex items-center justify-center gap-3">
             <span className="h-px w-10 bg-bone-faint" />
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-neon">Dillon og Rás 2 í samstarfi við</span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-neon">Dillon og Rás 2 í samstarfi við Thule kynna</span>
             <span className="h-px w-10 bg-bone-faint" />
           </div>
 
@@ -309,7 +310,7 @@ function XeroxLayout({ variant }: { variant: ThuleVariant }) {
           className={`mb-2 inline-block -rotate-2 bg-neon px-3 py-1 font-mono text-[11px] uppercase tracking-[0.3em] sm:text-sm ${PAPER}`}
           style={xerox}
         >
-          Dillon × Rás 2 í samstarfi við
+          Dillon × Rás 2 í samstarfi við Thule kynna
         </p>
 
         {/* Overlapping, distorted title. */}
