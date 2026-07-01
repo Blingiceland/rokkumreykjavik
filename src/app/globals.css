@@ -50,6 +50,120 @@
     --on-amber: 18 16 15;
   }
 
+  /* ---------------------------------------------------------------------
+     THULE TAKEOVER looks — Icelandic flag inks (navy / red / white) run
+     through the same token system. Only used on the password-gated /thule
+     page; the public site never sets these. Four swappable treatments.
+     Contrast invariants kept in every block: bone↔base, bone↔amber (chips
+     use bg-amber + text-bone), base↔neon (chips use bg-neon + text-base).
+     --------------------------------------------------------------------- */
+
+  /* FÁNI — deep navy ground, white ink, red spot. National, bold. */
+  [data-look="thule-fani"] {
+    color-scheme: dark;
+    --c-base: 15 44 94;
+    --c-base-deep: 9 32 74;
+    --c-base-card: 22 54 108;
+    --c-base-raised: 28 64 122;
+    --c-base-line: 56 92 146;
+    --c-base-linebright: 104 146 196;
+    --c-bone: 244 246 249;
+    --c-bone-dim: 178 202 230;
+    --c-bone-faint: 120 156 200;
+    --c-neon: 214 58 64;
+    --c-neon-cyan: 150 200 248;
+    --c-neon-deep: 176 42 48;
+    --c-amber: 214 58 64;
+    --c-amber-bright: 230 92 96;
+    --c-amber-deep: 176 42 48;
+    --on-amber: 244 246 249;
+  }
+
+  /* ÍSKALDUR — icy off-white ground, navy ink, red + sky spots. Light/fresh. */
+  [data-look="thule-frost"] {
+    color-scheme: light;
+    --c-base: 233 240 248;
+    --c-base-deep: 220 230 242;
+    --c-base-card: 240 245 251;
+    --c-base-raised: 248 250 253;
+    --c-base-line: 26 48 88;
+    --c-base-linebright: 64 96 146;
+    --c-bone: 13 38 80;
+    --c-bone-dim: 48 74 120;
+    --c-bone-faint: 98 128 174;
+    --c-neon: 178 41 46;
+    --c-neon-cyan: 36 104 166;
+    --c-neon-deep: 148 41 46;
+    --c-amber: 150 198 245;
+    --c-amber-bright: 182 218 255;
+    --c-amber-deep: 96 162 224;
+    --on-amber: 13 38 80;
+  }
+
+  /* RAUÐA DÓSIN — Thule red ground, white ink, sky-blue spot. Loud takeover. */
+  [data-look="thule-dos"] {
+    color-scheme: dark;
+    --c-base: 152 39 44;
+    --c-base-deep: 126 30 35;
+    --c-base-card: 164 46 51;
+    --c-base-raised: 178 56 61;
+    --c-base-line: 206 116 116;
+    --c-base-linebright: 230 168 168;
+    --c-bone: 246 241 239;
+    --c-bone-dim: 236 202 200;
+    --c-bone-faint: 224 168 168;
+    --c-neon: 150 200 248;
+    --c-neon-cyan: 36 104 166;
+    --c-neon-deep: 110 175 235;
+    --c-amber: 18 50 104;
+    --c-amber-bright: 30 66 128;
+    --c-amber-deep: 12 38 82;
+    --on-amber: 246 241 239;
+  }
+
+  /* SILKI-THULE — keeps the venue's dirty-paper silkscreen grit, but pressed
+     in flag inks: navy-black ink, red + sky spots on the same paper ground. */
+  [data-look="thule-silki"] {
+    color-scheme: light;
+    --c-base: 232 228 218;
+    --c-base-deep: 222 217 205;
+    --c-base-card: 232 228 218;
+    --c-base-raised: 232 228 218;
+    --c-base-line: 24 24 30;
+    --c-base-linebright: 58 56 64;
+    --c-bone: 20 26 44;
+    --c-bone-dim: 60 66 88;
+    --c-bone-faint: 104 108 132;
+    --c-neon: 176 40 46;
+    --c-neon-cyan: 34 92 150;
+    --c-neon-deep: 150 35 40;
+    --c-amber: 150 196 242;
+    --c-amber-bright: 182 216 255;
+    --c-amber-deep: 96 160 222;
+    --on-amber: 20 26 44;
+  }
+
+  /* PÖNK-XEROX — near-black ground, bone white, blood red. Cut-up zine. */
+  [data-look="thule-xerox"] {
+    color-scheme: dark;
+    --c-base: 16 16 18;
+    --c-base-deep: 8 8 10;
+    --c-base-card: 24 24 28;
+    --c-base-raised: 30 30 34;
+    --c-base-line: 72 72 78;
+    --c-base-linebright: 112 112 120;
+    --c-bone: 242 239 232;
+    --c-bone-dim: 182 179 172;
+    --c-bone-faint: 122 119 114;
+    --c-neon: 202 38 44;
+    --c-neon-cyan: 150 200 248;
+    --c-neon-deep: 162 28 34;
+    --c-amber: 202 38 44;
+    --c-amber-bright: 226 60 64;
+    --c-amber-deep: 162 28 34;
+    --on-amber: 242 239 232;
+  }
+
   html { scroll-behavior: smooth; }
 
   body {
@@ -79,8 +193,11 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     animation: grain-shift 8s steps(10) infinite;
   }
-  /* On the dark look, screen so the tooth reads as light film grain. */
-  [data-look="svart"] .grain::before {
+  /* On the dark looks, screen so the tooth reads as light film grain. */
+  [data-look="svart"] .grain::before,
+  [data-look="thule-fani"] .grain::before,
+  [data-look="thule-dos"] .grain::before,
+  [data-look="thule-xerox"] .grain::before {
     mix-blend-mode: screen;
     opacity: 0.12;
   }
@@ -90,13 +207,19 @@
     background-size: 5px 5px;
     mix-blend-mode: multiply;
   }
-  [data-look="svart"] .halftone { mix-blend-mode: screen; }
+  [data-look="svart"] .halftone,
+  [data-look="thule-fani"] .halftone,
+  [data-look="thule-dos"] .halftone,
+  [data-look="thule-xerox"] .halftone { mix-blend-mode: screen; }
 
   .hatch {
     background-image: repeating-linear-gradient(45deg, rgb(var(--c-bone)) 0 1px, transparent 1px 14px);
     mix-blend-mode: multiply;
   }
-  [data-look="svart"] .hatch { mix-blend-mode: screen; }
+  [data-look="svart"] .hatch,
+  [data-look="thule-fani"] .hatch,
+  [data-look="thule-dos"] .hatch,
+  [data-look="thule-xerox"] .hatch { mix-blend-mode: screen; }
 
   .text-stroke { -webkit-text-stroke: 1.5px rgb(var(--c-bone)); color: transparent; }
   .text-stroke-neon { -webkit-text-stroke: 1.5px rgb(var(--c-neon)); color: transparent; }
@@ -109,12 +232,27 @@
 
   /* Sponsor logos: print dark on paper, light on the dark look. */
   .sponsor-logo { filter: invert(1); mix-blend-mode: multiply; }
-  [data-look="svart"] .sponsor-logo { filter: none; mix-blend-mode: lighten; }
+  [data-look="svart"] .sponsor-logo,
+  [data-look="thule-fani"] .sponsor-logo,
+  [data-look="thule-dos"] .sponsor-logo,
+  [data-look="thule-xerox"] .sponsor-logo { filter: none; mix-blend-mode: lighten; }
 
   /* Single-ink sponsor mark — any logo flattened to one ink, theme-aware
      (black on paper, cream on the dark look). Keeps the source aspect ratio. */
   .sponsor-ink { filter: brightness(0); }
-  [data-look="svart"] .sponsor-ink { filter: brightness(0) invert(1); }
+  [data-look="svart"] .sponsor-ink,
+  [data-look="thule-fani"] .sponsor-ink,
+  [data-look="thule-dos"] .sponsor-ink,
+  [data-look="thule-xerox"] .sponsor-ink { filter: brightness(0) invert(1); }
+
+  /* Poster-scoped grain (the global .grain is fixed to the viewport, which a
+     captured poster element can't contain). Multiply on light grounds, screen
+     on the dark looks so the tooth reads as light film grain. */
+  .poster-grain { mix-blend-mode: multiply; opacity: 0.4; }
+  [data-look="svart"] .poster-grain,
+  [data-look="thule-fani"] .poster-grain,
+  [data-look="thule-dos"] .poster-grain,
+  [data-look="thule-xerox"] .poster-grain { mix-blend-mode: screen; opacity: 0.14; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -10,7 +10,7 @@ import { getEventDays } from "@/data/events";
 import { PosterFilters, PosterGrain, PosterHalftone, plate, xerox } from "./poster-filters";
 import { PosterSponsorTop, PosterSponsorBottom } from "./poster-sponsors";
 import type { PosterVariant, PosterFormat, PosterTheme } from "./band-poster";
-import { POSTER_SIZES } from "./band-poster";
+import { POSTER_SIZES, posterLook } from "./band-poster";
 
 function hasPhoto(image: string): boolean {
   return Boolean(image) && !image.includes("placeholder");
@@ -42,7 +42,7 @@ export function FrontPoster({
   return (
     <div
       data-poster
-      data-look={theme === "svart" ? "svart" : undefined}
+      data-look={posterLook(theme)}
       className="relative flex flex-col overflow-hidden bg-base text-bone"
       style={{ width: size.w, height: size.h, containerType: "size", ...safe }}
     >

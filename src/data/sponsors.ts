@@ -30,6 +30,9 @@ export interface Sponsor {
    */
   logo: string;
   treatment?: LogoTreatment;
+  /** Optional per-logo size multiplier for the on-screen sponsor grid, to even
+   *  out marks whose artwork carries a lot of built-in whitespace. Default 1. */
+  scale?: number;
 }
 
 // Rás 2 is no longer listed here — it is now a presenter (with Dillon) and
@@ -51,6 +54,7 @@ export const sponsors: Sponsor[] = [
     url: "#",
     logo: "/images/logos/four-roses.png",
     treatment: "ink",
+    scale: 1.3,
   },
   {
     id: "helix7",
@@ -83,6 +87,17 @@ export const sponsors: Sponsor[] = [
     url: "#",
     logo: "/images/logos/planteray.png",
     treatment: "ink",
+  },
+  {
+    id: "shankys",
+    name: "Shanky's Whip",
+    tier: "Styrktaraðili",
+    url: "#",
+    logo: "/images/logos/shankys.png",
+    // Detailed multi-colour crest — flattening to one ink turns it into an
+    // illegible blob, so keep its own colours (as Thule does).
+    treatment: "keep",
+    scale: 1.3,
   },
 ];
 

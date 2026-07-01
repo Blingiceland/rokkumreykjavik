@@ -15,7 +15,31 @@ import { PosterSponsorTop, PosterSponsorBottom } from "./poster-sponsors";
 
 export type PosterVariant = "mynd" | "typo" | "klassik";
 export type PosterFormat = "a3" | "p45" | "story" | "square" | "fbcover" | "fbpage";
-export type PosterTheme = "bleikt" | "svart";
+export type PosterTheme =
+  | "bleikt"
+  | "svart"
+  | "thule-fani"
+  | "thule-frost"
+  | "thule-dos"
+  | "thule-silki"
+  | "thule-xerox";
+
+/** Theme id → label for the builder pills. Every value except "bleikt" is a
+ *  valid [data-look] attribute; "bleikt" is the document default (no attribute). */
+export const POSTER_THEMES: Record<PosterTheme, string> = {
+  bleikt: "Bleikt",
+  svart: "Svart",
+  "thule-fani": "Thule · Fáni",
+  "thule-frost": "Thule · Ískaldur",
+  "thule-dos": "Thule · Rauð",
+  "thule-silki": "Thule · Silki",
+  "thule-xerox": "Thule · Pönk",
+};
+
+/** The data-look value a theme maps to (bleikt = document default → none). */
+export function posterLook(theme: PosterTheme): string | undefined {
+  return theme === "bleikt" ? undefined : theme;
+}
 
 /** Display pixel sizes. Headless capture multiplies these via deviceScaleFactor
  * for print resolution, so these stay screen-friendly. The two `fb*` formats are
@@ -78,7 +102,7 @@ export function BandPoster({
   return (
     <div
       data-poster
-      data-look={theme === "svart" ? "svart" : undefined}
+      data-look={posterLook(theme)}
       className="relative flex flex-col overflow-hidden bg-base text-bone"
       style={{ width: size.w, height: size.h, containerType: "size" }}
     >

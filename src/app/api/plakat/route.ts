@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getPosterBrowser } from "@/lib/poster-browser";
 import { getArtistBySlug } from "@/data/artists";
 import { events } from "@/data/events";
-import { POSTER_SIZES, type PosterFormat } from "@/components/poster/band-poster";
+import { POSTER_SIZES, POSTER_THEMES, type PosterFormat } from "@/components/poster/band-poster";
 
 // Puppeteer needs the Node runtime; never cache (params drive the output).
 // maxDuration gives headless Chrome room to cold-start on Vercel (Pro+; Hobby
@@ -42,7 +42,8 @@ export async function GET(req: Request) {
   const id = url.searchParams.get("id") ?? url.searchParams.get("band") ?? "";
   const variant = pick(VARIANTS, url.searchParams.get("utgafa"), kind === "forsida" ? "typo" : "mynd");
   const format = pick(FORMATS, url.searchParams.get("snid"), "a3") as PosterFormat;
-  const theme = url.searchParams.get("thema") === "svart" ? "svart" : "bleikt";
+  const themeParam = url.searchParams.get("thema") ?? "";
+  const theme = Object.prototype.hasOwnProperty.call(POSTER_THEMES, themeParam) ? themeParam : "bleikt";
   const ext = pick(Object.keys(EXTS) as Ext[], url.searchParams.get("ext"), "pdf") as Ext;
 
   const target = resolveTarget(kind, id);
@@ -60,7 +61,7 @@ export async function GET(req: Request) {
     browser = await getPosterBrowser();
     const page = await browser.newPage();
     await page.setViewport({ width: size.w, height: size.h, deviceScaleFactor: scaleFactor });
-    await page.goto(rawUrl, { waitUntil: "networkidle0", timeout: 30_000 });
+    await page.goto(rawUrl, { waitUntil: "networkidle0", timeout: 45_000 });
     // Ensure web fonts and any photos have painted before capture.
     await page.evaluate(async () => {
       await (document as Document & { fonts: FontFaceSet }).fonts.ready;

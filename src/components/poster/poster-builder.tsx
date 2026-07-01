@@ -4,6 +4,7 @@ import { BackLink } from "./back-link";
 import {
   POSTER_SIZES,
   POSTER_VARIANTS,
+  POSTER_THEMES,
   PORTRAIT_FORMATS,
   type PosterVariant,
   type PosterFormat,
@@ -24,7 +25,9 @@ export function coercePosterValues(
   const format: PosterFormat = Object.prototype.hasOwnProperty.call(POSTER_SIZES, search.snid ?? "")
     ? (search.snid as PosterFormat)
     : "a3";
-  const theme: PosterTheme = search.thema === "svart" ? "svart" : "bleikt";
+  const theme: PosterTheme = Object.prototype.hasOwnProperty.call(POSTER_THEMES, search.thema ?? "")
+    ? (search.thema as PosterTheme)
+    : "bleikt";
   return { variant, format, theme };
 }
 
@@ -119,8 +122,9 @@ export function PosterBuilder({
               ))}
             </Control>
             <Control label="Þema">
-              <Pill base={base} current={theme} param="thema" value="bleikt" label="Bleikt" />
-              <Pill base={base} current={theme} param="thema" value="svart" label="Svart" />
+              {(Object.keys(POSTER_THEMES) as PosterTheme[]).map((t) => (
+                <Pill key={t} base={base} current={theme} param="thema" value={t} label={POSTER_THEMES[t]} />
+              ))}
             </Control>
             <Control label="Sækja">
               <DownloadLink href={dl("pdf")} label="PDF" />

@@ -107,16 +107,9 @@ function EventJsonLd() {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="is" data-look="bleikt" suppressHydrationWarning>
+    // Thule launch: the whole site ships in the Dósin look.
+    <html lang="is" data-look="thule-dos" suppressHydrationWarning>
       <body className="grain min-h-screen">
-        {/* Apply the saved palette before paint to avoid a flash (local only). */}
-        <script
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{var l=localStorage.getItem('rr-look');if(l)document.documentElement.setAttribute('data-look',l);}catch(e){}",
-          }}
-        />
         <EventJsonLd />
         <a
           href="#top"

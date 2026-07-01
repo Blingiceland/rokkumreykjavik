@@ -56,11 +56,12 @@ export function SponsorSection() {
                   rel="noopener noreferrer"
                   className="group flex flex-col items-center gap-3 rounded-xl border border-base-line bg-base px-4 py-5 transition-colors hover:border-neon"
                 >
-                  <div className="flex h-16 w-full items-center justify-center">
+                  <div className="flex h-20 w-full items-center justify-center">
                     {s.logo ? (
                       <SponsorMark
                         sponsor={s}
                         className="max-h-14 max-w-full opacity-90 transition-opacity group-hover:opacity-100"
+                        style={s.scale ? { maxHeight: `${3.5 * s.scale}rem` } : undefined}
                       />
                     ) : (
                       // No artwork yet — tidy wordmark placeholder.

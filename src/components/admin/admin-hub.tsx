@@ -39,19 +39,32 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-export function AdminHub({ logout }: { logout: () => void }) {
+export function AdminHub({
+  logout,
+  theme = "bleikt",
+  eyebrow = "Admin · plaköt",
+  title = "Plakat-miðstöð",
+}: {
+  logout: () => void;
+  /** Default poster theme baked into the quick-download + builder links. */
+  theme?: string;
+  eyebrow?: string;
+  title?: string;
+}) {
   // Sensible defaults for the quick-download links; the builder lets you tune.
-  const q = "utgafa=mynd&snid=a3&thema=bleikt";
+  const q = `utgafa=mynd&snid=a3&thema=${theme}`;
+  // Open builders with the theme preselected.
+  const b = (href: string) => `${href}?thema=${theme}`;
 
   return (
     <main className="min-h-screen px-4 py-10 sm:px-8">
       <div className="mx-auto max-w-3xl">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-neon">Admin · plaköt</p>
-            <h1 className="mt-2 font-display text-4xl uppercase leading-none text-bone sm:text-5xl">Plakat-miðstöð</h1>
+            <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-neon">{eyebrow}</p>
+            <h1 className="mt-2 font-display text-4xl uppercase leading-none text-bone sm:text-5xl">{title}</h1>
             <p className="mt-2 max-w-md font-mono text-[11px] leading-relaxed text-bone-faint">
-              Opnaðu builder til að velja útgáfu/snið/þema, eða gríptu flýti-niðurhal (Mynd · A3 · bleikt).
+              Opnaðu builder til að velja útgáfu/snið/þema, eða gríptu flýti-niðurhal (Mynd · A3).
             </p>
           </div>
           <form action={logout}>
@@ -64,8 +77,8 @@ export function AdminHub({ logout }: { logout: () => void }) {
         <Section title="Forsíða">
           <Row
             label="Rokk í Reykjavík"
-            builder="/plakat/forsida"
-            dl="/api/plakat?kind=forsida&id=forsida&utgafa=typo&snid=a3&thema=bleikt"
+            builder={b("/plakat/forsida")}
+            dl={`/api/plakat?kind=forsida&id=forsida&utgafa=typo&snid=a3&thema=${theme}`}
             lead
           />
         </Section>
@@ -75,7 +88,7 @@ export function AdminHub({ logout }: { logout: () => void }) {
             <Row
               key={e.id}
               label={`Dagur ${i + 1} · ${e.displayDate.replace("Laugardagur ", "")}`}
-              builder={`/plakat/dagur/${i + 1}`}
+              builder={b(`/plakat/dagur/${i + 1}`)}
               dl={`/api/plakat?kind=dagur&id=${i + 1}&${q}`}
               lead
             />
@@ -88,7 +101,7 @@ export function AdminHub({ logout }: { logout: () => void }) {
               <Row
                 key={a.id}
                 label={a.name}
-                builder={`/plakat/${a.slug}`}
+                builder={b(`/plakat/${a.slug}`)}
                 dl={`/api/plakat?kind=band&id=${a.slug}&${q}`}
               />
             ))}
